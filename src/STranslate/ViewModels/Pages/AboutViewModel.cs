@@ -7,8 +7,10 @@ using System.IO;
 
 namespace STranslate.ViewModels.Pages;
 
-public partial class AboutViewModel : ObservableObject
+public partial class AboutViewModel(Settings settings, DataProvider dataProvider) : ObservableObject
 {
+    public Settings Settings { get; } = settings;
+    public DataProvider DataProvider { get; } = dataProvider;
     [ObservableProperty] public partial string AppVersion { get; set; } = VersionInfo.GetVersion();
 
     [RelayCommand]

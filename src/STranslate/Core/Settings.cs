@@ -1,6 +1,8 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.DependencyInjection;
 using iNKORE.UI.WPF.Modern;
+using Serilog.Core;
+using Serilog.Events;
 using STranslate.Helpers;
 using STranslate.Plugin;
 using STranslate.Views;
@@ -207,6 +209,8 @@ public partial class Settings : ObservableObject
 
     #endregion
 
+    [ObservableProperty] public partial LogEventLevel LogLevel { get; set; } = LogEventLevel.Information;
+
     [ObservableProperty] public partial ProxySettings Proxy { get; set; } = new();
 
     #endregion
@@ -272,6 +276,7 @@ public partial class Settings : ObservableObject
         {
             throw new InvalidOperationException("Storage is not set. Please call SetStorage() before Initialize().");
         }
+        ApplyLogLevel();
         ApplyStartup();
         ApplyStartMode();
     }
@@ -360,6 +365,12 @@ public partial class Settings : ObservableObject
         }
     }
 
+    private void ApplyLogLevel()
+    {
+        var loggingLevelSwitch = Ioc.Default.GetRequiredService<LoggingLevelSwitch>();
+        loggingLevelSwitch.MinimumLevel = LogLevel;
+    }
+
     private void HandlePropertyChanged(string? propertyName)
     {
         switch (propertyName)
@@ -378,6 +389,9 @@ public partial class Settings : ObservableObject
                 break;
             case nameof(HideWhenDeactivated):
                 ApplyDeactived();
+                break;
+            case nameof(LogLevel):
+                ApplyLogLevel();
                 break;
             case nameof(DisableGlobalHotkeys):
                 Ioc.Default.GetRequiredService<HotkeySettings>().ApplyGlobalHotkeys();

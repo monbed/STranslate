@@ -50,19 +50,7 @@ public partial class App : ISingleInstanceApp, INavigation, IDisposable
         // Do not use bitmap cache since it can cause WPF second window freezing issue
         ShadowAssist.UseBitmapCache = false;
 
-        // Configure Serilog
         var levelSwitch = new LoggingLevelSwitch(LogEventLevel.Verbose);
-        Log.Logger = new LoggerConfiguration()
-            .MinimumLevel.Override("System.Net.Http", LogEventLevel.Warning)
-            .MinimumLevel.Override("Microsoft.Extensions.Http", LogEventLevel.Warning)
-            .MinimumLevel.ControlledBy(levelSwitch)
-            .WriteTo.File(
-                path: Path.Combine(Constant.Logs, ".log"),
-                encoding: Encoding.UTF8,
-                rollingInterval: RollingInterval.Day,
-                outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff} [{Level:u3}] [{SourceContext}]: {Message:lj}{NewLine}{Exception}"
-            )
-            .CreateLogger();
 
         try
         {
@@ -157,6 +145,19 @@ public partial class App : ISingleInstanceApp, INavigation, IDisposable
 
         try
         {
+            // Configure Serilog
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Override("System.Net.Http", LogEventLevel.Warning)
+                .MinimumLevel.Override("Microsoft.Extensions.Http", LogEventLevel.Warning)
+                .MinimumLevel.ControlledBy(levelSwitch)
+                .WriteTo.File(
+                    path: Path.Combine(Constant.Logs, ".log"),
+                    encoding: Encoding.UTF8,
+                    rollingInterval: RollingInterval.Day,
+                    outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff} [{Level:u3}] [{SourceContext}]: {Message:lj}{NewLine}{Exception}"
+                )
+                .CreateLogger();
+
             if (_settings is null || _hotkeySettings is null)
                 throw new Exception("settings or hotkeySettings is null when initialize executing");
 

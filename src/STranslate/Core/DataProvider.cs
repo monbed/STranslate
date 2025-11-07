@@ -1,4 +1,5 @@
 using iNKORE.UI.WPF.Modern;
+using Serilog.Events;
 using STranslate.Plugin;
 using STranslate.ViewModels.Pages;
 
@@ -30,6 +31,7 @@ public class DataProvider
         DropdownDataGeneric<WindowScreenType>.UpdateLabels(WindowScreenTypes);
         DropdownDataGeneric<WindowAlignType>.UpdateLabels(WindowAlignTypes);
         DropdownDataGeneric<StartMode>.UpdateLabels(StartModes);
+        DropdownDataGeneric<LogEventLevel>.UpdateLabels(LogEventLevels);
     }
 
     #region LangEnums
@@ -110,6 +112,14 @@ public class DataProvider
     public class StartModeData : DropdownDataGeneric<StartMode> { }
     public List<StartModeData> StartModes { get; } =
         DropdownDataGeneric<StartMode>.GetValues<StartModeData>("StartMode");
+
+    #endregion
+
+    #region LogEventLevels
+
+    public class LogEventLevelData : DropdownDataGeneric<LogEventLevel> { }
+    public List<LogEventLevelData> LogEventLevels { get; } =
+        DropdownDataGeneric<LogEventLevel>.GetValues<LogEventLevelData>("LogEventLevel");
 
     #endregion
 }

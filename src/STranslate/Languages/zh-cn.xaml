@@ -201,6 +201,7 @@
     <sys:String x:Key="ConfirmDelete">确认删除?</sys:String>
     <sys:String x:Key="ConfirmDeleteService">确定要删除服务 '{0}' 吗？</sys:String>
     <sys:String x:Key="Close">关闭</sys:String>
+    <sys:String x:Key="LogLevel">日志级别</sys:String>
 
     <!--  // Common //  -->
     <sys:String x:Key="Add">添加</sys:String>
@@ -348,6 +349,13 @@
     <sys:String x:Key="WindowAlignTypeLeftTop">左上</sys:String>
     <sys:String x:Key="WindowAlignTypeRightTop">右上</sys:String>
     <sys:String x:Key="WindowAlignTypeCustom">自定义位置</sys:String>
+
+    <sys:String x:Key="LogEventLevelVerbose">详细</sys:String>
+    <sys:String x:Key="LogEventLevelDebug">调试</sys:String>
+    <sys:String x:Key="LogEventLevelInformation">信息</sys:String>
+    <sys:String x:Key="LogEventLevelWarning">警告</sys:String>
+    <sys:String x:Key="LogEventLevelError">错误</sys:String>
+    <sys:String x:Key="LogEventLevelFatal">致命</sys:String>
 
     <!--  // Plugins //  -->
     <sys:String x:Key="UnsupportedSourceLang">不支持的源语言</sys:String>

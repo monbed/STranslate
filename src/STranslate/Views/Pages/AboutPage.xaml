@@ -29,7 +29,7 @@
                 Margin="0,0,0,12"
                 Style="{DynamicResource TitleTextBlockStyle}"
                 Text="{DynamicResource About}" />
-            <ikw:SimpleStackPanel Grid.Row="1" Spacing="12">
+            <ikw:SimpleStackPanel Grid.Row="1" Spacing="4">
 
                 <ui:SettingsCard Description="{DynamicResource UserDataLocationDescription}" Header="{DynamicResource UserDataLocation}">
                     <ui:SettingsCard.HeaderIcon>
@@ -70,6 +70,18 @@
                             </ui:FlyoutService.Flyout>
                         </Button>
                     </ikw:SimpleStackPanel>
+                </ui:SettingsCard>
+
+                <ui:SettingsCard Header="{DynamicResource LogLevel}">
+                    <ui:SettingsCard.HeaderIcon>
+                        <ui:FontIcon Icon="{x:Static ui:FluentSystemIcons.Print_20_Regular}" />
+                    </ui:SettingsCard.HeaderIcon>
+                    <ComboBox
+                        MinWidth="150"
+                        DisplayMemberPath="Display"
+                        ItemsSource="{Binding DataProvider.LogEventLevels}"
+                        SelectedValue="{Binding Settings.LogLevel}"
+                        SelectedValuePath="Value" />
                 </ui:SettingsCard>
 
                 <ui:SettingsExpander Description="© 2020 zggsong &amp; STranslate Contributors" Header="STranslate">

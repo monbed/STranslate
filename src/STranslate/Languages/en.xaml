@@ -201,6 +201,7 @@
     <sys:String x:Key="ConfirmDelete">Confirm Delete?</sys:String>
     <sys:String x:Key="ConfirmDeleteService">Are you sure you want to delete service '{0}'?</sys:String>
     <sys:String x:Key="Close">Close</sys:String>
+    <sys:String x:Key="LogLevel">Log Level</sys:String>
 
     <!--  // Common //  -->
     <sys:String x:Key="Add">Add</sys:String>
@@ -347,6 +348,13 @@
     <sys:String x:Key="WindowAlignTypeLeftTop">LeftTop</sys:String>
     <sys:String x:Key="WindowAlignTypeRightTop">RightTop</sys:String>
     <sys:String x:Key="WindowAlignTypeCustom">Custom</sys:String>
+
+    <sys:String x:Key="LogEventLevelVerbose">Verbose</sys:String>
+    <sys:String x:Key="LogEventLevelDebug">Debug</sys:String>
+    <sys:String x:Key="LogEventLevelInformation">Information</sys:String>
+    <sys:String x:Key="LogEventLevelWarning">Warning</sys:String>
+    <sys:String x:Key="LogEventLevelError">Error</sys:String>
+    <sys:String x:Key="LogEventLevelFatal">Fatal</sys:String>
 
     <!--  // Plugins //  -->
     <sys:String x:Key="UnsupportedSourceLang">Unsupported source language</sys:String>
