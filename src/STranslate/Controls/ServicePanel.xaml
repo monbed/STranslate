@@ -61,7 +61,6 @@
                 <control:Badge
                     Grid.Column="2"
                     Margin="3,0"
-                    FontSize="10"
                     IsOfficial="{Binding MetaData.IsPrePlugin}" />
 
                 <ui:ToggleSwitch

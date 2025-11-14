@@ -68,7 +68,7 @@
     <sys:String x:Key="General_ShowMouseHook">显示鼠标钩子</sys:String>
     <sys:String x:Key="General_ShowMouseHookDescription">主界面是否显示快捷启用/禁用监听鼠标划词图标。</sys:String>
     <sys:String x:Key="General_FontSize">字体大小</sys:String>
-    <sys:String x:Key="General_FontSizeDescription">输入输出控件文本字体大小</sys:String>
+    <sys:String x:Key="General_FontSizeDescription">调整除「右键菜单」外的所有字体大小</sys:String>
     <sys:String x:Key="General_ShowPrompt">提示词</sys:String>
     <sys:String x:Key="General_ShowPromptDescription">主界面是否显示AI翻译服务的提示词切换按钮</sys:String>
     <sys:String x:Key="General_FontFamily">字体</sys:String>

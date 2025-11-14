@@ -5,11 +5,12 @@
     xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern">
 
     <Style TargetType="{x:Type control:IconButton}">
-        <Setter Property="Padding" Value="5" />
+        <Setter Property="Padding" Value="5,3" />
         <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
         <Setter Property="ui:ControlHelper.CornerRadius" Value="6" />
         <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="IconSize" Value="{DynamicResource {x:Static ui:ThemeKeys.ControlContentThemeFontSizeKey}}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type control:IconButton}">
@@ -25,7 +26,7 @@
                             CommandParameter="{TemplateBinding CommandParameter}"
                             ToolTip="{TemplateBinding ToolTip}"
                             Visibility="Visible">
-                            <ui:FontIcon FontSize="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=IconSize}" Icon="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Icon}" />
+                            <ui:FontIcon FontSize="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=IconSize, Mode=TwoWay}" Icon="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Icon}" />
                         </Button>
 
                         <ToggleButton
@@ -38,7 +39,7 @@
                             IsChecked="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=IsOn}"
                             ToolTip="{TemplateBinding ToolTip}"
                             Visibility="Collapsed">
-                            <ui:FontIcon FontSize="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=IconSize}" Icon="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Icon}" />
+                            <ui:FontIcon FontSize="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=IconSize, Mode=TwoWay}" Icon="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Icon}" />
                         </ToggleButton>
                     </Grid>
 

@@ -3,8 +3,23 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:cnvt="clr-namespace:STranslate.Converters"
     xmlns:ikw="http://schemas.inkore.net/lib/ui/wpf"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern"
     xmlns:xf="clr-namespace:XamlFlair;assembly=XamlFlair.WPF">
+
+    <!--#region FontSize-->
+    <sys:Double x:Key="STControlFontSize8">8</sys:Double>
+    <sys:Double x:Key="STControlFontSize9">9</sys:Double>
+    <sys:Double x:Key="STControlFontSize10">10</sys:Double>
+    <sys:Double x:Key="STControlFontSize11">11</sys:Double>
+    <sys:Double x:Key="STControlFontSize12">12</sys:Double>
+    <sys:Double x:Key="STControlFontSize13">13</sys:Double>
+    <sys:Double x:Key="STControlFontSize14">14</sys:Double>
+    <sys:Double x:Key="STControlFontSize15">15</sys:Double>
+    <sys:Double x:Key="STControlFontSize16">16</sys:Double>
+    <sys:Double x:Key="STControlFontSize17">17</sys:Double>
+    <sys:Double x:Key="STControlFontSize18">18</sys:Double>
+    <!--#endregion-->
 
     <!--#region Expander-->
 
@@ -202,6 +217,23 @@
     <Style TargetType="Image">
         <Setter Property="UseLayoutRounding" Value="True" />
         <Setter Property="RenderOptions.BitmapScalingMode" Value="HighQuality" />
+    </Style>
+
+    <!--#endregion-->
+
+    <!--#region IconAndText-->
+
+    <Style BasedOn="{StaticResource {x:Type ui:IconAndText}}" TargetType="ui:IconAndText">
+        <Setter Property="IconSize" Value="{DynamicResource STControlFontSize16}" />
+    </Style>
+
+    <!--#endregion-->
+
+    <!--#region MenuItem-->
+
+    <!--  // MenuItem字体大小统一设置为12，配合MenuItem固定无法更改，不改还好看点 //  -->
+    <Style BasedOn="{StaticResource {x:Type MenuItem}}" TargetType="MenuItem">
+        <Setter Property="FontSize" Value="12" />
     </Style>
 
     <!--#endregion-->

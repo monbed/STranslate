@@ -75,7 +75,7 @@
                                 Command="{Binding DataContext.DeleteModelCommand, RelativeSource={RelativeSource AncestorType=ComboBox}}"
                                 CommandParameter="{Binding}">
                                 <ui:FontIcon
-                                    FontSize="12"
+                                    FontSize="{DynamicResource STControlFontSize12}"
                                     Foreground="{DynamicResource SystemFillColorCriticalBrush}"
                                     Icon="{x:Static ui:FluentSystemIcons.Delete_24_Regular}" />
                             </Button>
@@ -177,7 +177,7 @@
                     </Border.Style>
                     <TextBlock
                         VerticalAlignment="Center"
-                        FontSize="12"
+                        FontSize="{DynamicResource STControlFontSize12}"
                         Foreground="{DynamicResource SystemFillColorSuccessBrush}"
                         Text="{Binding ValidateResult}" />
                 </Border>

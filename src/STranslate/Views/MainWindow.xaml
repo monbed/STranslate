@@ -141,7 +141,7 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Stretch"
                         Command="{Binding SwapLanguageCommand}">
-                        <ui:FontIcon Icon="{x:Static ui:FluentSystemIcons.ArrowSwap_20_Regular}" />
+                        <ui:FontIcon FontSize="{DynamicResource STControlFontSize16}" Icon="{x:Static ui:FluentSystemIcons.ArrowSwap_20_Regular}" />
                     </Button>
 
                     <ComboBox

@@ -48,7 +48,6 @@
                 <Image Width="20" Source="pack://application:,,,/Resources/app.ico" />
                 <TextBlock
                     VerticalAlignment="Center"
-                    FontSize="14"
                     Style="{DynamicResource CaptionTextBlockStyle}"
                     Text="{DynamicResource Settings}"
                     TextWrapping="NoWrap" />

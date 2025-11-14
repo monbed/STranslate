@@ -34,6 +34,11 @@
     <!--#region Plugin Selector-->
 
     <DataTemplate x:Key="DictionaryPluginTemplate" DataType="plugin:Service">
+        <DataTemplate.Resources>
+            <Style BasedOn="{StaticResource {x:Type ui:FontIcon}}" TargetType="ui:FontIcon">
+                <Setter Property="FontSize" Value="{DynamicResource STControlFontSize16}" />
+            </Style>
+        </DataTemplate.Resources>
         <Expander
             Margin="0,0,0,5"
             Padding="0"
@@ -125,7 +130,7 @@
                             <ui:FontIcon Icon="{x:Static ui:FluentSystemIcons.Timer_24_Regular}" Opacity="0.6" />
                             <TextBlock
                                 VerticalAlignment="Center"
-                                FontSize="10"
+                                FontSize="{DynamicResource STControlFontSize10}"
                                 Opacity="0.7"
                                 Text="{Binding Plugin.DictionaryResult.Duration, StringFormat='\{0:ss\\.ff}'}" />
                         </ikw:SimpleStackPanel>
@@ -200,7 +205,7 @@
                                                 CornerRadius="2">
                                                 <TextBlock
                                                     VerticalAlignment="Center"
-                                                    FontSize="10"
+                                                    FontSize="{DynamicResource STControlFontSize10}"
                                                     Foreground="{DynamicResource {x:Static ui:ThemeKeys.TextOnAccentFillColorPrimaryBrushKey}}"
                                                     Text="{Binding Label}" />
                                             </Border>
@@ -312,6 +317,11 @@
     </DataTemplate>
 
     <DataTemplate x:Key="TransaltePluginTemplate" DataType="plugin:Service">
+        <DataTemplate.Resources>
+            <Style BasedOn="{StaticResource {x:Type ui:FontIcon}}" TargetType="ui:FontIcon">
+                <Setter Property="FontSize" Value="{DynamicResource STControlFontSize16}" />
+            </Style>
+        </DataTemplate.Resources>
         <Expander
             Margin="0,0,0,5"
             Padding="0"
@@ -342,6 +352,11 @@
                     </DockPanel.Resources>
                     <DockPanel.ContextMenu>
                         <ContextMenu>
+                            <ContextMenu.Resources>
+                                <Style BasedOn="{StaticResource {x:Type ui:FontIcon}}" TargetType="ui:FontIcon">
+                                    <Setter Property="FontSize" Value="{DynamicResource STControlFontSize16}" />
+                                </Style>
+                            </ContextMenu.Resources>
                             <MenuItem
                                 Command="{Binding Source={StaticResource MainVmProxy}, Path=Data.SingleTranslateCommand}"
                                 CommandParameter="{Binding Source={StaticResource SvcProxy}, Path=Data}"
@@ -404,8 +419,8 @@
                         Orientation="Horizontal"
                         Spacing="10">
                         <Image
-                            Width="18"
-                            Height="18"
+                            Width="{DynamicResource STControlFontSize18}"
+                            Height="{DynamicResource STControlFontSize18}"
                             Source="{Binding MetaData.IconPath}" />
                         <TextBlock
                             VerticalAlignment="Center"
@@ -417,8 +432,8 @@
                             <ui:ProgressRing.Style>
                                 <Style BasedOn="{StaticResource {x:Type ui:ProgressRing}}" TargetType="ui:ProgressRing">
                                     <Style.Setters>
-                                        <Setter Property="Width" Value="16" />
-                                        <Setter Property="Height" Value="16" />
+                                        <Setter Property="Width" Value="{DynamicResource STControlFontSize16}" />
+                                        <Setter Property="Height" Value="{DynamicResource STControlFontSize16}" />
                                         <Setter Property="IsActive" Value="False" />
                                         <Setter Property="Visibility" Value="Collapsed" />
                                     </Style.Setters>
@@ -449,7 +464,7 @@
                             <StackPanel.Resources>
                                 <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
                                     <Setter Property="VerticalAlignment" Value="Center" />
-                                    <Setter Property="FontSize" Value="10" />
+                                    <Setter Property="FontSize" Value="{DynamicResource STControlFontSize10}" />
                                     <Setter Property="Opacity" Value="0.7" />
                                     <Setter Property="Margin" Value="5,0,0,0" />
                                 </Style>
@@ -518,12 +533,6 @@
                                 Margin="6,2"
                                 Orientation="Horizontal"
                                 Spacing="4">
-                                <ikw:SimpleStackPanel.Resources>
-                                    <Style BasedOn="{StaticResource {x:Type control:IconButton}}" TargetType="control:IconButton">
-                                        <Setter Property="Padding" Value="5,3" />
-                                        <Setter Property="IconSize" Value="14" />
-                                    </Style>
-                                </ikw:SimpleStackPanel.Resources>
                                 <ikw:SimpleStackPanel.Style>
                                     <Style TargetType="ikw:SimpleStackPanel">
                                         <Style.Triggers>
@@ -549,15 +558,15 @@
                                 <control:IconButton
                                     Command="{Binding RelativeSource={RelativeSource AncestorType=control:OutputControl}, Path=PlayAudioCommand}"
                                     CommandParameter="{Binding Plugin.TransResult.Text}"
-                                    Icon="{x:Static ui:FluentSystemIcons.Speaker2_24_Regular}" />
+                                    Icon="{x:Static ui:FluentSystemIcons.Speaker2_20_Regular}" />
                                 <control:IconButton
                                     Command="{Binding RelativeSource={RelativeSource AncestorType=control:OutputControl}, Path=CopyCommand}"
                                     CommandParameter="{Binding Plugin.TransResult.Text}"
-                                    Icon="{x:Static ui:FluentSystemIcons.Copy_24_Regular}" />
+                                    Icon="{x:Static ui:FluentSystemIcons.Copy_20_Regular}" />
                                 <control:IconButton
                                     Command="{Binding RelativeSource={RelativeSource AncestorType=control:OutputControl}, Path=InsertCommand}"
                                     CommandParameter="{Binding Plugin.TransResult.Text}"
-                                    Icon="{x:Static ui:FluentSystemIcons.TextHanging_24_Regular}" />
+                                    Icon="{x:Static ui:FluentSystemIcons.TextHanging_20_Regular}" />
                                 <control:IconButton
                                     Command="{Binding RelativeSource={RelativeSource AncestorType=control:OutputControl}, Path=TransBackCommand}"
                                     CommandParameter="{Binding}"
@@ -623,30 +632,22 @@
                                             </Style.Triggers>
                                         </Style>
                                     </ikw:SimpleStackPanel.Style>
-                                    <Button
-                                        Padding="5,3"
+                                    <control:IconButton
                                         Command="{Binding RelativeSource={RelativeSource AncestorType=control:OutputControl}, Path=PlayAudioCommand}"
-                                        CommandParameter="{Binding Plugin.TransBackResult.Text}">
-                                        <ui:FontIcon FontSize="14" Icon="{x:Static ui:FluentSystemIcons.Speaker2_24_Regular}" />
-                                    </Button>
-                                    <Button
-                                        Padding="5,3"
+                                        CommandParameter="{Binding Plugin.TransBackResult.Text}"
+                                        Icon="{x:Static ui:FluentSystemIcons.Speaker2_20_Regular}" />
+                                    <control:IconButton
                                         Command="{Binding RelativeSource={RelativeSource AncestorType=control:OutputControl}, Path=CopyCommand}"
-                                        CommandParameter="{Binding Plugin.TransBackResult.Text}">
-                                        <ui:FontIcon FontSize="14" Icon="{x:Static ui:FluentSystemIcons.Copy_24_Regular}" />
-                                    </Button>
-                                    <Button
-                                        Padding="5,3"
+                                        CommandParameter="{Binding Plugin.TransBackResult.Text}"
+                                        Icon="{x:Static ui:FluentSystemIcons.Copy_20_Regular}" />
+                                    <control:IconButton
                                         Command="{Binding RelativeSource={RelativeSource AncestorType=control:OutputControl}, Path=InsertCommand}"
-                                        CommandParameter="{Binding Plugin.TransBackResult.Text}">
-                                        <ui:FontIcon FontSize="14" Icon="{x:Static ui:FluentSystemIcons.TextHanging_24_Regular}" />
-                                    </Button>
-                                    <Button
-                                        Padding="5,3"
+                                        CommandParameter="{Binding Plugin.TransBackResult.Text}"
+                                        Icon="{x:Static ui:FluentSystemIcons.TextHanging_20_Regular}" />
+                                    <control:IconButton
                                         Command="{Binding RelativeSource={RelativeSource AncestorType=control:OutputControl}, Path=CleanTransBackCommand}"
-                                        CommandParameter="{Binding Plugin}">
-                                        <ui:FontIcon FontSize="14" Icon="{x:Static ui:FluentSystemIcons.DeleteLines_20_Regular}" />
-                                    </Button>
+                                        CommandParameter="{Binding Plugin}"
+                                        Icon="{x:Static ui:FluentSystemIcons.DeleteLines_20_Regular}" />
                                 </ikw:SimpleStackPanel>
                             </Grid>
                         </ikw:SimpleStackPanel>

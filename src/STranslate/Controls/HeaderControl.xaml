@@ -22,6 +22,11 @@
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         WindowChrome.IsHitTestVisibleInChrome="True">
+                        <Border.Resources>
+                            <Style BasedOn="{StaticResource {x:Type control:IconButton}}" TargetType="control:IconButton">
+                                <Setter Property="Padding" Value="5" />
+                            </Style>
+                        </Border.Resources>
                         <DockPanel>
                             <control:IconButton
                                 Icon="{x:Static ui:FluentSystemIcons.Pin_24_Regular}"
@@ -36,18 +41,18 @@
                                 Spacing="3">
                                 <control:IconButton
                                     Command="{TemplateBinding SettingCommand}"
-                                    Icon="{x:Static ui:FluentSystemIcons.Settings_24_Regular}"
+                                    Icon="{x:Static ui:FluentSystemIcons.Settings_20_Regular}"
                                     ToolTip="{DynamicResource OpenSettings}"
                                     Visibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=IsSettingVisible, Converter={cnvt:BoolToVisibilityConverter}}" />
                                 <control:IconButton
-                                    Icon="{x:Static ui:FluentSystemIcons.SlideHide_24_Regular}"
+                                    Icon="{x:Static ui:FluentSystemIcons.SlideHide_20_Regular}"
                                     IsOn="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=IsHideInput}"
                                     ToolTip="{DynamicResource Hotkey_ShowHideInputBox}"
                                     Type="Toggle"
                                     Visibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=IsHideInputVisible, Converter={cnvt:BoolToVisibilityConverter}}" />
                                 <control:IconButton
                                     Command="{TemplateBinding ColorSchemeCommand}"
-                                    Icon="{x:Static ui:FluentSystemIcons.Color_24_Regular}"
+                                    Icon="{x:Static ui:FluentSystemIcons.Color_20_Regular}"
                                     ToolTip="{DynamicResource Hotkey_ToggleColorTheme}"
                                     Visibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=IsColorSchemeVisible, Converter={cnvt:BoolToVisibilityConverter}}" />
                                 <control:IconButton

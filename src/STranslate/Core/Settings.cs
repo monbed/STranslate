@@ -356,9 +356,23 @@ public partial class Settings : ObservableObject
 
     private void ApplyAppFontSize()
     {
+        // original
         App.Current.Resources["ControlContentThemeFontSize"] = TextFontSize;    //14
         App.Current.Resources["CaptionTextBlockFontSize"] = TextFontSize - 2;   //12
-        App.Current.Resources["SubtitleTextBlockFontSize"] = TextFontSize + 6;  //18
+        App.Current.Resources["SubtitleTextBlockFontSize"] = TextFontSize + 6;  //20
+
+        // custom for stranslate
+        App.Current.Resources["STControlFontSize8"] = TextFontSize - 6;
+        App.Current.Resources["STControlFontSize9"] = TextFontSize - 5;
+        App.Current.Resources["STControlFontSize10"] = TextFontSize - 4;
+        App.Current.Resources["STControlFontSize11"] = TextFontSize - 3;
+        App.Current.Resources["STControlFontSize12"] = TextFontSize - 2;
+        App.Current.Resources["STControlFontSize13"] = TextFontSize - 1;
+        App.Current.Resources["STControlFontSize14"] = TextFontSize;
+        App.Current.Resources["STControlFontSize15"] = TextFontSize + 1;
+        App.Current.Resources["STControlFontSize16"] = TextFontSize + 2;
+        App.Current.Resources["STControlFontSize17"] = TextFontSize + 3;
+        App.Current.Resources["STControlFontSize18"] = TextFontSize + 4;
     }
 
     private void ApplyTheme()

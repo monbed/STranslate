@@ -38,6 +38,11 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
+                <Grid.Resources>
+                    <Style BasedOn="{StaticResource {x:Type control:IconButton}}" TargetType="control:IconButton">
+                        <Setter Property="Padding" Value="5" />
+                    </Style>
+                </Grid.Resources>
                 <Grid
                     dd:DragDrop.DropHandler="{StaticResource ImTranDropHandler}"
                     dd:DragDrop.IsDropTarget="True"
@@ -86,7 +91,7 @@
                             <control:Badge
                                 Grid.Column="2"
                                 Margin="2,0"
-                                FontSize="10"
+                                FontSize="{DynamicResource STControlFontSize10}"
                                 IsOfficial="{Binding Instance.ImageTranslateService.MetaData.IsPrePlugin}" />
                         </Grid>
                     </ui:ElevationBorder>
@@ -113,7 +118,7 @@
                         Grid.Column="2"
                         Margin="0,0,5,0"
                         Command="{Binding DeactiveImTranCommand}"
-                        FontSize="8"
+                        FontSize="{DynamicResource STControlFontSize8}"
                         Icon="{x:Static ui:FluentSystemIcons.Delete_20_Regular}"
                         Visibility="{Binding Instance.ImageTranslateService, Converter={cnvt:EqualToVisibilityInverseConverter}}" />
                 </Grid>
@@ -175,7 +180,7 @@
                             <control:Badge
                                 Grid.Column="2"
                                 Margin="2,0"
-                                FontSize="10"
+                                FontSize="{DynamicResource STControlFontSize10}"
                                 IsOfficial="{Binding Instance.ReplaceService.MetaData.IsPrePlugin}" />
                         </Grid>
                     </ui:ElevationBorder>
@@ -202,7 +207,7 @@
                         Grid.Column="2"
                         Margin="0,0,5,0"
                         Command="{Binding DeactiveReplaceCommand}"
-                        FontSize="8"
+                        FontSize="{DynamicResource STControlFontSize8}"
                         Icon="{x:Static ui:FluentSystemIcons.Delete_20_Regular}"
                         Visibility="{Binding Instance.ReplaceService, Converter={cnvt:EqualToVisibilityInverseConverter}}" />
                 </Grid>

@@ -22,6 +22,7 @@
     ui:WindowHelper.SystemBackdropType="Mica"
     ui:WindowHelper.UseModernWindowStyle="True"
     ResizeMode="CanResize"
+    ShowInTaskbar="False"
     WindowStartupLocation="CenterOwner"
     mc:Ignorable="d">
 
@@ -66,7 +67,6 @@
                 BorderThickness="1"
                 CornerRadius="6">
                 <TextBlock
-                    FontSize="14"
                     FontWeight="SemiBold"
                     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                     Text="{DynamicResource PromptList}" />
@@ -131,7 +131,7 @@
                                 <control:EditableTextBlock
                                     Grid.Column="0"
                                     Margin="5,0,0,0"
-                                    FontSize="13"
+                                    FontSize="{DynamicResource STControlFontSize13}"
                                     Text="{Binding Name}"
                                     ToolTipService.ToolTip="{Binding Name}" />
                                 <ui:ToggleSwitch
@@ -172,7 +172,6 @@
                 BorderThickness="1"
                 CornerRadius="6">
                 <TextBlock
-                    FontSize="14"
                     FontWeight="SemiBold"
                     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                     Text="{DynamicResource PromptDetails}" />
@@ -186,7 +185,6 @@
                 Spacing="10">
                 <TextBlock
                     VerticalAlignment="Center"
-                    FontSize="14"
                     FontWeight="SemiBold"
                     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                     Text="{DynamicResource PromptItemManagement}" />
@@ -235,7 +233,7 @@
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock
-                                    FontSize="13"
+                                    FontSize="{DynamicResource STControlFontSize13}"
                                     FontWeight="Medium"
                                     Text="{Binding Role}" />
                             </DataTemplate>
@@ -280,7 +278,7 @@
                                 <ComboBox
                                     Grid.Column="1"
                                     Padding="10,6"
-                                    FontSize="13"
+                                    FontSize="{DynamicResource STControlFontSize13}"
                                     IsEnabled="{Binding SelectedPromptItem, Converter={cnvt:NullToBoolInverseConverter}}"
                                     ItemsSource="{Binding Roles}"
                                     Text="{Binding SelectedPromptItem.Role, UpdateSourceTrigger=PropertyChanged}" />
@@ -300,7 +298,7 @@
                                         Foreground="{DynamicResource SystemFillColorAttentionBrush}"
                                         Text="{DynamicResource CustomPromptInstructionTitle}" />
                                     <TextBlock
-                                        FontSize="11"
+                                        FontSize="{DynamicResource STControlFontSize11}"
                                         Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                         TextWrapping="Wrap">
                                         <Run Text="{DynamicResource CustomPromptInstructionDesc1}" />
@@ -330,7 +328,7 @@
                             AcceptsReturn="True"
                             Background="Transparent"
                             BorderThickness="0"
-                            FontSize="13"
+                            FontSize="{DynamicResource STControlFontSize13}"
                             IsEnabled="{Binding SelectedPromptItem, Converter={cnvt:NullToBoolInverseConverter}}"
                             Text="{Binding SelectedPromptItem.Content, UpdateSourceTrigger=PropertyChanged}"
                             TextWrapping="Wrap"
@@ -355,7 +353,7 @@
                 Command="{Binding SaveCommand}"
                 CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
                 Content="{DynamicResource Save}"
-                FontSize="13"
+                FontSize="{DynamicResource STControlFontSize13}"
                 FontWeight="Medium"
                 IsDefault="True"
                 Style="{StaticResource AccentButtonStyle}" />
@@ -365,7 +363,7 @@
                 Command="{Binding CancelCommand}"
                 CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
                 Content="{DynamicResource Cancel}"
-                FontSize="13"
+                FontSize="{DynamicResource STControlFontSize13}"
                 IsCancel="True" />
         </ikw:SimpleStackPanel>
     </Grid>

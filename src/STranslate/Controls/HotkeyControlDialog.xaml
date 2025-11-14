@@ -31,14 +31,11 @@
         </Grid.RowDefinitions>
         <StackPanel Margin="26,12,26,0">
             <TextBlock
-                FontSize="20"
+                FontSize="{DynamicResource {x:Static ui:ThemeKeys.SubtitleTextBlockFontSizeKey}}"
                 FontWeight="SemiBold"
                 Text="{Binding WindowTitle}"
                 TextWrapping="WrapWithOverflow" />
-            <TextBlock
-                VerticalAlignment="Center"
-                FontSize="14"
-                Text="{DynamicResource HotkeyFunctionPrompt}" />
+            <TextBlock VerticalAlignment="Center" Text="{DynamicResource HotkeyFunctionPrompt}" />
         </StackPanel>
         <Border
             Grid.Row="1"
@@ -78,7 +75,7 @@
                                     Margin="5,0"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
-                                    FontSize="18"
+                                    FontSize="{DynamicResource STControlFontSize18}"
                                     FontWeight="Bold"
                                     Foreground="{DynamicResource TextFillColorInverseBrush}"
                                     Text="{Binding}" />

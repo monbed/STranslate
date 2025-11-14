@@ -53,12 +53,6 @@
                                 Margin="6,2"
                                 Orientation="Horizontal"
                                 Spacing="4">
-                                <ikw:SimpleStackPanel.Resources>
-                                    <Style BasedOn="{StaticResource {x:Type control:IconButton}}" TargetType="control:IconButton">
-                                        <Setter Property="Padding" Value="5,3" />
-                                        <Setter Property="IconSize" Value="14" />
-                                    </Style>
-                                </ikw:SimpleStackPanel.Resources>
                                 <control:IconButton
                                     Command="{TemplateBinding SaveToVocabularyCommand}"
                                     CommandParameter="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Text}"
@@ -100,15 +94,15 @@
                                     Visibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=IsIdentify, Converter={cnvt:BoolToVisibilityConverter}}" />
 
                                 <ui:ElevationBorder
-                                    Height="23"
-                                    Padding="5,0"
+                                    Padding="5"
+                                    VerticalAlignment="Center"
                                     Background="{DynamicResource {x:Static ui:ThemeKeys.ControlFillColorDefaultBrushKey}}"
                                     BorderBrush="{DynamicResource {x:Static ui:ThemeKeys.ControlElevationBorderBrushKey}}"
                                     BorderThickness="{DynamicResource {x:Static ui:ThemeKeys.ButtonBorderThemeThicknessKey}}"
                                     CornerRadius="{DynamicResource {x:Static ui:ThemeKeys.ControlCornerRadiusKey}}"
                                     Visibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=IdentifiedLanguage, Converter={cnvt:EqualToVisibilityInverseConverter}}">
                                     <ikw:SimpleStackPanel Orientation="Horizontal" Spacing="2">
-                                        <TextBlock VerticalAlignment="Center" FontSize="12">
+                                        <TextBlock VerticalAlignment="Center" FontSize="{DynamicResource {x:Static ui:ThemeKeys.CaptionTextBlockFontSizeKey}}">
                                             <Run Text="{DynamicResource IdentifiedLanguageLabel}" />
                                             <Run Text=": " />
                                             <Run Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=IdentifiedLanguage}" />
