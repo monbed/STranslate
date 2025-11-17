@@ -103,6 +103,7 @@
         <PackageReference Include="System.IdentityModel.Tokens.Jwt" />
         <PackageReference Include="System.Reflection.MetadataLoadContext" />
         <PackageReference Include="XamlFlair.WPF" />
+        <PackageReference Include="ZXing.Net.Bindings.ZKWeb.System.Drawing" />
     </ItemGroup>
 
     <ItemGroup>

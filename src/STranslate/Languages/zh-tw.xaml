@@ -417,6 +417,8 @@
     <sys:String x:Key="ShowText">顯示文字</sys:String>
     <sys:String x:Key="HideText">隱藏文字</sys:String>
     <sys:String x:Key="Recognize">辨識</sys:String>
+    <sys:String x:Key="RecognizeQrCode">辨識二維碼</sys:String>
+    <sys:String x:Key="NoQrCodeFound">​​找不到二維碼</sys:String>
 
     <sys:String x:Key="RecognizeLanguage">辨識語言</sys:String>
     <sys:String x:Key="TranslateLanguage">翻譯語言</sys:String>

@@ -16,6 +16,8 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using ZXing;
+using ZXing.ZKWeb;
 using Bitmap = System.Drawing.Bitmap;
 
 namespace STranslate.ViewModels;
@@ -91,6 +93,9 @@ public partial class OcrWindowViewModel : ObservableObject, IDisposable
     private BitmapSource? _annotatedImage;
 
     [ObservableProperty]
+    public partial string QrCodeResult { get; set; } = string.Empty;
+
+    [ObservableProperty]
     public partial ObservableCollection<OcrWord> OcrWords { get; set; } = [];
 
     [ObservableProperty]
@@ -123,6 +128,14 @@ public partial class OcrWindowViewModel : ObservableObject, IDisposable
                 return;
 
             var data = Utilities.ToBytes(bitmap);
+
+            // 尝试获取二维码结果
+            var qrResult = DecodeQrCode(data);
+            if (qrResult != null)
+            {
+                QrCodeResult = qrResult.Text;
+            }
+
             _lastOcrResult = await ocrSvc.RecognizeAsync(new OcrRequest(data, Settings.OcrLanguage), cancellationToken);
 
             if (!_lastOcrResult.IsSuccess || string.IsNullOrEmpty(_lastOcrResult.Text))
@@ -138,6 +151,25 @@ public partial class OcrWindowViewModel : ObservableObject, IDisposable
         {
             IsExecuting = false;
         }
+    }
+
+    [RelayCommand]
+    private void QrCode()
+    {
+        if (_sourceImage == null || IsExecuting) return;
+
+        // 清理当前QrCodeResult
+        QrCodeResult = string.Empty;
+        using var bitmap = Utilities.ToBitmap(_sourceImage);
+        var data = Utilities.ToBytes(bitmap);
+        var qrResult = DecodeQrCode(data);
+        if (qrResult == null || string.IsNullOrWhiteSpace(qrResult.Text))
+        {
+            _snackbar.ShowInfo(_i18n.GetTranslation("NoQrCodeFound"));
+            return;
+        }
+
+        QrCodeResult = qrResult.Text;
     }
 
     [RelayCommand]
@@ -420,6 +452,7 @@ public partial class OcrWindowViewModel : ObservableObject, IDisposable
 
     private void Clear()
     {
+        QrCodeResult = string.Empty;
         Result = string.Empty;
         _sourceImage = null;
         _annotatedImage = null;
@@ -434,6 +467,42 @@ public partial class OcrWindowViewModel : ObservableObject, IDisposable
         return fileName.EndsWith(".png", StringComparison.OrdinalIgnoreCase)
             ? new PngBitmapEncoder()
             : new JpegBitmapEncoder();
+    }
+
+    private Result? DecodeQrCode(byte[] bytes)
+    {
+        try
+        {
+            // 创建 ZXing 的 BarcodeReader 实例
+            var reader = new BarcodeReader
+            {
+                AutoRotate = true, // 自动旋转图像以提高识别率
+                Options = new ZXing.Common.DecodingOptions
+                {
+                    TryInverted = true, // 尝试反色处理
+                    TryHarder = true, // 更努力地尝试识别
+                    PureBarcode = false, // 不是纯条码图像
+                    PossibleFormats =
+                    [
+                        BarcodeFormat.QR_CODE, // 只识别二维码
+                        BarcodeFormat.DATA_MATRIX, // 也可以识别 Data Matrix
+                        BarcodeFormat.AZTEC // 也可以识别 Aztec 码
+                    ]
+                }
+            };
+
+            // 使用字节数组创建 System.DrawingCore.Bitmap
+            using var stream = new MemoryStream(bytes);
+            using var drawingCoreBitmap = new System.DrawingCore.Bitmap(stream);
+            // 解码二维码
+            var result = reader.Decode(drawingCoreBitmap);
+
+            return result;
+        }
+        catch (Exception)
+        {
+            return default;
+        }
     }
 
     #endregion

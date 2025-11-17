@@ -37,5 +37,6 @@
     <PackageVersion Include="System.Reflection.MetadataLoadContext" Version="10.0.0" />
     <PackageVersion Include="WeChatOcr" Version="1.0.4" />
     <PackageVersion Include="XamlFlair.WPF" Version="1.2.13" />
+    <PackageVersion Include="ZXing.Net.Bindings.ZKWeb.System.Drawing" Version="0.16.9" />
   </ItemGroup>
 </Project>

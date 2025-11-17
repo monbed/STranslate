@@ -416,6 +416,8 @@
     <sys:String x:Key="ShowText">Show Text</sys:String>
     <sys:String x:Key="HideText">Hide Text</sys:String>
     <sys:String x:Key="Recognize">Recognize</sys:String>
+    <sys:String x:Key="RecognizeQrCode">Recognize QrCode</sys:String>
+    <sys:String x:Key="NoQrCodeFound">No QrCode found</sys:String>
 
     <sys:String x:Key="RecognizeLanguage">Recognize Language</sys:String>
     <sys:String x:Key="TranslateLanguage">Translate Language</sys:String>
