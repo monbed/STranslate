@@ -115,7 +115,10 @@
 
     <!--  // Plugin Page //  -->
     <sys:String x:Key="AddPlugin">Add Plugin</sys:String>
-    <sys:String x:Key="FilterPlugin">Filter Plugin</sys:String>
+    <sys:String x:Key="PluginName">Name</sys:String>
+    <sys:String x:Key="PluginAuthor">Author</sys:String>
+    <sys:String x:Key="PluginType">Type</sys:String>
+    <sys:String x:Key="PluginVersion">Version</sys:String>
     <sys:String x:Key="SearchPlugin">Search Plugin</sys:String>
     <sys:String x:Key="SearchPluginToolTip">Ctrl+F to search plugins</sys:String>
 

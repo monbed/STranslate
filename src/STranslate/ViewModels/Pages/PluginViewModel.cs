@@ -8,8 +8,6 @@ using STranslate.Plugin;
 using System.Collections;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
 
 namespace STranslate.ViewModels.Pages;
@@ -30,6 +28,41 @@ public partial class PluginViewModel : ObservableObject
 
     [ObservableProperty] public partial ListSortDirection NameSortDirection { get; set; } = ListSortDirection.Ascending;
     [ObservableProperty] public partial ListSortDirection VersionSortDirection { get; set; } = ListSortDirection.Ascending;
+    [ObservableProperty] public partial ListSortDirection AuthorSortDirection { get; set; } = ListSortDirection.Ascending;
+    [ObservableProperty] public partial ListSortDirection TypeSortDirection { get; set; } = ListSortDirection.Ascending;
+
+    /// <summary>
+    /// 所有插件数量
+    /// </summary>
+    public int TotalPluginCount => _pluginInstance.PluginMetaDatas.Count;
+
+    /// <summary>
+    /// 翻译插件数量（包含翻译和词典插件）
+    /// </summary>
+    public int TranslatePluginCount => _pluginInstance.PluginMetaDatas
+        .Where(x => typeof(ITranslatePlugin).IsAssignableFrom(x.PluginType) || typeof(IDictionaryPlugin).IsAssignableFrom(x.PluginType))
+        .Count();
+
+    /// <summary>
+    /// OCR插件数量
+    /// </summary>
+    public int OcrPluginCount => _pluginInstance.PluginMetaDatas
+        .Where(x => typeof(IOcrPlugin).IsAssignableFrom(x.PluginType))
+        .Count();
+
+    /// <summary>
+    /// TTS插件数量
+    /// </summary>
+    public int TtsPluginCount => _pluginInstance.PluginMetaDatas
+        .Where(x => typeof(ITtsPlugin).IsAssignableFrom(x.PluginType))
+        .Count();
+
+    /// <summary>
+    /// 词汇表插件数量
+    /// </summary>
+    public int VocabularyPluginCount => _pluginInstance.PluginMetaDatas
+        .Where(x => typeof(IVocabularyPlugin).IsAssignableFrom(x.PluginType))
+        .Count();
 
     public PluginViewModel(
         PluginInstance pluginInstance,
@@ -50,6 +83,16 @@ public partial class PluginViewModel : ObservableObject
             Source = _pluginInstance.PluginMetaDatas
         };
         _pluginCollectionView.Filter += OnPluginFilter;
+
+        // 监听插件集合变化，更新计数
+        _pluginInstance.PluginMetaDatas.CollectionChanged += (s, e) =>
+        {
+            OnPropertyChanged(nameof(TotalPluginCount));
+            OnPropertyChanged(nameof(TranslatePluginCount));
+            OnPropertyChanged(nameof(OcrPluginCount));
+            OnPropertyChanged(nameof(TtsPluginCount));
+            OnPropertyChanged(nameof(VocabularyPluginCount));
+        };
     }
 
     [ObservableProperty]
@@ -117,6 +160,20 @@ public partial class PluginViewModel : ObservableObject
     {
         VersionSortDirection = VersionSortDirection == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
         ApplySortWithCustomComparer(VersionSortDirection, new VersionComparer());
+    }
+
+    [RelayCommand]
+    private void SortByAuthor()
+    {
+        AuthorSortDirection = AuthorSortDirection == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
+        ApplySort(nameof(PluginMetaData.Author), AuthorSortDirection);
+    }
+
+    [RelayCommand]
+    private void SortByType()
+    {
+        TypeSortDirection = TypeSortDirection == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
+        ApplySortWithCustomComparer(TypeSortDirection, new PluginTypeComparer());
     }
 
     partial void OnPluginTypeChanged(PluginType value) => _pluginCollectionView.View?.Refresh();
@@ -196,41 +253,6 @@ public partial class PluginViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private async Task PluginSummaryAsync(Control control)
-    {
-        var helpDialog = new ContentDialog()
-        {
-            Owner = Window.GetWindow(control),
-            Content = new StackPanel
-            {
-                Children =
-                {
-                    GetTextBlock("PluginTypeAll", _pluginInstance.PluginMetaDatas.Count.ToString(), new Thickness()),
-                    GetTextBlock("PluginTypeTranslate", _pluginInstance.PluginMetaDatas.Where(x => typeof(ITranslatePlugin).IsAssignableFrom(x.PluginType) || typeof(IDictionaryPlugin).IsAssignableFrom(x.PluginType)).Count().ToString(), new Thickness(0, 24, 0, 10)),
-                    GetTextBlock("PluginTypeOcr", _pluginInstance.PluginMetaDatas.Where(x => typeof(IOcrPlugin).IsAssignableFrom(x.PluginType)).Count().ToString(), new Thickness(0, 24, 0, 10)),
-                    GetTextBlock("PluginTypeTts", _pluginInstance.PluginMetaDatas.Where(x => typeof(ITtsPlugin).IsAssignableFrom(x.PluginType)).Count().ToString(), new Thickness(0, 24, 0, 10)),
-                    GetTextBlock("PluginTypeVocabulary", _pluginInstance.PluginMetaDatas.Where(x => typeof(IVocabularyPlugin).IsAssignableFrom(x.PluginType)).Count().ToString(), new Thickness(0, 24, 0, 0)),
-                }
-            },
-            PrimaryButtonText = (string)Application.Current.Resources["Ok"],
-            DefaultButton = ContentDialogButton.Primary,
-            CornerRadius = new CornerRadius(8),
-            Style = (Style)Application.Current.Resources["ContentDialog"]
-        };
-
-        await helpDialog.ShowAsync();
-
-        TextBlock GetTextBlock(string resourceKey, string text, Thickness thickness) =>
-            new()
-            {
-                Text = $"{(string)Application.Current.Resources[resourceKey]}: {text}",
-                FontSize = 16,
-                TextWrapping = TextWrapping.Wrap,
-                Margin = thickness
-            };
-    }
-
-    [RelayCommand]
     private void OpenPluginDirectory(PluginMetaData plugin)
     {
         var directory = plugin.PluginDirectory;
@@ -283,6 +305,68 @@ public partial class PluginViewModel : ObservableObject
     [RelayCommand]
     private void OpenOfficialLink(string url)
         => Process.Start(new ProcessStartInfo { FileName = url, UseShellExecute = true });
+}
+
+/// <summary>
+/// 插件类型比较器，用于按插件类型排序
+/// 排序顺序：翻译类 -> OCR -> TTS -> 词汇表 -> 其他
+/// </summary>
+public class PluginTypeComparer : IComparer
+{
+    public int Compare(object? x, object? y)
+    {
+        if (x is not PluginMetaData pluginX || y is not PluginMetaData pluginY)
+            return 0;
+
+        var typeX = GetPluginTypePriority(pluginX.PluginType);
+        var typeY = GetPluginTypePriority(pluginY.PluginType);
+
+        int result = typeX.CompareTo(typeY);
+
+        // 如果类型相同，则按名称排序
+        if (result == 0)
+        {
+            result = string.Compare(pluginX.Name, pluginY.Name, StringComparison.OrdinalIgnoreCase);
+        }
+
+        return result;
+    }
+
+    /// <summary>
+    /// 获取插件类型的排序优先级
+    /// </summary>
+    /// <param name="pluginType">插件类型</param>
+    /// <returns>优先级数字，越小优先级越高</returns>
+    private static int GetPluginTypePriority(Type? pluginType)
+    {
+        // 检查是否为翻译类插件（翻译或词典）
+        if (typeof(ITranslatePlugin).IsAssignableFrom(pluginType) ||
+            typeof(IDictionaryPlugin).IsAssignableFrom(pluginType))
+        {
+            return 1;
+        }
+
+        // OCR 插件
+        if (typeof(IOcrPlugin).IsAssignableFrom(pluginType))
+        {
+            return 2;
+        }
+
+        // TTS 插件
+        if (typeof(ITtsPlugin).IsAssignableFrom(pluginType))
+        {
+            return 3;
+        }
+
+        // 词汇表插件
+        if (typeof(IVocabularyPlugin).IsAssignableFrom(pluginType))
+        {
+            return 4;
+        }
+
+        // 其他类型插件
+        return 5;
+    }
 }
 
 /// <summary>

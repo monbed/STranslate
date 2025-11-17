@@ -115,7 +115,10 @@
 
     <!--  // Plugin Page //  -->
     <sys:String x:Key="AddPlugin">新增外掛</sys:String>
-    <sys:String x:Key="FilterPlugin">過濾外掛</sys:String>
+    <sys:String x:Key="PluginName">名稱</sys:String>
+    <sys:String x:Key="PluginAuthor">作者</sys:String>
+    <sys:String x:Key="PluginType">類型</sys:String>
+    <sys:String x:Key="PluginVersion">版本</sys:String>
     <sys:String x:Key="SearchPlugin">搜尋外掛</sys:String>
     <sys:String x:Key="SearchPluginToolTip">按 Ctrl+F 搜尋外掛</sys:String>
 

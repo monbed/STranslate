@@ -51,25 +51,28 @@
                     <ui:FontIcon FontSize="{DynamicResource STControlFontSize16}" Icon="{x:Static ui:FluentSystemIcons.Filter_20_Regular}" />
                     <ui:FlyoutService.Flyout>
                         <ui:MenuFlyout Placement="BottomEdgeAlignedLeft">
-                            <MenuItem Command="{Binding SortByNameCommand}" Header="名称">
+                            <MenuItem Command="{Binding SortByNameCommand}" Header="{DynamicResource PluginName}">
                                 <MenuItem.Icon>
                                     <ui:FontIcon Icon="{x:Static ui:FluentSystemIcons.TextSortAscending_20_Regular}" />
                                 </MenuItem.Icon>
                             </MenuItem>
-                            <MenuItem Command="{Binding SortByVersionCommand}" Header="版本">
+                            <MenuItem Command="{Binding SortByVersionCommand}" Header="{DynamicResource PluginVersion}">
                                 <MenuItem.Icon>
                                     <ui:FontIcon Icon="{x:Static ui:FluentSystemIcons.ArrowSortDownLines_20_Regular}" />
                                 </MenuItem.Icon>
                             </MenuItem>
+                            <MenuItem Command="{Binding SortByAuthorCommand}" Header="{DynamicResource PluginAuthor}">
+                                <MenuItem.Icon>
+                                    <ui:FontIcon Icon="{x:Static ui:FluentSystemIcons.LayerDiagonalPerson_20_Regular}" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Command="{Binding SortByTypeCommand}" Header="{DynamicResource PluginType}">
+                                <MenuItem.Icon>
+                                    <ui:FontIcon Icon="{x:Static ui:FluentSystemIcons.DataBarVerticalAscending_20_Regular}" />
+                                </MenuItem.Icon>
+                            </MenuItem>
                         </ui:MenuFlyout>
                     </ui:FlyoutService.Flyout>
-                </Button>
-                <Button
-                    Margin="-6,0,0,0"
-                    Padding="5,6"
-                    Command="{Binding PluginSummaryCommand}"
-                    CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
-                    <ui:FontIcon FontSize="{DynamicResource STControlFontSize16}" Icon="{x:Static ui:FluentSystemIcons.QuestionCircle_20_Regular}" />
                 </Button>
                 <TextBox
                     x:Name="PluginFilterTextbox"
@@ -181,25 +184,36 @@
             HorizontalAlignment="Center"
             Orientation="Horizontal"
             Spacing="12">
+            <ikw:SimpleStackPanel.Resources>
+                <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static ui:ThemeKeys.TextFillColorSecondaryBrushKey}}" />
+                    <Setter Property="FontSize" Value="{DynamicResource STControlFontSize12}" />
+                </Style>
+            </ikw:SimpleStackPanel.Resources>
             <TextBlock>
-                <Run Text="所有插件: " />
-                <Run Text="10" />
+                <Run Text="{DynamicResource PluginTypeAll}" />
+                <Run Text=": " />
+                <Run Text="{Binding TotalPluginCount, Mode=OneWay}" />
             </TextBlock>
             <TextBlock>
-                <Run Text="文本翻译: " />
-                <Run Text="2" />
+                <Run Text="{DynamicResource PluginTypeTranslate}" />
+                <Run Text=": " />
+                <Run Text="{Binding TranslatePluginCount, Mode=OneWay}" />
             </TextBlock>
             <TextBlock>
-                <Run Text="文本识别: " />
-                <Run Text="3" />
+                <Run Text="{DynamicResource PluginTypeOcr}" />
+                <Run Text=": " />
+                <Run Text="{Binding OcrPluginCount, Mode=OneWay}" />
             </TextBlock>
             <TextBlock>
-                <Run Text="语音合成: " />
-                <Run Text="3" />
+                <Run Text="{DynamicResource PluginTypeTts}" />
+                <Run Text=": " />
+                <Run Text="{Binding TtsPluginCount, Mode=OneWay}" />
             </TextBlock>
             <TextBlock>
-                <Run Text="生词本: " />
-                <Run Text="2" />
+                <Run Text="{DynamicResource PluginTypeVocabulary}" />
+                <Run Text=": " />
+                <Run Text="{Binding VocabularyPluginCount, Mode=OneWay}" />
             </TextBlock>
         </ikw:SimpleStackPanel>
     </Grid>

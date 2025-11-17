@@ -8,11 +8,12 @@ using System.Text.Json;
 
 namespace STranslate.Core;
 
-public class PluginManager
+public class PluginManager : IDisposable
 {
     private readonly ILogger<PluginManager> _logger;
     private readonly List<PluginMetaData> _pluginMetaDatas;
     private readonly string _tempExtractPath;
+    private bool _disposed = false;
 
     public PluginManager(ILogger<PluginManager> logger)
     {
@@ -166,20 +167,45 @@ public class PluginManager
         return true;
     }
 
-    public void CleanupTempFiles()
+    #region IDisposable
+
+    protected virtual void Dispose(bool disposing)
     {
-        try
+        if (!_disposed)
         {
-            if (Directory.Exists(_tempExtractPath))
+            if (disposing)
             {
-                Directory.Delete(_tempExtractPath, true);
+                try
+                {
+                    if (Directory.Exists(_tempExtractPath))
+                    {
+                        Directory.Delete(_tempExtractPath, true);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError($"Failed to cleanup temp files: {ex.Message}");
+                }
             }
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError($"Failed to cleanup temp files: {ex.Message}");
+
+            _disposed = true;
         }
     }
+
+    public void Dispose()
+    {
+        Dispose(disposing: true);
+#pragma warning disable CA1816
+        GC.SuppressFinalize(this);
+#pragma warning restore CA1816
+    }
+
+    ~PluginManager()
+    {
+        Dispose(disposing: false);
+    }
+
+    #endregion
 
     #region Private Methods
 

@@ -32,6 +32,7 @@ public partial class App : ISingleInstanceApp, INavigation, IDisposable
     private ILogger<App>? _logger;
     private MainWindow? _mainWindow;
     private MainWindowViewModel? _mainWindowViewModel;
+    private PluginManager? _pluginManager;
     private Notification? _notification;
     private static bool _disposed;
 
@@ -190,7 +191,8 @@ public partial class App : ISingleInstanceApp, INavigation, IDisposable
 
         AutoLoggerAttribute.InitializeLogger(_logger);
 
-        Ioc.Default.GetRequiredService<PluginManager>().LoadPlugins();
+        _pluginManager = Ioc.Default.GetRequiredService<PluginManager>();
+        _pluginManager.LoadPlugins();
         Ioc.Default.GetRequiredService<ServiceManager>().LoadServices();
 
         RegisterAppDomainExceptions();
@@ -367,7 +369,7 @@ public partial class App : ISingleInstanceApp, INavigation, IDisposable
             _notification?.Uninstall();
             _mainWindowViewModel?.Dispose();
             _mainWindow?.Dispatcher.Invoke(_mainWindow.Dispose);
-            Ioc.Default.GetRequiredService<PluginManager>().CleanupTempFiles();
+            _pluginManager?.Dispose();
         }
 
         _logger?.LogInformation("End STranslate dispose ----------------------------------------------------");
