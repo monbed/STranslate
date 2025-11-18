@@ -126,10 +126,13 @@
     <sys:String x:Key="SearchPluginToolTip">按 Ctrl+F 搜索插件</sys:String>
 
     <!--  // Network Page //  -->
+    <sys:String x:Key="Network_EnableExternalCall">启用外部调用</sys:String>
+    <sys:String x:Key="Network_EnableExternalCallDescription">启用或禁用外部调用</sys:String>
+    <sys:String x:Key="Network_ExternalCallPort">外部调用端口</sys:String>
+    <sys:String x:Key="Network_ExternalCallPortDescription">外部调用端口，地址为 localhost</sys:String>
+    <sys:String x:Key="Network_ExternalCallPortPlaceholder">例如：50020</sys:String>
     <sys:String x:Key="Network_EnableProxy">启用代理</sys:String>
     <sys:String x:Key="Network_EnableProxyDescription">启用或禁用代理功能</sys:String>
-    <sys:String x:Key="Network_Enable">启用</sys:String>
-    <sys:String x:Key="Network_Disable">禁用</sys:String>
     <sys:String x:Key="Network_ProxyType">代理类型</sys:String>
     <sys:String x:Key="Network_ProxyTypeDescription">选择代理服务器类型</sys:String>
     <sys:String x:Key="Network_ProxyAddress">代理服务器地址</sys:String>

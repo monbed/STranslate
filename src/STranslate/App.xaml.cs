@@ -134,6 +134,9 @@ public partial class App : ISingleInstanceApp, INavigation, IDisposable
                     // 自动注册页面
                     services.AddScopedFromNamespace("STranslate.ViewModels.Pages", Assembly.GetExecutingAssembly());
                     services.AddScopedFromNamespace("STranslate.Views.Pages", Assembly.GetExecutingAssembly());
+
+                    // 注册外部调用服务
+                    services.AddSingleton<ExternalCallService>();
                 })
                 .Build();
             Ioc.Default.ConfigureServices(host.Services);

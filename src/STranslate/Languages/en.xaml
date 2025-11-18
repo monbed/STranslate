@@ -126,10 +126,13 @@
     <sys:String x:Key="SearchPluginToolTip">Ctrl+F to search plugins</sys:String>
 
     <!--  // Network Page //  -->
+    <sys:String x:Key="Network_EnableExternalCall">Enable external call</sys:String>
+    <sys:String x:Key="Network_EnableExternalCallDescription">Enable or disable external call</sys:String>
+    <sys:String x:Key="Network_ExternalCallPort">External Call Port</sys:String>
+    <sys:String x:Key="Network_ExternalCallPortDescription">External call port, address is localhost</sys:String>
+    <sys:String x:Key="Network_ExternalCallPortPlaceholder">e.g., 50020</sys:String>
     <sys:String x:Key="Network_EnableProxy">Enable Proxy</sys:String>
     <sys:String x:Key="Network_EnableProxyDescription">Enable or disable proxy functionality</sys:String>
-    <sys:String x:Key="Network_Enable">Enable</sys:String>
-    <sys:String x:Key="Network_Disable">Disable</sys:String>
     <sys:String x:Key="Network_ProxyType">Proxy Type</sys:String>
     <sys:String x:Key="Network_ProxyTypeDescription">Select the type of proxy server</sys:String>
     <sys:String x:Key="Network_ProxyAddress">Proxy Address</sys:String>

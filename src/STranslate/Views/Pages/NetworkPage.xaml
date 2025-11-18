@@ -67,15 +67,44 @@
 
         <ui:ScrollViewerEx x:Name="PART_ScrollViewer" Grid.Row="1">
             <ikw:SimpleStackPanel Margin="20,10" Spacing="4">
+                <!--  // 外部调用 //  -->
+                <control:CardGroup>
+                    <ui:SettingsCard Description="{DynamicResource Network_EnableExternalCallDescription}" Header="{DynamicResource Network_EnableExternalCall}">
+                        <ui:SettingsCard.HeaderIcon>
+                            <ui:FontIcon Icon="{x:Static ui:FluentSystemIcons.Remote_20_Regular}" />
+                        </ui:SettingsCard.HeaderIcon>
+                        <ui:ToggleSwitch
+                            IsOn="{Binding Settings.EnableExternalCall}"
+                            OffContent="{DynamicResource Disable}"
+                            OnContent="{DynamicResource Enable}" />
+                    </ui:SettingsCard>
+                    <ui:SettingsCard Description="{DynamicResource Network_ExternalCallPortDescription}" Header="{DynamicResource Network_ExternalCallPort}">
+                        <ui:SettingsCard.HeaderIcon>
+                            <ui:FontIcon Icon="{x:Static ui:FluentSystemIcons.DocumentPageNumber_20_Regular}" />
+                        </ui:SettingsCard.HeaderIcon>
+                        <ui:NumberBox
+                            MinWidth="120"
+                            ui:ControlHelper.PlaceholderText="{DynamicResource Network_ExternalCallPortPlaceholder}"
+                            Maximum="65535"
+                            Minimum="1"
+                            SpinButtonPlacementMode="Inline"
+                            ValidationMode="InvalidInputOverwritten"
+                            Value="{Binding Settings.ExternalCallPort}" />
+                    </ui:SettingsCard>
+                </control:CardGroup>
+
                 <!--  代理启用设置  -->
-                <ui:SettingsCard Description="{DynamicResource Network_EnableProxyDescription}" Header="{DynamicResource Network_EnableProxy}">
+                <ui:SettingsCard
+                    Margin="0,8,0,0"
+                    Description="{DynamicResource Network_EnableProxyDescription}"
+                    Header="{DynamicResource Network_EnableProxy}">
                     <ui:SettingsCard.HeaderIcon>
                         <ui:FontIcon Icon="{x:Static ui:FluentSystemIcons.Shield_24_Regular}" />
                     </ui:SettingsCard.HeaderIcon>
                     <ui:ToggleSwitch
                         IsOn="{Binding Settings.Proxy.IsEnabled}"
-                        OffContent="{DynamicResource Network_Disable}"
-                        OnContent="{DynamicResource Network_Enable}" />
+                        OffContent="{DynamicResource Disable}"
+                        OnContent="{DynamicResource Enable}" />
                 </ui:SettingsCard>
 
                 <!--  代理类型设置  -->

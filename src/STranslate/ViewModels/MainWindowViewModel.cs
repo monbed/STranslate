@@ -203,7 +203,7 @@ public partial class MainWindowViewModel : ObservableObject, IDisposable
             return;
 
         (Settings.SourceLang, Settings.TargetLang) = (Settings.TargetLang, Settings.SourceLang);
-        TranslateCommand.Execute("force");
+        TranslateCommand.Execute(null);
     }
 
     [RelayCommand]
@@ -247,7 +247,16 @@ public partial class MainWindowViewModel : ObservableObject, IDisposable
         }
 
         using var bitmap = await _screenshot.GetScreenshotAsync();
+        await ScreenshotTranslateHandlerAsync(bitmap, ocrPlugin, cancellationToken);
+    }
+
+    public async Task ScreenshotTranslateHandlerAsync(System.Drawing.Bitmap? bitmap, IOcrPlugin? ocrPlugin = default, CancellationToken cancellationToken = default)
+    {
         if (bitmap == null) return;
+
+        ocrPlugin ??= GetOcrSvcAndNotify();
+        if (ocrPlugin == null)
+            return;
 
         if (Settings.ScreenshotTranslateInImage)
         {
@@ -289,8 +298,12 @@ public partial class MainWindowViewModel : ObservableObject, IDisposable
             return;
 
         using var bitmap = await _screenshot.GetScreenshotAsync();
-        if (bitmap == null) return;
+        await OcrHandlerAsync(bitmap);
+    }
 
+    public async Task OcrHandlerAsync(System.Drawing.Bitmap? bitmap)
+    {
+        if (bitmap == null) return;
         var window = await SingletonWindowOpener.OpenAsync<OcrWindow>();
         await ((OcrWindowViewModel)window.DataContext).ExecuteCommand.ExecuteAsync(bitmap);
     }
@@ -303,8 +316,16 @@ public partial class MainWindowViewModel : ObservableObject, IDisposable
             return;
 
         using var bitmap = await _screenshot.GetScreenshotAsync();
+        await SilentOcrHandlerAsync(bitmap, ocrPlugin, cancellationToken);
+    }
+
+    public async Task SilentOcrHandlerAsync(System.Drawing.Bitmap? bitmap, IOcrPlugin? ocrPlugin = default, CancellationToken cancellationToken = default)
+    {
         if (bitmap == null) return;
 
+        ocrPlugin ??= GetOcrSvcAndNotify();
+        if (ocrPlugin == null)
+            return;
         try
         {
             CursorHelper.Execute();
@@ -386,6 +407,14 @@ public partial class MainWindowViewModel : ObservableObject, IDisposable
 
         var (success, text) = await GetTextAsync();
         if (!success || string.IsNullOrWhiteSpace(text))
+            return;
+        await SilentTtsHandlerAsync(text, ttsSvc, cancellationToken);
+    }
+
+    public async Task SilentTtsHandlerAsync(string text, ITtsPlugin? ttsSvc = default, CancellationToken cancellationToken = default)
+    {
+        ttsSvc ??= TtsInstance.GetActiveSvc<ITtsPlugin>();
+        if (ttsSvc == null)
             return;
 
         try
@@ -986,6 +1015,12 @@ public partial class MainWindowViewModel : ObservableObject, IDisposable
 
     #endregion
 
+    #region Global Hotkeys
+
+    public void ToggleGlobalHotkey() => Settings.DisableGlobalHotkeys = !Settings.DisableGlobalHotkeys;
+
+    #endregion
+
     #region Helpers & Event Handlers
 
     partial void OnInputTextChanged(string value)
@@ -996,11 +1031,16 @@ public partial class MainWindowViewModel : ObservableObject, IDisposable
 
     partial void OnIsMouseHookChanged(bool value) => _ = ToggleMouseHookAsync(value);
 
-    public void ExecuteTranslate(string text)
+    /// <summary>
+    /// 执行翻译
+    /// </summary>
+    /// <param name="text"></param>
+    /// <param name="force">不为空则跳过缓存</param>
+    public void ExecuteTranslate(string text, string? force = null)
     {
         CancelAllOperations();
         InputText = text;
-        TranslateCommand.Execute(null);
+        TranslateCommand.Execute(force);
         Show();
         UpdateCaret();
     }

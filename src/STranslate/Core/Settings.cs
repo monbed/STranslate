@@ -216,6 +216,10 @@ public partial class Settings : ObservableObject
 
     [ObservableProperty] public partial LogEventLevel LogLevel { get; set; } = LogEventLevel.Information;
 
+    [ObservableProperty] public partial bool EnableExternalCall { get; set; } = false;
+
+    [ObservableProperty] public partial int ExternalCallPort { get; set; } = 50020;
+
     [ObservableProperty] public partial ProxySettings Proxy { get; set; } = new();
 
     #endregion
@@ -293,6 +297,7 @@ public partial class Settings : ObservableObject
         ApplyFontSize();
         ApplyTheme();
         ApplyDeactived();
+        ApplyExternalCall();
     }
 
     private void ApplyStartup()
@@ -415,6 +420,23 @@ public partial class Settings : ObservableObject
         loggingLevelSwitch.MinimumLevel = LogLevel;
     }
 
+    private void ApplyExternalCall()
+    {
+        var externalCallService = Ioc.Default.GetRequiredService<ExternalCallService>();
+        if (EnableExternalCall)
+        {
+            var result = externalCallService.StartService($"http://localhost:{ExternalCallPort}/");
+            if (!result)
+            {
+                EnableExternalCall = false;
+            }
+        }
+        else
+        {
+            externalCallService.StopService();
+        }
+    }
+
     private void HandlePropertyChanged(string? propertyName)
     {
         switch (propertyName)
@@ -442,6 +464,10 @@ public partial class Settings : ObservableObject
                 break;
             case nameof(LogLevel):
                 ApplyLogLevel();
+                break;
+            case nameof(EnableExternalCall):
+            case nameof(ExternalCallPort):
+                ApplyExternalCall();
                 break;
             case nameof(DisableGlobalHotkeys):
                 Ioc.Default.GetRequiredService<HotkeySettings>().ApplyGlobalHotkeys();

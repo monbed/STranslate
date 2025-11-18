@@ -789,6 +789,20 @@ public class Utilities
         }
     }
 
+    /// <summary>
+    ///     通过FileStream 来打开文件，这样就可以实现不锁定Image文件，到时可以让多用户同时访问Image文件
+    /// </summary>
+    /// <param name="path"></param>
+    /// <returns></returns>
+    public static Bitmap? ToBitmap(string path)
+    {
+        if (!File.Exists(path)) return null; // 文件不存在
+
+        using var fs = File.OpenRead(path);
+        var result = System.Drawing.Image.FromStream(fs); // 从流中创建图像
+        return new Bitmap(result); // 创建并返回位图
+    }
+
     #endregion
 
     #region ProcessUtils
