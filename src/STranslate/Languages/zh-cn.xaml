@@ -472,6 +472,7 @@
     <sys:String x:Key="TtsFailed">语音合成失败</sys:String>
     <sys:String x:Key="ImtransFailed">图片翻译失败</sys:String>
     <sys:String x:Key="NoTranslateService">未找到可用的翻译服务</sys:String>
+    <sys:String x:Key="NavigateFailed">已经到头了</sys:String>
 
     <!--  // Processing Messages //  -->
     <sys:String x:Key="RecognizingImageText">正在识别图片文字...</sys:String>

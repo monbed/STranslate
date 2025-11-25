@@ -808,51 +808,45 @@ public partial class MainWindowViewModel : ObservableObject, IDisposable
     [RelayCommand]
     private async Task HistoryPreviousAsync()
     {
-        HistoryModel? history = null;
-        if (string.IsNullOrWhiteSpace(InputText))
-        {
-            // 如果输入为空，则获取最新的一条历史记录
-            history = (await _sqlService.GetDataAsync(1, 1))?.FirstOrDefault();
-        }
-        else
-        {
-            // 否则，获取当前输入文本对应的历史记录，并查找上一条
-            var current = await _sqlService.GetDataAsync(InputText, Settings.SourceLang.ToString(), Settings.TargetLang.ToString());
-            if (current != null)
-            {
-                history = await _sqlService.GetPreviousAsync(current);
-            }
-        }
+        var result = await QueryRecentTextAsync();
 
-        if (history != null)
-            ExecuteTranslate(history.SourceText);
+        if (!string.IsNullOrWhiteSpace(result))
+            ExecuteTranslate(result);
         else
-            _snakebar.ShowWarning(_i18n.GetTranslation("OperationFailed"));
+            _snakebar.ShowWarning(_i18n.GetTranslation("NavigateFailed"));
     }
 
     [RelayCommand]
     private async Task HistoryNextAsync()
     {
-        HistoryModel? history = null;
+        var result = await QueryRecentTextAsync(isNext: true);
+
+        if (!string.IsNullOrWhiteSpace(result))
+            ExecuteTranslate(result);
+        else
+            _snakebar.ShowWarning(_i18n.GetTranslation("NavigateFailed"));
+    }
+
+    private async Task<string?> QueryRecentTextAsync(bool isNext = false)
+    {
         if (string.IsNullOrWhiteSpace(InputText))
         {
             // 如果输入为空，则获取最新的一条历史记录
-            history = (await _sqlService.GetDataAsync(1, 1))?.FirstOrDefault();
+            var histories = await _sqlService.GetDataAsync(1, 1);
+            return histories?.FirstOrDefault()?.SourceText;
         }
         else
         {
-            // 否则，获取当前输入文本对应的历史记录，并查找下一条
+            // 否则，获取当前输入文本对应的历史记录
             var current = await _sqlService.GetDataAsync(InputText, Settings.SourceLang.ToString(), Settings.TargetLang.ToString());
             if (current != null)
             {
-                history = await _sqlService.GetNextAsync(current);
+                var history = isNext ? await _sqlService.GetNextAsync(current) : await _sqlService.GetPreviousAsync(current);
+                return history?.SourceText;
             }
         }
 
-        if (history != null)
-            ExecuteTranslate(history.SourceText);
-        else
-            _snakebar.ShowWarning(_i18n.GetTranslation("OperationFailed"));
+        return default;
     }
 
     #endregion

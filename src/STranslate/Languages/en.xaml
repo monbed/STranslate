@@ -471,6 +471,7 @@
     <sys:String x:Key="TtsFailed">TTS Failed</sys:String>
     <sys:String x:Key="ImtransFailed">Image translation failed</sys:String>
     <sys:String x:Key="NoTranslateService">No available translation service found</sys:String>
+    <sys:String x:Key="NavigateFailed">Already at the end</sys:String>
 
     <!--  // Processing Messages //  -->
     <sys:String x:Key="RecognizingImageText">Recognizing text in the image...</sys:String>
