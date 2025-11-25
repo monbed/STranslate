@@ -367,6 +367,7 @@ public partial class Settings : ObservableObject
     {
         // original
         App.Current.Resources["ControlContentThemeFontSize"] = FontSize;    //14
+        App.Current.Resources["BodyTextBlockFontSize"] = FontSize;    //14 BodyStrongTextBlockStyle
         App.Current.Resources["CaptionTextBlockFontSize"] = FontSize - 2;   //12
         App.Current.Resources["SubtitleTextBlockFontSize"] = FontSize + 6;  //20
 

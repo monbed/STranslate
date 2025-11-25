@@ -21,9 +21,18 @@
     <sys:Double x:Key="STControlFontSize17">17</sys:Double>
     <sys:Double x:Key="STControlFontSize18">18</sys:Double>
 
-    <!--  // MenuItem字体大小统一设置为12，配合MenuItem固定无法更改，不改还好看点 //  -->
+    <!--  // MenuItem字体大小统一设置为14，配合MenuItem固定无法更改，不改还好看点 //  -->
     <Style BasedOn="{StaticResource {x:Type MenuItem}}" TargetType="MenuItem">
         <Setter Property="FontSize" Value="14" />
+    </Style>
+
+    <!--  // 2025.11.25 很奇怪 所有的TextBox和TextBlock指定的默认大小都不生效了。。。先手动强制指定一下 //  -->
+    <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="{DynamicResource STControlFontSize14}" />
+    </Style>
+
+    <Style BasedOn="{StaticResource {x:Type TextBox}}" TargetType="TextBox">
+        <Setter Property="FontSize" Value="{DynamicResource STControlFontSize14}" />
     </Style>
 
     <!--#endregion-->
