@@ -1,10 +1,22 @@
+using STranslate.Plugin;
 using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Markup;
 
 namespace STranslate.Converters;
 
-// 具体的枚举类型在使用时创建Converter并继承此泛型类
+public class ExecutionModeBoolConverter : EnumToBoolConverter<ExecutionMode>
+{
+    public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (parameter is string str && Enum.TryParse<ExecutionMode>(str, out var @enum))
+        {
+            // 返回解析后的枚举值，这将更新绑定的源属性
+            return @enum;
+        }
+        return base.ConvertBack(value, targetType, parameter, culture);
+    }
+}
 
 public class EnumToBoolConverter<T> : MarkupExtension, IValueConverter where T : struct, Enum
 {
@@ -16,10 +28,10 @@ public class EnumToBoolConverter<T> : MarkupExtension, IValueConverter where T :
         if (!Enum.TryParse<T>(targetValueStr, out var targetValue))
             return false;
 
-        return currentValue.Equals(targetValue) ? true : false;
+        return currentValue.Equals(targetValue);
     }
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    public virtual object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         => Binding.DoNothing;
 
     public override object ProvideValue(IServiceProvider serviceProvider) => this;

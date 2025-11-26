@@ -56,7 +56,7 @@
                                 <control:IconButton
                                     Command="{TemplateBinding SaveToVocabularyCommand}"
                                     CommandParameter="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Text}"
-                                    Icon="{x:Static ui:FluentSystemIcons.Book_20_Regular}">
+                                    Icon="{x:Static ui:FluentSystemIcons.Class_20_Regular}">
                                     <control:IconButton.Visibility>
                                         <MultiBinding Converter="{cnvt:SaveToVocabularyMultiConverter}">
                                             <Binding Path="HasActivedVocabulary" RelativeSource="{RelativeSource Mode=TemplatedParent}" />

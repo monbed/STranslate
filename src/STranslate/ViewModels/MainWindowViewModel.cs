@@ -230,7 +230,7 @@ public partial class MainWindowViewModel : ObservableObject, IDisposable
         }
         historyData.TransResult = translateResult;
 
-        if (plugin.AutoTransBack)
+        if (service.AutoBackTranslation)
         {
             var backResult = await ExecuteBackAsync(plugin, target, source, cancellationToken).ConfigureAwait(false);
             historyData.TransBackResult = backResult;
@@ -285,7 +285,7 @@ public partial class MainWindowViewModel : ObservableObject, IDisposable
 
     private async Task<HistoryModel?> ExecuteTranslateAsync(bool checkCacheFirst, CancellationToken cancellationToken)
     {
-        var enabledSvcs = TranslateInstance.Services.Where(x => x.IsEnabled).ToList();
+        var enabledSvcs = TranslateInstance.Services.Where(x => x.IsEnabled && x.ExecMode == ExecutionMode.Automatic).ToList();
         if (enabledSvcs.Count == 0)
             return null;
 
@@ -361,7 +361,7 @@ public partial class MainWindowViewModel : ObservableObject, IDisposable
             if (data.TransResult != null && data.TransResult.IsSuccess && !string.IsNullOrWhiteSpace(data.TransResult.Text))
                 tPlugin.TransResult.Update(data.TransResult);
 
-            if (tPlugin.AutoTransBack && data.TransBackResult != null && data.TransBackResult.IsSuccess && !string.IsNullOrWhiteSpace(data.TransBackResult.Text))
+            if (svc.AutoBackTranslation && data.TransBackResult != null && data.TransBackResult.IsSuccess && !string.IsNullOrWhiteSpace(data.TransBackResult.Text))
                 tPlugin.TransBackResult.Update(data.TransBackResult);
         }
         else if (svc.Plugin is IDictionaryPlugin dPlugin)
@@ -425,7 +425,7 @@ public partial class MainWindowViewModel : ObservableObject, IDisposable
             await ExecuteNewTranslationAsync(service, plugin, source, target, history, cancellationToken).ConfigureAwait(false);
         }
         // 否则，只执行反向翻译（如果需要）
-        else if (plugin.AutoTransBack && history.GetData(service)?.TransBackResult == null)
+        else if (service.AutoBackTranslation && history.GetData(service)?.TransBackResult == null)
         {
             await ExecuteBackTranslationOnlyAsync(service, plugin, target, source, history, cancellationToken).ConfigureAwait(false);
         }
@@ -445,7 +445,7 @@ public partial class MainWindowViewModel : ObservableObject, IDisposable
         historyData.TransResult = translateResult;
 
         // 执行反向翻译（如果需要且主翻译成功）
-        if (plugin.AutoTransBack)
+        if (service.AutoBackTranslation)
         {
             var backResult = await ExecuteBackAsync(plugin, target, source, cancellationToken).ConfigureAwait(false);
             historyData.TransBackResult = backResult;

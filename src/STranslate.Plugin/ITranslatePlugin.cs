@@ -54,10 +54,6 @@ public abstract partial class TranslatePluginBase : ObservableObject, ITranslate
     /// </summary>
     public TranslateResult TransBackResult { get; } = new();
     /// <summary>
-    /// 自动回译
-    /// </summary>
-    [ObservableProperty] public partial bool AutoTransBack { get; set; } = false;
-    /// <summary>
     /// 获取设置UI
     /// </summary>
     /// <returns></returns>
@@ -145,11 +141,6 @@ public interface ITranslatePlugin : IPlugin
     /// 回译结果
     /// </summary>
     TranslateResult TransBackResult { get; }
-
-    /// <summary>
-    /// 是否自动回译
-    /// </summary>
-    bool AutoTransBack { get; set; }
 
     /// <summary>
     /// 重置翻译结果

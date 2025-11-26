@@ -127,7 +127,7 @@
         </ui:SettingsCard>
 
         <!--  连接验证  -->
-        <ui:SettingsCard Description="{DynamicResource PluginTranslateAutoTransBackDescription}" Header="{DynamicResource PluginTranslateValidate}">
+        <ui:SettingsCard Description="{DynamicResource PluginTranslateValidateDescription}" Header="{DynamicResource PluginTranslateValidate}">
             <ui:SettingsCard.HeaderIcon>
                 <ui:FontIcon Icon="{x:Static ui:FluentSystemIcons.CheckmarkCircle_24_Regular}" />
             </ui:SettingsCard.HeaderIcon>

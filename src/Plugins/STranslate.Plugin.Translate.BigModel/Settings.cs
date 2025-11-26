@@ -4,7 +4,6 @@ public class Settings
 {
     public string ApiKey { get; set; } = string.Empty;
     public string Url { get; set; } = "https://open.bigmodel.cn/";
-    public bool AutoTransBack { get; set; } = false;
     public string Model { get; set; } = "glm-4-flash-250414";
     public List<string> Models { get; set; } =
     [

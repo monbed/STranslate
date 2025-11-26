@@ -276,7 +276,7 @@ public partial class App : ISingleInstanceApp, INavigation, IDisposable
     private static void ShowErrorMsgBoxAndFailFast(string message, Exception e)
     {
         // Firstly show users the message
-        MessageBox.Show(e.ToString(), message, MessageBoxButton.OK, MessageBoxImage.Error);
+        iNKORE.UI.WPF.Modern.Controls.MessageBox.Show(e.ToString(), message, MessageBoxButton.OK, MessageBoxImage.Error);
 
         // Flow cannot construct its App instance, so ensure Flow crashes w/ the exception info.
         Environment.FailFast(message, e);

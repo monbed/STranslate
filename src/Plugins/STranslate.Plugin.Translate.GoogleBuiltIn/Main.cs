@@ -1,6 +1,5 @@
 using STranslate.Plugin.Translate.GoogleBuiltIn.View;
 using STranslate.Plugin.Translate.GoogleBuiltIn.ViewModel;
-using System.ComponentModel;
 using System.Text.Json;
 using System.Windows.Controls;
 
@@ -98,21 +97,9 @@ public class Main : TranslatePluginBase
     {
         Context = context;
         Settings = context.LoadSettingStorage<Settings>();
-
-        AutoTransBack = Settings.AutoTransBack;
-        PropertyChanged += OnPropertyChanged;
     }
 
-    public override void Dispose() => PropertyChanged -= OnPropertyChanged;
-
-    private void OnPropertyChanged(object? sender, PropertyChangedEventArgs e)
-    {
-        if (e.PropertyName == nameof(AutoTransBack))
-        {
-            Settings.AutoTransBack = AutoTransBack;
-            Context.SaveSettingStorage<Settings>();
-        }
-    }
+    public override void Dispose() { }
 
     public override async Task TranslateAsync(TranslateRequest request, TranslateResult result, CancellationToken cancellationToken = default)
     {

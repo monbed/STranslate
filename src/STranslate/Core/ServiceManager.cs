@@ -184,6 +184,12 @@ public class ServiceManager
             DisplayName = settings?.Name ?? metaDataClone.Name
         };
 
+        // 针对翻译插件，设置执行模式和自动回译选项尝试从缓存加载
+        if (metaData.PluginType != null && typeof(ITranslatePlugin).IsAssignableFrom(metaData.PluginType))
+        {
+            service.ExecMode = settings?.ExecMode ?? ExecutionMode.Automatic;
+            service.AutoBackTranslation = settings?.AutoBackTranslation ?? false;
+        }
         var plugin = metaDataClone.CreatePluginInstance();
         var context = new PluginContext(metaDataClone, serviceID);
         service.Plugin = plugin;

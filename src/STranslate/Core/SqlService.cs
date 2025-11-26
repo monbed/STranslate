@@ -500,7 +500,7 @@ public class HistoryModel
                 d.TransResult != null &&
                 d.TransResult.IsSuccess &&
                 !string.IsNullOrWhiteSpace(d.TransResult.Text) &&
-                (!tPlugin.AutoTransBack || (d.TransBackResult != null && d.TransBackResult.IsSuccess && !string.IsNullOrWhiteSpace(d.TransBackResult.Text)))
+                (!svc.AutoBackTranslation || (d.TransBackResult != null && d.TransBackResult.IsSuccess && !string.IsNullOrWhiteSpace(d.TransBackResult.Text)))
             );
         else
             return Data.Any(d =>

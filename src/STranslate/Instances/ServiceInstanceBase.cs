@@ -237,6 +237,14 @@ public abstract partial class ServiceInstanceBase : ObservableObject, IDisposabl
                 svcSetting.Name = svc.DisplayName;
                 _serviceSettings.Save();
                 break;
+            case nameof(Service.AutoBackTranslation):
+                svcSetting.AutoBackTranslation = svc.AutoBackTranslation;
+                _serviceSettings.Save();
+                break;
+            case nameof(Service.ExecMode):
+                svcSetting.ExecMode = svc.ExecMode;
+                _serviceSettings.Save();
+                break;
         }
     }
 

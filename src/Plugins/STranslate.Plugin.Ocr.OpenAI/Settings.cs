@@ -4,7 +4,6 @@ public class Settings
 {
     public string ApiKey { get; set; } = string.Empty;
     public string Url { get; set; } = "https://api.openai.com/";
-    public bool AutoTransBack { get; set; } = false;
     public string Model { get; set; } = "gpt-4o";
     public List<string> Models { get; set; } =
     [

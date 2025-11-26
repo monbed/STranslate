@@ -122,6 +122,10 @@
     <sys:String x:Key="NoServiceEnabled">No Service Enabled</sys:String>
     <sys:String x:Key="AsReplaceSvc">Replace Translation</sys:String>
     <sys:String x:Key="AsImTranSvc">Image Translation</sys:String>
+    <sys:String x:Key="TransExecMode">Translation Mode</sys:String>
+    <sys:String x:Key="TransExecAutomatic">Auto Execute</sys:String>
+    <sys:String x:Key="TransExecManual">Manual Execute</sys:String>
+    <sys:String x:Key="TransExecPinned">Pin to Language Area for Manual Execute</sys:String>
 
     <!--  // Plugin Page //  -->
     <sys:String x:Key="AddPlugin">Add Plugin</sys:String>
@@ -259,7 +263,7 @@
 
     <!--  // Output Control Context Menu //  -->
     <sys:String x:Key="ExecuteTranslation">Execute Translation</sys:String>
-    <sys:String x:Key="AutoTransBack">Auto Trans Back</sys:String>
+    <sys:String x:Key="AutoBackTranslation">Auto Trans Back</sys:String>
     <sys:String x:Key="ConfigureService">Configure Service</sys:String>
     <sys:String x:Key="CloseService">Close Service</sys:String>
     <sys:String x:Key="Paraphrase">Definition</sys:String>
@@ -484,8 +488,8 @@
     <sys:String x:Key="TranslatingText">Translating text...</sys:String>
 
     <!--  // For Plugins //  -->
-    <sys:String x:Key="PluginTranslateAutoTransBack">Back Translation</sys:String>
-    <sys:String x:Key="PluginTranslateAutoTransBackDescription">Automatically perform back translation after translation</sys:String>
+    <sys:String x:Key="PluginTranslateAutoBackTranslation">Back Translation</sys:String>
+    <sys:String x:Key="PluginTranslateAutoBackTranslationDescription">Automatically perform back translation after translation</sys:String>
     <sys:String x:Key="PluginTranslateValidate">Validate</sys:String>
     <sys:String x:Key="PluginTranslateValidateDescription">Test whether the API connection and configuration are correct</sys:String>
 </ResourceDictionary>

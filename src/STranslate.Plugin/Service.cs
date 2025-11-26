@@ -46,6 +46,10 @@ public partial class Service : ObservableObject, IDisposable
     /// </summary>
     [ObservableProperty] public partial bool IsEnabled { get; set; } = true;
 
+    [ObservableProperty] public partial ExecutionMode ExecMode { get; set; } = ExecutionMode.Automatic;
+
+    [ObservableProperty] public partial bool AutoBackTranslation { get; set; } = false;
+
     /// <summary>
     /// 初始化服务实例
     /// </summary>
@@ -92,4 +96,27 @@ public partial class Service : ObservableObject, IDisposable
 
         GC.SuppressFinalize(this);
     }
+}
+
+/// <summary>
+/// 翻译执行模式
+/// </summary>
+public enum ExecutionMode
+{
+    /// <summary>
+    /// 自动执行（默认）
+    /// </summary>
+    Automatic,
+
+    /// <summary>
+    /// 手动执行
+    /// </summary>
+    Manual,
+
+    /// <summary>
+    /// 钉住
+    /// * 不显示在列表中
+    /// * 手动执行
+    /// </summary>
+    Pinned,
 }

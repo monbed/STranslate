@@ -5,6 +5,7 @@
     xmlns:control="clr-namespace:STranslate.Controls"
     xmlns:ikw="http://schemas.inkore.net/lib/ui/wpf"
     xmlns:plugin="clr-namespace:STranslate.Plugin;assembly=STranslate.Plugin"
+    xmlns:s="https://github.com/zggsong/2022/xaml"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern">
 
@@ -95,39 +96,85 @@
             BorderThickness="{DynamicResource SettingsCardBorderThickness}"
             CornerRadius="{DynamicResource {x:Static ui:ThemeKeys.ControlCornerRadiusKey}}">
             <Border.Resources>
-                <ui:BindingProxy x:Key="VmProxy" Value="{Binding RelativeSource={RelativeSource AncestorType=control:ServicePanel}, Path=DataContext}" />
-                <ui:BindingProxy x:Key="SvcProxy" Value="{Binding RelativeSource={RelativeSource AncestorType=Border}, Path=DataContext}" />
+                <s:BindingProxy x:Key="VmProxy" Data="{Binding RelativeSource={RelativeSource AncestorType=control:ServicePanel}, Path=DataContext}" />
+                <s:BindingProxy x:Key="SvcProxy" Data="{Binding RelativeSource={RelativeSource AncestorType=Border}, Path=DataContext}" />
             </Border.Resources>
             <Border.ContextMenu>
                 <ContextMenu>
                     <MenuItem
-                        Command="{Binding Source={StaticResource VmProxy}, Path=Value.ActiveImTranCommand}"
-                        CommandParameter="{Binding Source={StaticResource SvcProxy}, Path=Value}"
+                        Command="{Binding Source={StaticResource VmProxy}, Path=Data.ActiveImTranCommand}"
+                        CommandParameter="{Binding Source={StaticResource SvcProxy}, Path=Data}"
                         Header="{DynamicResource AsImTranSvc}">
                         <MenuItem.Icon>
                             <ui:FontIcon Icon="{x:Static ui:FluentSystemIcons.DrawImage_20_Regular}" />
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem
-                        Command="{Binding Source={StaticResource VmProxy}, Path=Value.ActiveReplaceCommand}"
-                        CommandParameter="{Binding Source={StaticResource SvcProxy}, Path=Value}"
+                        Command="{Binding Source={StaticResource VmProxy}, Path=Data.ActiveReplaceCommand}"
+                        CommandParameter="{Binding Source={StaticResource SvcProxy}, Path=Data}"
                         Header="{DynamicResource AsReplaceSvc}">
                         <MenuItem.Icon>
                             <ui:FontIcon Icon="{x:Static ui:FluentSystemIcons.PenSparkle_20_Regular}" />
                         </MenuItem.Icon>
                     </MenuItem>
                     <Separator />
+                    <MenuItem Header="{DynamicResource TransExecMode}">
+                        <MenuItem.Icon>
+                            <ui:FontIcon Icon="{x:Static ui:FluentSystemIcons.GlanceHorizontalSparkles_20_Regular}" />
+                        </MenuItem.Icon>
+                        <MenuItem
+                            Header="{DynamicResource TransExecAutomatic}"
+                            IsCheckable="True"
+                            IsChecked="{Binding Source={StaticResource SvcProxy}, Path=Data.ExecMode, Converter={cnvt:ExecutionModeBoolConverter}, ConverterParameter=Automatic}" />
+                        <MenuItem
+                            Header="{DynamicResource TransExecManual}"
+                            IsCheckable="True"
+                            IsChecked="{Binding Source={StaticResource SvcProxy}, Path=Data.ExecMode, Converter={cnvt:ExecutionModeBoolConverter}, ConverterParameter=Manual}" />
+                        <MenuItem
+                            Header="{DynamicResource TransExecPinned}"
+                            IsCheckable="True"
+                            IsChecked="{Binding Source={StaticResource SvcProxy}, Path=Data.ExecMode, Converter={cnvt:ExecutionModeBoolConverter}, ConverterParameter=Pinned}" />
+                    </MenuItem>
+                    <MenuItem Header="{DynamicResource AutoBackTranslation}">
+                        <MenuItem.Style>
+                            <Style BasedOn="{StaticResource {x:Type MenuItem}}" TargetType="MenuItem">
+                                <Setter Property="Icon">
+                                    <Setter.Value>
+                                        <ui:FontIcon Icon="{x:Static ui:FluentSystemIcons.FlashOff_20_Regular}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Source={StaticResource SvcProxy}, Path=Data.AutoBackTranslation}" Value="True">
+                                        <Setter Property="Icon">
+                                            <Setter.Value>
+                                                <ui:FontIcon Icon="{x:Static ui:FluentSystemIcons.FlashSparkle_20_Regular}" />
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </MenuItem.Style>
+                        <MenuItem
+                            Header="{DynamicResource On}"
+                            IsCheckable="True"
+                            IsChecked="{Binding Source={StaticResource SvcProxy}, Path=Data.AutoBackTranslation}" />
+                        <MenuItem
+                            Header="{DynamicResource Off}"
+                            IsCheckable="True"
+                            IsChecked="{Binding Source={StaticResource SvcProxy}, Path=Data.AutoBackTranslation, Converter={cnvt:BoolInverseConverter}}" />
+                    </MenuItem>
+                    <Separator />
                     <MenuItem
-                        Command="{Binding Source={StaticResource VmProxy}, Path=Value.DuplicateCommand}"
-                        CommandParameter="{Binding Source={StaticResource SvcProxy}, Path=Value}"
+                        Command="{Binding Source={StaticResource VmProxy}, Path=Data.DuplicateCommand}"
+                        CommandParameter="{Binding Source={StaticResource SvcProxy}, Path=Data}"
                         Header="{DynamicResource Duplicate}">
                         <MenuItem.Icon>
                             <ui:FontIcon Icon="{x:Static ui:FluentSystemIcons.SaveCopy_20_Regular}" />
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem
-                        Command="{Binding Source={StaticResource VmProxy}, Path=Value.DeleteCommand}"
-                        CommandParameter="{Binding Source={StaticResource SvcProxy}, Path=Value}"
+                        Command="{Binding Source={StaticResource VmProxy}, Path=Data.DeleteCommand}"
+                        CommandParameter="{Binding Source={StaticResource SvcProxy}, Path=Data}"
                         Header="{DynamicResource Delete}">
                         <MenuItem.Icon>
                             <ui:FontIcon Icon="{x:Static ui:FluentSystemIcons.Delete_20_Regular}" />

@@ -122,6 +122,10 @@
     <sys:String x:Key="NoServiceEnabled">未启用服务</sys:String>
     <sys:String x:Key="AsReplaceSvc">替换翻译</sys:String>
     <sys:String x:Key="AsImTranSvc">图片翻译</sys:String>
+    <sys:String x:Key="TransExecMode">翻译模式</sys:String>
+    <sys:String x:Key="TransExecAutomatic">自动执行</sys:String>
+    <sys:String x:Key="TransExecManual">手动执行</sys:String>
+    <sys:String x:Key="TransExecPinned">钉到语言区手动执行</sys:String>
 
     <!--  // Plugin Page //  -->
     <sys:String x:Key="AddPlugin">添加插件</sys:String>
@@ -259,7 +263,7 @@
 
     <!--  // Output Control Context Menu //  -->
     <sys:String x:Key="ExecuteTranslation">执行翻译</sys:String>
-    <sys:String x:Key="AutoTransBack">自动回译</sys:String>
+    <sys:String x:Key="AutoBackTranslation">自动回译</sys:String>
     <sys:String x:Key="ConfigureService">配置服务</sys:String>
     <sys:String x:Key="CloseService">关闭服务</sys:String>
     <sys:String x:Key="Paraphrase">释义</sys:String>
@@ -485,8 +489,8 @@
     <sys:String x:Key="TranslatingText">正在翻译文本...</sys:String>
 
     <!--  // For Plugins //  -->
-    <sys:String x:Key="PluginTranslateAutoTransBack">回译</sys:String>
-    <sys:String x:Key="PluginTranslateAutoTransBackDescription">翻译之后自动进行回译</sys:String>
+    <sys:String x:Key="PluginTranslateAutoBackTranslation">回译</sys:String>
+    <sys:String x:Key="PluginTranslateAutoBackTranslationDescription">翻译之后自动进行回译</sys:String>
     <sys:String x:Key="PluginTranslateValidate">校验</sys:String>
     <sys:String x:Key="PluginTranslateValidateDescription">测试 API 连接和配置是否正确</sys:String>
 </ResourceDictionary>

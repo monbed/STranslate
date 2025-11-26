@@ -24,18 +24,6 @@
                 Text="{Binding Url}" />
         </ui:SettingsCard>
 
-        <!--  自动执行回译  -->
-        <ui:SettingsCard Description="{DynamicResource PluginTranslateAutoTransBackDescription}" Header="{DynamicResource PluginTranslateAutoTransBack}">
-            <ui:SettingsCard.HeaderIcon>
-                <ui:FontIcon Icon="{x:Static ui:FluentSystemIcons.TranslateAuto_24_Regular}" />
-            </ui:SettingsCard.HeaderIcon>
-
-            <ui:ToggleSwitch
-                IsOn="{Binding Main.AutoTransBack}"
-                OffContent="{DynamicResource Off}"
-                OnContent="{DynamicResource On}" />
-        </ui:SettingsCard>
-
         <!--  连接验证  -->
         <ui:SettingsCard Description="{DynamicResource PluginTranslateValidateDescription}" Header="{DynamicResource PluginTranslateValidate}">
             <ui:SettingsCard.HeaderIcon>

@@ -1,6 +1,5 @@
 using STranslate.Plugin.Translate.BigModel.View;
 using STranslate.Plugin.Translate.BigModel.ViewModel;
-using System.ComponentModel;
 using System.Text;
 using System.Text.Json.Nodes;
 using System.Windows.Controls;
@@ -111,26 +110,9 @@ public class Main : LlmTranslatePluginBase
         Settings = context.LoadSettingStorage<Settings>();
 
         Settings.Prompts.ForEach(Prompts.Add);
-        // 加载配置到实例
-        AutoTransBack = Settings.AutoTransBack;
-        PropertyChanged += OnPropertyChanged;
     }
 
-    public override void Dispose()
-    {
-        PropertyChanged -= OnPropertyChanged;
-
-        _viewModel?.Dispose();
-    }
-
-    private void OnPropertyChanged(object? sender, PropertyChangedEventArgs e)
-    {
-        if (e.PropertyName == nameof(AutoTransBack))
-        {
-            Settings.AutoTransBack = AutoTransBack;
-            Context.SaveSettingStorage<Settings>();
-        }
-    }
+    public override void Dispose() => _viewModel?.Dispose();
 
     public override async Task TranslateAsync(TranslateRequest request, TranslateResult result, CancellationToken cancellationToken = default)
     {
