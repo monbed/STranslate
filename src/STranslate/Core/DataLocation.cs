@@ -16,6 +16,7 @@ public class DataLocation
     public static readonly string DesktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
     public static readonly string StartupShortcutPath = Path.Combine(StartupPath, Constant.AppName + ".lnk");
     public static readonly string DesktopShortcutPath = Path.Combine(DesktopPath, Constant.AppName + ".lnk");
+    public static readonly string InfoFilePath = Path.Combine(Constant.ProgramDirectory, Constant.InfoFileName);
 
     public static readonly string CacheDirectory = Path.Combine(DataDirectory(), Constant.Cache);
     public static readonly string SettingsDirectory = Path.Combine(DataDirectory(), Constant.Settings);

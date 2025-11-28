@@ -20,6 +20,7 @@ public class Constant
     public const string PluginFileExtension = ".spkg";
     public const string NeedDelete = "NeedDelete.txt";
     public const string NeedUpgrade = "_NeedUpgrade";
+    public const string InfoFileName = ".INFO";
 
     /// <summary>
     ///     用户软件根目录

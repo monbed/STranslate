@@ -208,6 +208,7 @@ public partial class App : ISingleInstanceApp, INavigation, IDisposable
             _settings?.LazyInitialize();
             _hotkeySettings?.LazyInitialize();
             UpdateToolTip();
+            CheckAndShowInfo();
         };
 
         RegisterExitEvents();
@@ -220,6 +221,44 @@ public partial class App : ISingleInstanceApp, INavigation, IDisposable
         if (!UACHelper.IsUserAdministrator()) return;
         _mainWindowViewModel?.TrayToolTip = $"{Constant.AppName} # " +
             $"{Ioc.Default.GetRequiredService<Internationalization>().GetTranslation("Administrator")}";
+    }
+
+    private void CheckAndShowInfo()
+    {
+        if (!File.Exists(DataLocation.InfoFilePath))
+            return;
+
+        _logger?.LogDebug("Locate the information file and try displaying the information message box.");
+
+        try
+        {
+            var info = File.ReadAllText(DataLocation.InfoFilePath);
+            if (string.IsNullOrWhiteSpace(info))
+            {
+                _logger?.LogDebug("The information file is empty, will not show the message box.");
+                return;
+            }
+
+            iNKORE.UI.WPF.Modern.Controls.MessageBox.Show(info, Constant.AppName, MessageBoxButton.OK, MessageBoxImage.Information);
+            _logger?.LogDebug($"The information message box is shown successfully [{info}].");
+        }
+        catch (Exception ex)
+        {
+            _logger?.LogError(ex, "Cannot show info message box");
+        }
+        finally
+        {
+            try
+            {
+                _logger?.LogDebug("Try deleting the information file.");
+                File.Delete(DataLocation.InfoFilePath);
+                _logger?.LogDebug("The information file is deleted successfully.");
+            }
+            catch
+            {
+                _logger?.LogWarning("Cannot delete the information file.");
+            }
+        }
     }
 
     #endregion

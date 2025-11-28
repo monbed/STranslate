@@ -2,7 +2,7 @@ use clap::{ArgMatches, ValueEnum};
 use std::collections::HashSet;
 use std::error::Error;
 use std::fs::{self, File};
-use std::io::{self};
+use std::io::{self, Write};
 use std::path::{Component, Path, PathBuf};
 use std::process::Command as ProcessCommand;
 use std::thread;
@@ -25,6 +25,8 @@ pub fn handle_backup_command(matches: &ArgMatches) -> Result<(), Box<dyn Error>>
     let delay = *matches.get_one::<u64>("delay").unwrap();
     let verbose = matches.get_flag("verbose");
     let launch_path = matches.get_one::<String>("launch");
+    let create_file = matches.get_one::<String>("create-file");
+    let file_content = matches.get_one::<String>("file-content");
 
     if delay > 0 {
         if verbose {
@@ -74,6 +76,13 @@ pub fn handle_backup_command(matches: &ArgMatches) -> Result<(), Box<dyn Error>>
                 restore_directory(archive, source, target, verbose)?;
                 println!("✅ 恢复完成: {} → {}", source, target);
             }
+        }
+    }
+
+    if let Some(file_path) = create_file {
+        if !file_path.trim().is_empty() {
+            let content = file_content.map(|s| s.as_str()).unwrap_or("");
+            create_file_with_content(file_path, content, verbose)?;
         }
     }
 
@@ -310,7 +319,39 @@ fn file_options() -> FileOptions {
     FileOptions::default().compression_method(CompressionMethod::Deflated)
 }
 
-/// 启动指定路径的程序
+fn create_file_with_content(
+    file_path: &str,
+    content: &str,
+    verbose: bool,
+) -> Result<(), Box<dyn Error>> {
+    let path = Path::new(file_path);
+
+    // 如果父目录不存在，则创建
+    if let Some(parent) = path.parent() {
+        if !parent.as_os_str().is_empty() && !parent.exists() {
+            fs::create_dir_all(parent)?;
+            if verbose {
+                println!("📁 创建目录: {}", parent.display());
+            }
+        }
+    }
+
+    if verbose {
+        println!("📝 创建文件: {}", file_path);
+    }
+
+    let mut file = File::create(path).map_err(|e| format!("创建文件失败: {}", e))?;
+
+    file.write_all(content.as_bytes())
+        .map_err(|e| format!("写入文件失败: {}", e))?;
+
+    if verbose {
+        println!("✅ 文件已创建，写入 {} 字节", content.len());
+    }
+
+    Ok(())
+}
+
 fn launch_program(program_path: &str, verbose: bool) -> Result<(), Box<dyn Error>> {
     let path = Path::new(program_path);
 

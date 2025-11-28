@@ -238,6 +238,20 @@ fn main() {
                         .help("操作完成后启动的程序路径（可选）"),
                 )
                 .arg(
+                    Arg::new("create-file")
+                        .short('c')
+                        .long("create-file")
+                        .value_name("FILE_PATH")
+                        .help("创建文件的路径（可选）"),
+                )
+                .arg(
+                    Arg::new("file-content")
+                        .short('w')
+                        .long("file-content")
+                        .value_name("CONTENT")
+                        .help("写入文件的内容（配合 --create-file 使用）"),
+                )
+                .arg(
                     Arg::new("verbose")
                         .short('v')
                         .long("verbose")
