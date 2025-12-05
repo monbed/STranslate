@@ -5,7 +5,9 @@ using System.Net.Http;
 using System.Net.Sockets;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Windows;
 using Velopack;
+using MessageBox = iNKORE.UI.WPF.Modern.Controls.MessageBox;
 
 namespace STranslate.Core;
 
@@ -25,7 +27,7 @@ public class UpdaterService(
             if (!silentUpdate)
                 notification.Show("Update Check", "Checking for updates...");
 
-            var updateManager = await GitHubUpdateManagerAsync(httpService, "https://github.com/zggsong7/STranslate"/*Constant.GitHub*/).ConfigureAwait(false);
+            var updateManager = await GitHubUpdateManagerAsync(httpService, Constant.GitHub).ConfigureAwait(false);
 
             if (!updateManager.IsInstalled)
             {
@@ -85,8 +87,7 @@ public class UpdaterService(
                 notification.Show("Update Ready", newVersionTips);
             logger.LogInformation($"Update success:{newVersionTips}");
 
-            if (await iNKORE.UI.WPF.Modern.Controls.MessageBox.ShowAsync(newVersionTips, "STranslate",
-                    System.Windows.MessageBoxButton.YesNo) == System.Windows.MessageBoxResult.Yes)
+            if (MessageBox.Show(newVersionTips, "STranslate", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 updateManager.ApplyUpdatesAndRestart(newUpdateInfo);
         }
         catch (Exception e)
