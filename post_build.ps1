@@ -22,7 +22,7 @@ if (-not (Test-Path $SourcePath)) {
 }
 
 # 检查图标是否存在
-$IconPath = ".\src\STranslate\Resources\app.ico"
+$IconPath = ".\src\STranslate\Resources\updater.ico"
 if (-not (Test-Path $IconPath)) {
     Log "错误: 图标文件不存在: $IconPath" "Red"
     exit 1

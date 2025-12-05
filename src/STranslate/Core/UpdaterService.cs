@@ -1,19 +1,20 @@
 using Microsoft.Extensions.Logging;
 using STranslate.Plugin;
+using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Net.Sockets;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Windows;
 using Velopack;
+using Velopack.Sources;
 using MessageBox = iNKORE.UI.WPF.Modern.Controls.MessageBox;
 
 namespace STranslate.Core;
 
 public class UpdaterService(
     ILogger<UpdaterService> logger,
-    IHttpService httpService,
+    Internationalization i18n,
     INotification notification
     )
 {
@@ -21,15 +22,15 @@ public class UpdaterService(
 
     public async Task UpdateAppAsync(bool silentUpdate = true)
     {
-        await UpdateLock.WaitAsync().ConfigureAwait(false);
+        await UpdateLock.WaitAsync();
         try
         {
             if (!silentUpdate)
                 notification.Show("Update Check", "Checking for updates...");
 
-            var updateManager = await GitHubUpdateManagerAsync(httpService, Constant.GitHub).ConfigureAwait(false);
+            var updateManager = new UpdateManager(new GithubSource(Constant.GitHub, accessToken: default, prerelease: false));
 
-            var newUpdateInfo = await updateManager.CheckForUpdatesAsync().ConfigureAwait(false);
+            var newUpdateInfo = await updateManager.CheckForUpdatesAsync();
 
             if (newUpdateInfo == null)
             {
@@ -42,7 +43,7 @@ public class UpdaterService(
             var newReleaseVersion = SemanticVersioning.Version.Parse(newUpdateInfo.TargetFullRelease.Version.ToString());
             var currentVersion = SemanticVersioning.Version.Parse(Constant.Version);
 
-            logger.LogInformation($"Future Release <{JsonSerializer.Serialize(newUpdateInfo.TargetFullRelease, JsonOptions)}>");
+            logger.LogInformation($"Future Release <{JsonSerializer.Serialize(newUpdateInfo.TargetFullRelease)}>");
 
             if (newReleaseVersion <= currentVersion)
             {
@@ -54,24 +55,18 @@ public class UpdaterService(
             if (!silentUpdate)
                 notification.Show("Update Available", $"New version {newReleaseVersion} found. Updating...");
 
-            await updateManager.DownloadUpdatesAsync(newUpdateInfo).ConfigureAwait(false);
+            await updateManager.DownloadUpdatesAsync(newUpdateInfo);
 
-            //if (DataLocation.PortableDataLocationInUse())
-            //{
-            //    var targetDestination = updateManager.RootAppDirectory +
-            //                            $"\\app-{newReleaseVersion}\\{DataLocation.PortableFolderName}";
-            //    FilesFolders.CopyAll(DataLocation.PortableDataPath, targetDestination, (s) => _api.ShowMsgBox(s));
-            //    if (!FilesFolders.VerifyBothFolderFilesEqual(DataLocation.PortableDataPath, targetDestination,
-            //            (s) => _api.ShowMsgBox(s)))
-            //        _api.ShowMsgBox(string.Format(
-            //            _api.GetTranslation("update_flowlauncher_fail_moving_portable_user_profile_data"),
-            //            DataLocation.PortableDataPath,
-            //            targetDestination));
-            //}
-            //else
-            //{
-            //    await updateManager.CreateUninstallerRegistryEntry().ConfigureAwait(false);
-            //}
+            if (DataLocation.PortableDataLocationInUse())
+            {
+                var targetDestination = Path.Combine(Path.GetTempPath(), Constant.TmpConfigFolderName);
+                FilesFolders.CopyAll(DataLocation.PortableDataPath, targetDestination, MessageBox.Show);
+
+                if (!FilesFolders.VerifyBothFolderFilesEqual(DataLocation.PortableDataPath, targetDestination, MessageBox.Show))
+                    MessageBox.Show(string.Format(i18n.GetTranslation("update_flowlauncher_fail_moving_portable_user_profile_data"),
+                        DataLocation.PortableDataPath,
+                        targetDestination));
+            }
 
             var newVersionTips = NewVersionTips(newReleaseVersion.ToString());
 
@@ -80,7 +75,10 @@ public class UpdaterService(
             logger.LogInformation($"Update success:{newVersionTips}");
 
             if (MessageBox.Show(newVersionTips, "STranslate", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                updateManager.ApplyUpdatesAndRestart(newUpdateInfo);
+            {
+                updateManager.WaitExitThenApplyUpdates(newUpdateInfo);
+                Application.Current.Shutdown();
+            }
         }
         catch (Exception e)
         {
@@ -103,46 +101,10 @@ public class UpdaterService(
         }
     }
 
-    private class GithubRelease
-    {
-        [JsonPropertyName("prerelease")] public bool Prerelease { get; set; }
-
-        [JsonPropertyName("published_at")] public DateTime PublishedAt { get; set; }
-
-        [JsonPropertyName("html_url")] public string HtmlUrl { get; set; } = string.Empty;
-    }
-
-    // https://github.com/Squirrel/Squirrel.Windows/blob/master/src/Squirrel/UpdateManager.Factory.cs
-    private static async Task<UpdateManager> GitHubUpdateManagerAsync(IHttpService httpService,string repository)
-    {
-        var uri = new Uri(repository);
-        var api = $"https://api.github.com/repos{uri.AbsolutePath}/releases";
-
-        var jsonStream = await httpService.GetAsStreamAsync(api, CancellationToken.None).ConfigureAwait(false);
-        var releases = await JsonSerializer.DeserializeAsync<List<GithubRelease>>(jsonStream).ConfigureAwait(false);
-        if (releases == null || releases.Count == 0)
-            throw new InvalidOperationException("No releases found in the repository.");
-
-        var latest = releases
-            .Where(r => !r.Prerelease)
-            .OrderByDescending(r => r.PublishedAt)
-            .FirstOrDefault() ?? throw new InvalidOperationException("No stable release found in the repository.");
-        var latestUrl = latest.HtmlUrl.Replace("/tag/", "/download/");
-        
-        var manager = new UpdateManager(latestUrl);
-
-        return manager;
-    }
-
     private string NewVersionTips(string version)
     {
         var tips = string.Format("New version {0} is available, would you like to restart STranslate to use the update?", version);
 
         return tips;
     }
-
-    private static readonly JsonSerializerOptions JsonOptions = new()
-    {
-        WriteIndented = true
-    };
 }

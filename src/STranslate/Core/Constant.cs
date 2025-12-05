@@ -14,6 +14,7 @@ public class Constant
     public const string Logs = "Logs";
     public const string PluginMetaFileName = "plugin.json";
     public const string TmpPluginFolderName = "STranslateTmpPlugins";
+    public const string TmpConfigFolderName = "STranslateTmpConfig";
     public const string SystemLanguageCode = "system";
     public const string HttpClientName = "DefaultClient";
     public const string HostExeName = "z_stranslate_host.exe";
