@@ -49,6 +49,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "STranslate.Plugin.Ocr.OpenA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "STranslate.Plugin.Translate.DeepL", "Plugins\STranslate.Plugin.Translate.DeepL\STranslate.Plugin.Translate.DeepL.csproj", "{40A8ED7C-2915-4856-BA6C-EF79F5FE8AB1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "STranslate.Plugin.Ocr.Baidu", "Plugins\STranslate.Plugin.Ocr.Baidu\STranslate.Plugin.Ocr.Baidu.csproj", "{6731350A-CCA5-42A8-B23A-3C289E398E61}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -107,6 +109,10 @@ Global
 		{40A8ED7C-2915-4856-BA6C-EF79F5FE8AB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40A8ED7C-2915-4856-BA6C-EF79F5FE8AB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40A8ED7C-2915-4856-BA6C-EF79F5FE8AB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6731350A-CCA5-42A8-B23A-3C289E398E61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6731350A-CCA5-42A8-B23A-3C289E398E61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6731350A-CCA5-42A8-B23A-3C289E398E61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6731350A-CCA5-42A8-B23A-3C289E398E61}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -124,6 +130,7 @@ Global
 		{334F65F9-A5DC-459F-A09D-D13019C582EC} = {5AB03004-BE0C-4B0A-9458-55324D128FD9}
 		{B5486849-C27A-4115-80D0-DDC90C32902B} = {5AB03004-BE0C-4B0A-9458-55324D128FD9}
 		{40A8ED7C-2915-4856-BA6C-EF79F5FE8AB1} = {5AB03004-BE0C-4B0A-9458-55324D128FD9}
+		{6731350A-CCA5-42A8-B23A-3C289E398E61} = {5AB03004-BE0C-4B0A-9458-55324D128FD9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DA398D62-3653-428C-AC2F-10281C6D435C}
