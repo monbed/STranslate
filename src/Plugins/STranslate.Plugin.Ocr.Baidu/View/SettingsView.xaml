@@ -36,6 +36,13 @@
                 plugin:PasswordBoxAssistant.Password="{Binding SecretKey}" />
         </ui:SettingsCard>
 
+        <ui:SettingsCard Description="{DynamicResource STranslate_Plugin_Ocr_Baidu_Action_Description}" Header="{DynamicResource STranslate_Plugin_Ocr_Baidu_Action}">
+            <ui:SettingsCard.HeaderIcon>
+                <ui:FontIcon Icon="{x:Static ui:FluentSystemIcons.TaskListSquareLtr_20_Regular}" />
+            </ui:SettingsCard.HeaderIcon>
+            <ComboBox ItemsSource="{Binding Actions}" SelectedItem="{Binding Action}" />
+        </ui:SettingsCard>
+
         <ui:SettingsCard Description="{DynamicResource STranslate_Plugin_Ocr_Baidu_Official_Description}" Header="{DynamicResource STranslate_Plugin_Ocr_Baidu_Official}">
             <ui:SettingsCard.HeaderIcon>
                 <ui:FontIcon Icon="{x:Static ui:FluentSystemIcons.WebAsset_20_Regular}" />

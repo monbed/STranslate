@@ -39,6 +39,8 @@ public partial class SettingsViewModel : ObservableObject, IDisposable
         _context.SaveSettingStorage<Settings>();
     }
 
+    public List<BaiduOCRAction> Actions => [.. Enum.GetValues<BaiduOCRAction>()];
+
     [ObservableProperty] public partial BaiduOCRAction Action { get; set; }
     [ObservableProperty] public partial string ApiKey { get; set; }
     [ObservableProperty] public partial string SecretKey { get; set; }
