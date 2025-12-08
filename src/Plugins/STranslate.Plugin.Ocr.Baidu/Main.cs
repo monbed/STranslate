@@ -84,11 +84,6 @@ public class Main : ObservableObject, IOcrPlugin
         var ocrResult = new OcrResult();
         var token = await GetAccessTokenAsync(Settings.ApiKey, Settings.SecretKey, cancellationToken);
         var url = $"https://aip.baidubce.com/rest/2.0/ocr/v1/{Settings.Action.GetDescription()}?access_token={token}";
-        var headers = new Dictionary<string, string[]>
-        {
-            { "Content-Type", ["application/x-www-form-urlencoded"] },
-            { "Accept", ["application/json"] }
-        };
         var base64Str = Convert.ToBase64String(request.ImageData);
         var target = LangConverter(request.Language) ?? throw new Exception($"unsupportted language[{request.Language}]");
         var options = new Options
