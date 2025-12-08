@@ -54,6 +54,8 @@
     <sys:String x:Key="General_TranslateOnPasteDescription">输入框内粘贴文本立即执行翻译。</sys:String>
     <sys:String x:Key="General_LineBreakHandleType">取词换行处理</sys:String>
     <sys:String x:Key="General_LineBreakHandleTypeDescription" xml:space="preserve">包括划词、截图翻译、剪贴板、静默OCR取词场最的换行处理&#10;「移除多于换行」主要针对PDF取词场景，移除多于换行和断句，但是对非PDF取词可能有影响</sys:String>
+    <sys:String x:Key="General_ImageQuality">图片质量</sys:String>
+    <sys:String x:Key="General_ImageQualityDescription">处理图片时质量调整，在线OCR服务可能会限制图片大小</sys:String>
     <sys:String x:Key="General_Language">语言</sys:String>
     <sys:String x:Key="General_ScreenshotTranslateInImage">图片内翻译</sys:String>
     <sys:String x:Key="General_ScreenshotTranslateInImageDescription">截图翻译时是否启用图片内翻译.</sys:String>
@@ -472,6 +474,10 @@
 
     <sys:String x:Key="BackupTypeLocal">本地备份</sys:String>
     <sys:String x:Key="BackupTypeWebDav">WebDav备份</sys:String>
+
+    <sys:String x:Key="ImageQualityLow">低质量</sys:String>
+    <sys:String x:Key="ImageQualityMedium">中等质量</sys:String>
+    <sys:String x:Key="ImageQualityHigh">高质量</sys:String>
 
     <!--  // Plugins //  -->
     <sys:String x:Key="UnsupportedSourceLang">不支持的源语言</sys:String>

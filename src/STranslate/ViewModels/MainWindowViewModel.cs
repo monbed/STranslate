@@ -689,7 +689,7 @@ public partial class MainWindowViewModel : ObservableObject, IDisposable
         try
         {
             CursorHelper.Execute();
-            var data = Utilities.ToBytes(bitmap);
+            var data = Utilities.ToBytes(bitmap, Settings.GetImageFormat());
             var result = await ocrPlugin.RecognizeAsync(new OcrRequest(data, LangEnum.Auto), cancellationToken);
 
             if (!result.IsSuccess || string.IsNullOrEmpty(result.Text))
@@ -750,7 +750,7 @@ public partial class MainWindowViewModel : ObservableObject, IDisposable
         try
         {
             CursorHelper.Execute();
-            var data = Utilities.ToBytes(bitmap);
+            var data = Utilities.ToBytes(bitmap, Settings.GetImageFormat());
             var result = await ocrPlugin.RecognizeAsync(new OcrRequest(data, LangEnum.Auto), cancellationToken);
             if (result.IsSuccess && !string.IsNullOrEmpty(result.Text))
             {

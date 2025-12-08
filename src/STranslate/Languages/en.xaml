@@ -54,6 +54,8 @@
     <sys:String x:Key="General_TranslateOnPasteDescription">Execute translation immediately when text is pasted into the input box.</sys:String>
     <sys:String x:Key="General_LineBreakHandleType">Line Break Handling</sys:String>
     <sys:String x:Key="General_LineBreakHandleTypeDescription" xml:space="preserve">Includes line break handling for word selection, screenshot translation, clipboard, and silent OCR scenarios.&#10;"Remove extra line breaks" is mainly for PDF text extraction, removing redundant line breaks and sentence breaks, but it may affect non-PDF extraction.</sys:String>
+    <sys:String x:Key="General_ImageQuality">Image Quality</sys:String>
+    <sys:String x:Key="General_ImageQualityDescription">Adjust the quality when processing images. Online OCR services may limit image size.</sys:String>
     <sys:String x:Key="General_Language">Language</sys:String>
     <sys:String x:Key="General_ScreenshotTranslateInImage">In-Image Translation</sys:String>
     <sys:String x:Key="General_ScreenshotTranslateInImageDescription">Whether to enable in-image translation during screenshot translation.</sys:String>
@@ -471,6 +473,10 @@
 
     <sys:String x:Key="BackupTypeLocal">Local</sys:String>
     <sys:String x:Key="BackupTypeWebDav">WebDav</sys:String>
+
+    <sys:String x:Key="ImageQualityLow">Low</sys:String>
+    <sys:String x:Key="ImageQualityMedium">Medium</sys:String>
+    <sys:String x:Key="ImageQualityHigh">High</sys:String>
 
     <!--  // Plugins //  -->
     <sys:String x:Key="UnsupportedSourceLang">Unsupported source language</sys:String>

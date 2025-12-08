@@ -140,14 +140,14 @@ public partial class OcrWindowViewModel : ObservableObject, IDisposable
         try
         {
             Clear();
-            _sourceImage = Utilities.ToBitmapImage(bitmap);
+            _sourceImage = Utilities.ToBitmapImage(bitmap, Settings.GetImageFormat());
             DisplayImage = _sourceImage;
 
             var ocrSvc = _ocrService.GetActiveSvc<IOcrPlugin>();
             if (ocrSvc == null)
                 return;
 
-            var data = Utilities.ToBytes(bitmap);
+            var data = Utilities.ToBytes(bitmap, Settings.GetImageFormat());
 
             // 尝试获取二维码结果
             var qrResult = DecodeQrCode(data);
@@ -194,7 +194,7 @@ public partial class OcrWindowViewModel : ObservableObject, IDisposable
 
         // 清理当前QrCodeResult
         QrCodeResult = string.Empty;
-        using var bitmap = Utilities.ToBitmap(_sourceImage);
+        using var bitmap = Utilities.ToBitmap(_sourceImage, Settings.GetBitmapEncoder());
         var data = Utilities.ToBytes(bitmap);
         var qrResult = DecodeQrCode(data);
         if (qrResult == null || string.IsNullOrWhiteSpace(qrResult.Text))
@@ -210,7 +210,7 @@ public partial class OcrWindowViewModel : ObservableObject, IDisposable
     private async Task ReExecuteAsync()
     {
         if (_sourceImage == null || IsExecuting) return;
-        using var bitmap = Utilities.ToBitmap(_sourceImage);
+        using var bitmap = Utilities.ToBitmap(_sourceImage, Settings.GetBitmapEncoder());
         await ExecuteCommand.ExecuteAsync(bitmap);
     }
 
@@ -333,7 +333,7 @@ public partial class OcrWindowViewModel : ObservableObject, IDisposable
             return;
         }
 
-        using var bitmap = Utilities.ToBitmap(bitmapSource);
+        using var bitmap = Utilities.ToBitmap(bitmapSource, Settings.GetBitmapEncoder());
         await ExecuteCommand.ExecuteAsync(bitmap);
     }
 

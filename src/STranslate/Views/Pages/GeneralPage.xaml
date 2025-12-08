@@ -242,6 +242,17 @@
                         SelectedValuePath="Value" />
                 </ui:SettingsCard>
 
+                <ui:SettingsCard Description="{DynamicResource General_ImageQualityDescription}" Header="{DynamicResource General_ImageQuality}">
+                    <ui:SettingsCard.HeaderIcon>
+                        <ui:FontIcon Icon="{x:Static ui:FluentSystemIcons.ImageTable_20_Regular}" />
+                    </ui:SettingsCard.HeaderIcon>
+                    <ComboBox
+                        DisplayMemberPath="Display"
+                        ItemsSource="{Binding DataProvider.ImageQualities}"
+                        SelectedValue="{Binding Settings.ImageQuality}"
+                        SelectedValuePath="Value" />
+                </ui:SettingsCard>
+
                 <!--#endregion-->
 
                 <!--#region Appearance-->

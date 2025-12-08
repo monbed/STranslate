@@ -7,7 +7,9 @@ using STranslate.Helpers;
 using STranslate.Plugin;
 using STranslate.Views;
 using System.ComponentModel;
+using System.Drawing.Imaging;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace STranslate.Core;
 
@@ -126,6 +128,7 @@ public partial class Settings : ObservableObject
     /// 取词时换行处理
     /// </summary>
     [ObservableProperty] public partial LineBreakHandleType LineBreakHandleType { get; set; } = LineBreakHandleType.RemoveExtraLineBreak;
+    [ObservableProperty] public partial ImageQuality ImageQuality { get; set; } = ImageQuality.Medium;
 
     #region Layout Analysis
     /* 版面分析参数配置
@@ -322,6 +325,26 @@ public partial class Settings : ObservableObject
                 DebounceTimeMs, // 500毫秒后执行
                 Timeout.Infinite); // 只执行一次
         }
+    }
+
+    internal ImageFormat GetImageFormat() =>
+        ImageQuality switch
+        {
+            ImageQuality.Low => ImageFormat.Jpeg,
+            ImageQuality.Medium => ImageFormat.Png,
+            ImageQuality.High => ImageFormat.Bmp,
+            _ => ImageFormat.Png,
+        };
+
+    internal BitmapEncoder GetBitmapEncoder()
+    {
+        return ImageQuality switch
+        {
+            ImageQuality.Low => new JpegBitmapEncoder { QualityLevel = 50 },
+            ImageQuality.Medium => new PngBitmapEncoder(),
+            ImageQuality.High => new BmpBitmapEncoder(),
+            _ => new PngBitmapEncoder(),
+        };
     }
 
     public void Initialize()
@@ -612,6 +635,13 @@ public enum CopyAfterTranslation
     Seventh,
     Eighth,
     Last,
+}
+
+public enum ImageQuality
+{
+    Low,
+    Medium,
+    High
 }
 
 #endregion

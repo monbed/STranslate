@@ -160,14 +160,14 @@ public partial class ImageTranslateWindowViewModel : ObservableObject, IDisposab
         try
         {
             Clear();
-            _sourceImage = Utilities.ToBitmapImage(bitmap);
+            _sourceImage = Utilities.ToBitmapImage(bitmap, Settings.GetImageFormat());
             DisplayImage = _sourceImage;
 
             var ocrSvc = _ocrService.GetActiveSvc<IOcrPlugin>();
             if (ocrSvc == null)
                 return;
 
-            var data = Utilities.ToBytes(bitmap);
+            var data = Utilities.ToBytes(bitmap, Settings.GetImageFormat());
             _lastOcrResult = await ocrSvc.RecognizeAsync(new OcrRequest(data, Settings.OcrLanguage), cancellationToken);
 
             if (!_lastOcrResult.IsSuccess || string.IsNullOrEmpty(_lastOcrResult.Text))
@@ -211,7 +211,7 @@ public partial class ImageTranslateWindowViewModel : ObservableObject, IDisposab
             });
 
             // 生成翻译结果图像（在原图上覆盖翻译文本）
-            _resultImage = GenerateTranslatedImage(_lastOcrResult, Utilities.ToBitmapImage(bitmap));
+            _resultImage = GenerateTranslatedImage(_lastOcrResult, Utilities.ToBitmapImage(bitmap, Settings.GetImageFormat()));
             Result = _lastOcrResult.Text;
 
             DisplayImage = Settings.IsImTranShowingAnnotated ? _annotatedImage : _resultImage;
@@ -235,7 +235,7 @@ public partial class ImageTranslateWindowViewModel : ObservableObject, IDisposab
     private async Task ReExecuteAsync()
     {
         if (_sourceImage == null || IsExecuting) return;
-        using var bitmap = Utilities.ToBitmap(_sourceImage);
+        using var bitmap = Utilities.ToBitmap(_sourceImage, Settings.GetBitmapEncoder());
         await ExecuteCommand.ExecuteAsync(bitmap);
     }
 
@@ -368,7 +368,7 @@ public partial class ImageTranslateWindowViewModel : ObservableObject, IDisposab
             return;
         }
 
-        using var bitmap = Utilities.ToBitmap(bitmapSource);
+        using var bitmap = Utilities.ToBitmap(bitmapSource, Settings.GetBitmapEncoder());
         await ExecuteCommand.ExecuteAsync(bitmap);
     }
 

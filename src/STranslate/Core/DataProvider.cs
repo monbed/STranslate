@@ -36,6 +36,7 @@ public class DataProvider
         DropdownDataGeneric<HistoryLimit>.UpdateLabels(HistoryLimits);
         DropdownDataGeneric<CopyAfterTranslation>.UpdateLabels(CopyAfterTranslations);
         DropdownDataGeneric<BackupType>.UpdateLabels(BackupTypes);
+        DropdownDataGeneric<ImageQuality>.UpdateLabels(ImageQualities);
     }
 
     #region LangEnums
@@ -156,6 +157,14 @@ public class DataProvider
     public class BackupTypeData : DropdownDataGeneric<BackupType> { }
     public List<BackupTypeData> BackupTypes { get; } =
         DropdownDataGeneric<BackupType>.GetValues<BackupTypeData>("BackupType");
+
+    #endregion
+
+    #region ImageQualities
+
+    public class ImageQualityData : DropdownDataGeneric<ImageQuality> { }
+    public List<ImageQualityData> ImageQualities { get; } =
+        DropdownDataGeneric<ImageQuality>.GetValues<ImageQualityData>("ImageQuality");
 
     #endregion
 }
