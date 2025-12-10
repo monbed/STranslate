@@ -579,7 +579,7 @@
     <sys:String x:Key="NoUpdateInfoFound">No update info found.</sys:String>
     <sys:String x:Key="AlreadyLatestVersion">You are already on the latest version.</sys:String>
     <sys:String x:Key="UpdateAvailable">Update Available</sys:String>
-    <sys:String x:Key="NewVersionFound">New version {0} found. Updating...</sys:String>
+    <sys:String x:Key="NewVersionFound">New version {0} found. Download?</sys:String>
     <sys:String x:Key="PortableDataMoveError">STranslate was not able to move your user profile data to the new update version.&#10;Please manually move your profile data folder from {0} to {1}</sys:String>
     <sys:String x:Key="UpdateReady">Update Ready</sys:String>
     <sys:String x:Key="UpdateFailed">Update Failed</sys:String>

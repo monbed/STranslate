@@ -52,9 +52,15 @@ public class UpdaterService(
                 return;
             }
 
-            if (!silentUpdate)
-                notification.Show(i18n.GetTranslation("UpdateAvailable"), string.Format(i18n.GetTranslation("NewVersionFound"), newReleaseVersion));
-            logger.LogInformation($"New version {newReleaseVersion} found. Updating...");
+            if (MessageBox.Show(string.Format(i18n.GetTranslation("NewVersionFound"), newReleaseVersion),
+                    Constant.AppName,
+                    MessageBoxButton.YesNo) != MessageBoxResult.Yes)
+            {
+                logger.LogInformation("User cancelled the update.");
+                return;
+            }
+
+            logger.LogInformation($"New version {newReleaseVersion} found. Downloading...");
 
             await updateManager.DownloadUpdatesAsync(newUpdateInfo);
 

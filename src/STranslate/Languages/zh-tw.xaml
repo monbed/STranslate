@@ -580,7 +580,7 @@
     <sys:String x:Key="NoUpdateInfoFound">未找到更新資訊。</sys:String>
     <sys:String x:Key="AlreadyLatestVersion">您已是最新版本。</sys:String>
     <sys:String x:Key="UpdateAvailable">有可用更新</sys:String>
-    <sys:String x:Key="NewVersionFound">發現新版本 {0}。正在更新...</sys:String>
+    <sys:String x:Key="NewVersionFound">發現新版本 {0}。是否下載？</sys:String>
     <sys:String x:Key="PortableDataMoveError">STranslate 無法將您的使用者配置資料移動到新更新版本。&#10;請手動將您的配置資料資料夾從 {0} 移動到 {1}</sys:String>
     <sys:String x:Key="UpdateReady">更新準備就緒</sys:String>
     <sys:String x:Key="UpdateFailed">更新失敗</sys:String>
