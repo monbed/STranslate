@@ -517,6 +517,9 @@
     <sys:String x:Key="FilterService">過濾服務</sys:String>
     <sys:String x:Key="SearchService">搜尋服務</sys:String>
     <sys:String x:Key="SearchServiceTooltip">按 Ctrl+F 搜尋服務</sys:String>
+    <sys:String x:Key="BuiltIn">內建</sys:String>
+    <sys:String x:Key="PreInstall">預裝</sys:String>
+    <sys:String x:Key="Extend">擴展</sys:String>
 
     <!--  // Dictionary //  -->
     <sys:String x:Key="PlayPronunciation">播放發音</sys:String>

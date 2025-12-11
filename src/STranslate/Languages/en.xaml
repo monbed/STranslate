@@ -516,6 +516,9 @@
     <sys:String x:Key="FilterService">Filter Service</sys:String>
     <sys:String x:Key="SearchService">Search Service</sys:String>
     <sys:String x:Key="SearchServiceTooltip">Ctrl+F to search services</sys:String>
+    <sys:String x:Key="BuiltIn">Built-in</sys:String>
+    <sys:String x:Key="PreInstall">Pre-installed</sys:String>
+    <sys:String x:Key="Extend">Extension</sys:String>
 
     <!--  // Dictionary //  -->
     <sys:String x:Key="PlayPronunciation">Play Pronunciation</sys:String>

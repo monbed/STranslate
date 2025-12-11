@@ -1,4 +1,6 @@
+using CommunityToolkit.Mvvm.DependencyInjection;
 using iNKORE.UI.WPF.Modern.Controls;
+using STranslate.Core;
 using STranslate.Plugin;
 using System.Collections;
 using System.Collections.ObjectModel;
@@ -12,6 +14,8 @@ namespace STranslate.Controls;
 
 public partial class ServiceContentDialog : INotifyPropertyChanged
 {
+    private readonly Internationalization _i18n = Ioc.Default.GetRequiredService<Internationalization>();
+
     public ServiceContentDialog(string title, ObservableCollection<PluginMetaData> itemsSource)
     {
         ServiceTitle = title;
@@ -24,12 +28,12 @@ public partial class ServiceContentDialog : INotifyPropertyChanged
         _collectionViewSource.Filter += OnFilter;
 
         // 使用自定义分组
-        _collectionViewSource.GroupDescriptions.Add(new CustomPluginGroupDescription());
+        _collectionViewSource.GroupDescriptions.Add(new CustomPluginGroupDescription(_i18n));
 
         // 自定义排序
         if (_collectionViewSource.View is ListCollectionView listCollectionView)
         {
-            listCollectionView.CustomSort = new PluginMetaDataComparer();
+            listCollectionView.CustomSort = new PluginMetaDataComparer(_i18n);
         }
     }
 
@@ -102,32 +106,32 @@ public partial class ServiceContentDialog : INotifyPropertyChanged
     }
 }
 
-internal class CustomPluginGroupDescription : GroupDescription
+internal class CustomPluginGroupDescription(Internationalization i18n) : GroupDescription
 {
     public override object GroupNameFromItem(object item, int level, System.Globalization.CultureInfo culture)
     {
         if (item is not PluginMetaData plugin)
         {
-            return "其他";
+            throw new ArgumentException("Item is not of type PluginMetaData", nameof(item));
         }
 
-        var isBuiltIn = plugin.IsPrePlugin && plugin.Name.Contains("内置", StringComparison.OrdinalIgnoreCase);
+        var isBuiltIn = plugin.IsPrePlugin && plugin.Name.Contains(i18n.GetTranslation("BuiltIn"), StringComparison.OrdinalIgnoreCase);
 
         if (isBuiltIn)
         {
-            return "内置插件";
+            return i18n.GetTranslation("BuiltIn");
         }
 
         if (plugin.IsPrePlugin)
         {
-            return "预装插件";
+            return i18n.GetTranslation("PreInstall");
         }
 
-        return "扩展插件";
+        return i18n.GetTranslation("Extend");
     }
 }
 
-internal class PluginMetaDataComparer : IComparer
+internal class PluginMetaDataComparer(Internationalization i18n) : IComparer
 {
     public int Compare(object? x, object? y)
     {
@@ -136,8 +140,8 @@ internal class PluginMetaDataComparer : IComparer
             return 0;
         }
 
-        var isBuiltInX = pluginX.IsPrePlugin && pluginX.Name.Contains("内置", StringComparison.OrdinalIgnoreCase);
-        var isBuiltInY = pluginY.IsPrePlugin && pluginY.Name.Contains("内置", StringComparison.OrdinalIgnoreCase);
+        var isBuiltInX = pluginX.IsPrePlugin && pluginX.Name.Contains(i18n.GetTranslation("BuiltIn"), StringComparison.OrdinalIgnoreCase);
+        var isBuiltInY = pluginY.IsPrePlugin && pluginY.Name.Contains(i18n.GetTranslation("BuiltIn"), StringComparison.OrdinalIgnoreCase);
 
         // 优先级1: IsPrePlugin=true 且 Name 包含"内置"
         if (isBuiltInX && !isBuiltInY)
