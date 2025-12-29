@@ -242,6 +242,9 @@ public partial class PluginViewModel : ObservableObject
     partial void OnFilterTextChanged(string value) => _pluginCollectionView.View?.Refresh();
 
     [RelayCommand]
+    private void Market() => Process.Start(new ProcessStartInfo { FileName = "https://stranslate.zggsong.com/plugins.html", UseShellExecute = true });
+
+    [RelayCommand]
     private async Task AddPluginAsync()
     {
         var dialog = new OpenFileDialog

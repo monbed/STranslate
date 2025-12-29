@@ -60,8 +60,6 @@
                 DockPanel.Dock="Right"
                 Orientation="Horizontal"
                 Spacing="10">
-                <ui:HyperlinkButton Content="Market" NavigateUri="https://stranslate.zggsong.com/plugins.html" />
-
                 <Button
                     Command="{Binding BatchDeletePluginCommand}"
                     CommandParameter="{Binding ElementName=PART_PluginListBox, Path=SelectedItems}"
@@ -75,8 +73,12 @@
                     <ui:IconAndText Content="{DynamicResource BatchOperation}" Icon="{x:Static ui:FluentSystemIcons.TaskListSquareLtr_20_Regular}" />
                 </Button>
 
+                <Button Command="{Binding MarketCommand}" Style="{DynamicResource {x:Static ui:ThemeKeys.AccentButtonStyleKey}}">
+                    <ui:IconAndText Content="{DynamicResource Market}" Icon="{x:Static ui:FluentSystemIcons.Apps_20_Regular}" />
+                </Button>
+
                 <Button Command="{Binding AddPluginCommand}">
-                    <ui:IconAndText Content="{DynamicResource AddPlugin}" Icon="{x:Static ui:FluentSystemIcons.BotAdd_24_Regular}" />
+                    <ui:IconAndText Content="{DynamicResource AddPlugin}" Icon="{x:Static ui:FluentSystemIcons.AppsAddIn_20_Regular}" />
                 </Button>
 
                 <ComboBox
