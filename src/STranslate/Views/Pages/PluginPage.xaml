@@ -60,6 +60,8 @@
                 DockPanel.Dock="Right"
                 Orientation="Horizontal"
                 Spacing="10">
+                <ui:HyperlinkButton Content="Market" NavigateUri="https://stranslate.zggsong.com/plugins.html" />
+
                 <Button
                     Command="{Binding BatchDeletePluginCommand}"
                     CommandParameter="{Binding ElementName=PART_PluginListBox, Path=SelectedItems}"

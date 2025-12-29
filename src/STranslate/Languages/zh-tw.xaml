@@ -154,7 +154,7 @@
     <sys:String x:Key="TransExecPinned">釘到語言區手動執行</sys:String>
 
     <!--  // Plugin Page //  -->
-    <sys:String x:Key="AddPlugin">新增外掛「spkg」</sys:String>
+    <sys:String x:Key="AddPlugin">安裝</sys:String>
     <sys:String x:Key="PluginName">名稱</sys:String>
     <sys:String x:Key="PluginAuthor">作者</sys:String>
     <sys:String x:Key="PluginType">類型</sys:String>
