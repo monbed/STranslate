@@ -167,7 +167,7 @@ public class Main : LlmTranslatePluginBase
 
         await Context.HttpService.StreamPostAsync(url, content, msg =>
         {
-            if (string.IsNullOrEmpty(msg?.Trim()))
+            if (string.IsNullOrEmpty(msg?.Trim()) || msg == ": OPENROUTER PROCESSING")
                 return;
 
             var preprocessString = msg.Replace("data:", "").Trim();
@@ -178,23 +178,6 @@ public class Main : LlmTranslatePluginBase
 
             try
             {
-                /**
-                 * 
-                 * var parsedData = JsonDocument.Parse(preprocessString);
-
-                if (parsedData is null)
-                    return;
-
-                var root = parsedData.RootElement;
-
-                // 提取 content 的值
-                var contentValue = root
-                    .GetProperty("choices")[0]
-                    .GetProperty("delta")
-                    .GetProperty("content")
-                    .GetString();
-                * 
-                 */
                 // 解析JSON数据
                 var parsedData = JsonNode.Parse(preprocessString);
 
