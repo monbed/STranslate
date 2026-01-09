@@ -95,6 +95,8 @@
             ColorSchemeCommand="{Binding ChangeColorSchemeCommand}"
             HistoryNextCommand="{Binding HistoryNextCommand}"
             HistoryPreviousCommand="{Binding HistoryPreviousCommand}"
+            IsAutoTranslate="{Binding Settings.AutoTranslate}"
+            IsAutoTranslateVisible="{Binding Settings.IsAutoTranslateVisible}"
             IsColorSchemeVisible="{Binding Settings.IsColorSchemeVisible}"
             IsHideInput="{Binding Settings.HideInput}"
             IsHideInputVisible="{Binding Settings.IsHideInputVisible}"

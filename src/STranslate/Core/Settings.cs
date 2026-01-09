@@ -108,6 +108,8 @@ public partial class Settings : ObservableObject
     /// </summary>
     [ObservableProperty] public partial bool TranslateOnPaste { get; set; } = true;
 
+    [ObservableProperty] public partial bool IsAutoTranslateVisible { get; set; } = true;
+
     /// <summary>
     /// 自动翻译
     /// </summary>
