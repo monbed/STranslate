@@ -379,6 +379,7 @@
                         ItemsSource="{Binding DataProvider.LangEnums}"
                         SelectedValue="{Binding Settings.SourceLang}"
                         SelectedValuePath="Value" />
+                    <TextBlock VerticalAlignment="Center" Text="&gt;&gt;" />
                     <ComboBox
                         HorizontalContentAlignment="Center"
                         DisplayMemberPath="Display"
