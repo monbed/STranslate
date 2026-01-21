@@ -5,6 +5,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <EnableWindowsTargeting>true</EnableWindowsTargeting>
         <RepositoryUrl>https://github.com/STranslate/STranslate/</RepositoryUrl>
+        <CETCompat>false</CETCompat>
 
         <!--// 禁用 SourceLink 功能以避免编译警报 //-->
         <EnableSourceLink>false</EnableSourceLink>
