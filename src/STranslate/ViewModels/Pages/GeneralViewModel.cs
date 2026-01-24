@@ -1,7 +1,9 @@
 using CommunityToolkit.Mvvm.Input;
+using STranslate.Controls;
 using STranslate.Core;
 using STranslate.Helpers;
 using STranslate.Plugin;
+using System.Windows.Input;
 
 namespace STranslate.ViewModels.Pages;
 
@@ -25,6 +27,18 @@ public partial class GeneralViewModel : SearchViewModelBase
 
     [RelayCommand]
     private void ResetFontSize() => Settings.FontSize = 14;
+
+    [RelayCommand]
+    private async Task IncreamentableTranalateKeyAsync()
+    {
+        var dialog = new HotkeyControlDialog(HotkeyType.Global, Settings.IncreamentalTranslateKey.ToString(), "LeftAlt");
+        await dialog.ShowAsync();
+        // TODO: 注册全局快捷键 啥也不干
+        if (dialog.ReturnType == HotkeyControlDialog.HkReturnType.Save)
+        {
+            Settings.IncreamentalTranslateKey = Enum.Parse<Key>(dialog.ResultValue);
+        }
+    }
 
     public List<int> ScreenNumbers
     {
