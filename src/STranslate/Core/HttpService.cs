@@ -5,6 +5,7 @@ using STranslate.Plugin;
 using System.Diagnostics;
 using System.IO;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 using System.Web;
@@ -184,7 +185,13 @@ public class HttpService : IHttpService
             var finalUrl = BuildUrlWithQuery(url, options?.QueryParams);
             using var request = new HttpRequestMessage(HttpMethod.Post, finalUrl);
             if (content != null)
-                request.Content = new StringContent(content, Encoding.UTF8, options?.ContentType ?? "application/json");
+            {
+                request.Content = new StringContent(content, Encoding.UTF8);
+
+                // 创建不带 charset 的 Content-Type
+                var contentType = options?.ContentType ?? "application/json";
+                request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse(contentType);
+            }
 
             AddHeaders(request, options?.Headers);
 
