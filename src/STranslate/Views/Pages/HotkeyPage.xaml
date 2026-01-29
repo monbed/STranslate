@@ -155,6 +155,17 @@
                             WindowTitle="{DynamicResource Hotkey_ScreenshotTranslate}" />
                     </ui:SettingsCard>
 
+                    <ui:SettingsCard Description="{DynamicResource Hotkey_ImageTranslateDescription}" Header="{DynamicResource Hotkey_ImageTranslate}">
+                        <ui:SettingsCard.HeaderIcon>
+                            <ui:FontIcon Icon="{x:Static ui:FluentSystemIcons.DrawImage_20_Regular}" />
+                        </ui:SettingsCard.HeaderIcon>
+                        <control:HotkeyControl
+                            DefaultHotkey="{Binding HotkeySettings.ImageTranslateHotkey.Default}"
+                            Hotkey="{Binding HotkeySettings.ImageTranslateHotkey.Key}"
+                            IsRegistered="{Binding HotkeySettings.ImageTranslateHotkey.IsConflict}"
+                            WindowTitle="{DynamicResource Hotkey_ImageTranslate}" />
+                    </ui:SettingsCard>
+
                     <ui:SettingsCard Description="{DynamicResource Hotkey_MouseHookTranslateDescription}" Header="{DynamicResource Hotkey_MouseHookTranslate}">
                         <ui:SettingsCard.HeaderIcon>
                             <ui:FontIcon Icon="{x:Static ui:FluentSystemIcons.KeyboardMouse_16_Regular}" />

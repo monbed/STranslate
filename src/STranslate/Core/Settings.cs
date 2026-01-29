@@ -5,11 +5,9 @@ using Serilog.Core;
 using Serilog.Events;
 using STranslate.Helpers;
 using STranslate.Plugin;
-using STranslate.ViewModels;
 using STranslate.Views;
 using System.ComponentModel;
 using System.Drawing.Imaging;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -50,9 +48,8 @@ public partial class Settings : ObservableObject
 
     [ObservableProperty] public partial bool IsColorSchemeVisible { get; set; } = true;
 
-    [ObservableProperty] public partial bool ScreenshotTranslateInImage { get; set; } = true;
-
-    [ObservableProperty] public partial bool IsScreenshotTranslateInImageVisible { get; set; } = true;
+    [ObservableProperty] public partial bool IsScreenshotTranslateVisible { get; set; } = true;
+    [ObservableProperty] public partial bool IsImageTranslateVisible { get; set; } = true;
 
     /// <summary>
     /// 截图时是否显示辅助线

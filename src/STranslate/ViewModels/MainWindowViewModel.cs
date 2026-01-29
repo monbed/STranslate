@@ -11,6 +11,7 @@ using STranslate.Services;
 using STranslate.ViewModels.Pages;
 using STranslate.Views;
 using STranslate.Views.Pages;
+using System.Drawing;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -664,29 +665,6 @@ public partial class MainWindowViewModel : ObservableObject, IDisposable
         if (ocrPlugin == null)
             return;
 
-        if (Settings.ScreenshotTranslateInImage && TranslateService.ImageTranslateService == null)
-        {
-            _notification.ShowWithButton(
-                 "无法获取图片翻译服务",
-                 "点击前往",
-                 () =>
-                 {
-                     Application.Current.Dispatcher.Invoke(() =>
-                     {
-                         SingletonWindowOpener
-                             .Open<SettingsWindow>()
-                             .Activate();
-
-                         Application.Current.Windows
-                                 .OfType<SettingsWindow>()
-                                 .First()
-                                 .Navigate(nameof(TranslatePage));
-                     });
-                 },
-                 "当前未配置启用图片翻译服务，请先前往「设置-服务-文本翻译」配置后使用该功能");
-            return;
-        }
-
         using var bitmap = await _screenshot.GetScreenshotAsync();
         await ScreenshotTranslateHandlerAsync(bitmap, ocrPlugin, cancellationToken);
     }
@@ -698,13 +676,6 @@ public partial class MainWindowViewModel : ObservableObject, IDisposable
         ocrPlugin ??= GetOcrSvcAndNotify();
         if (ocrPlugin == null)
             return;
-
-        if (Settings.ScreenshotTranslateInImage)
-        {
-            var window = await SingletonWindowOpener.OpenAsync<ImageTranslateWindow>();
-            await ((ImageTranslateWindowViewModel)window.DataContext).ExecuteCommand.ExecuteAsync(bitmap);
-            return;
-        }
 
         try
         {
@@ -736,6 +707,53 @@ public partial class MainWindowViewModel : ObservableObject, IDisposable
     }
 
     [RelayCommand]
+    private async Task ImageTranslateAsync()
+    {
+        var ocrPlugin = GetOcrSvcAndNotify();
+        if (ocrPlugin == null)
+            return;
+
+        if (TranslateService.ImageTranslateService == null)
+        {
+            _notification.ShowWithButton(
+                 "无法获取图片翻译服务",
+                 "点击前往",
+                 () =>
+                 {
+                     Application.Current.Dispatcher.Invoke(() =>
+                     {
+                         SingletonWindowOpener
+                             .Open<SettingsWindow>()
+                             .Activate();
+
+                         Application.Current.Windows
+                                 .OfType<SettingsWindow>()
+                                 .First()
+                                 .Navigate(nameof(TranslatePage));
+                     });
+                 },
+                 "当前未配置启用图片翻译服务，请先前往「设置-服务-文本翻译」配置后使用该功能");
+            return;
+        }
+
+
+        using var bitmap = await _screenshot.GetScreenshotAsync();
+        await ImageTranslateHandlerAsync(bitmap, ocrPlugin);
+    }
+
+    private async Task ImageTranslateHandlerAsync(Bitmap? bitmap, IOcrPlugin? ocrPlugin)
+    {
+        if (bitmap == null) return;
+
+        ocrPlugin ??= GetOcrSvcAndNotify();
+        if (ocrPlugin == null)
+            return;
+
+        var window = await SingletonWindowOpener.OpenAsync<ImageTranslateWindow>();
+        await ((ImageTranslateWindowViewModel)window.DataContext).ExecuteCommand.ExecuteAsync(bitmap);
+    }
+
+    [RelayCommand]
     private async Task OcrAsync()
     {
         if (GetOcrSvcAndNotify() == null)
@@ -745,7 +763,7 @@ public partial class MainWindowViewModel : ObservableObject, IDisposable
         await OcrHandlerAsync(bitmap);
     }
 
-    public async Task OcrHandlerAsync(System.Drawing.Bitmap? bitmap)
+    public async Task OcrHandlerAsync(Bitmap? bitmap)
     {
         if (bitmap == null) return;
         var window = await SingletonWindowOpener.OpenAsync<OcrWindow>();
@@ -762,7 +780,7 @@ public partial class MainWindowViewModel : ObservableObject, IDisposable
         await QrCodeHandlerAsync(bitmap);
     }
 
-    public async Task QrCodeHandlerAsync(System.Drawing.Bitmap? bitmap)
+    public async Task QrCodeHandlerAsync(Bitmap? bitmap)
     {
         if (bitmap == null) return;
         var window = await SingletonWindowOpener.OpenAsync<OcrWindow>();
@@ -780,7 +798,7 @@ public partial class MainWindowViewModel : ObservableObject, IDisposable
         await SilentOcrHandlerAsync(bitmap, ocrPlugin, cancellationToken);
     }
 
-    public async Task SilentOcrHandlerAsync(System.Drawing.Bitmap? bitmap, IOcrPlugin? ocrPlugin = default, CancellationToken cancellationToken = default)
+    public async Task SilentOcrHandlerAsync(Bitmap? bitmap, IOcrPlugin? ocrPlugin = default, CancellationToken cancellationToken = default)
     {
         if (bitmap == null) return;
 

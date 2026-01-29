@@ -92,32 +92,17 @@ public class HeaderControl : Control
 
     #endregion
 
-    #region ScreenshotTranslateInImage
+    #region ScreenshotTranslate
 
-    public bool ScreenshotTranslateInImage
+    public bool IsScreenshotTranslateVisible
     {
-        get => (bool)GetValue(ScreenshotTranslateInImageProperty);
-        set => SetValue(ScreenshotTranslateInImageProperty, value);
+        get => (bool)GetValue(IsScreenshotTranslateVisibleProperty);
+        set => SetValue(IsScreenshotTranslateVisibleProperty, value);
     }
 
-    public static readonly DependencyProperty ScreenshotTranslateInImageProperty =
+    public static readonly DependencyProperty IsScreenshotTranslateVisibleProperty =
         DependencyProperty.Register(
-            nameof(ScreenshotTranslateInImage),
-            typeof(bool),
-            typeof(HeaderControl),
-            new FrameworkPropertyMetadata(
-                false,
-                FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
-
-    public bool IsScreenshotTranslateInImageVisible
-    {
-        get => (bool)GetValue(IsScreenshotTranslateInImageVisibleProperty);
-        set => SetValue(IsScreenshotTranslateInImageVisibleProperty, value);
-    }
-
-    public static readonly DependencyProperty IsScreenshotTranslateInImageVisibleProperty =
-        DependencyProperty.Register(
-            nameof(IsScreenshotTranslateInImageVisible),
+            nameof(IsScreenshotTranslateVisible),
             typeof(bool),
             typeof(HeaderControl),
             new FrameworkPropertyMetadata(
@@ -133,6 +118,37 @@ public class HeaderControl : Control
     public static readonly DependencyProperty ScreenshotTranslateCommandProperty =
         DependencyProperty.Register(
             nameof(ScreenshotTranslateCommand),
+            typeof(ICommand),
+            typeof(HeaderControl));
+
+    #endregion
+
+    #region ImageTranslate
+
+    public bool IsImageTranslateVisible
+    {
+        get => (bool)GetValue(IsImageTranslateVisibleProperty);
+        set => SetValue(IsImageTranslateVisibleProperty, value);
+    }
+
+    public static readonly DependencyProperty IsImageTranslateVisibleProperty =
+        DependencyProperty.Register(
+            nameof(IsImageTranslateVisible),
+            typeof(bool),
+            typeof(HeaderControl),
+            new FrameworkPropertyMetadata(
+                true,
+                FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+
+    public ICommand? ImageTranslateCommand
+    {
+        get => (ICommand?)GetValue(ImageTranslateCommandProperty);
+        set => SetValue(ImageTranslateCommandProperty, value);
+    }
+
+    public static readonly DependencyProperty ImageTranslateCommandProperty =
+        DependencyProperty.Register(
+            nameof(ImageTranslateCommand),
             typeof(ICommand),
             typeof(HeaderControl));
 

@@ -82,12 +82,14 @@
                                     Visibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=IsMouseHookVisible, Converter={cnvt:BoolToVisibilityConverter}}" />
                                 <control:IconButton
                                     Command="{TemplateBinding ScreenshotTranslateCommand}"
+                                    Icon="{x:Static ui:FluentSystemIcons.ScreenCut_20_Regular}"
+                                    ToolTip="{DynamicResource General_ScreenshotTranslate}"
+                                    Visibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=IsScreenshotTranslateVisible, Converter={cnvt:BoolToVisibilityConverter}}" />
+                                <control:IconButton
+                                    Command="{TemplateBinding ImageTranslateCommand}"
                                     Icon="{x:Static ui:FluentSystemIcons.DrawImage_20_Regular}"
-                                    IsOn="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=ScreenshotTranslateInImage}"
-                                    RequireCtrlToToggle="True"
-                                    ToolTip="{DynamicResource General_ScreenshotTranslateButtonToolTip}"
-                                    Type="Toggle"
-                                    Visibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=IsScreenshotTranslateInImageVisible, Converter={cnvt:BoolToVisibilityConverter}}" />
+                                    ToolTip="{DynamicResource General_ImageTranslate}"
+                                    Visibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=IsImageTranslateVisible, Converter={cnvt:BoolToVisibilityConverter}}" />
                                 <control:IconButton
                                     Command="{TemplateBinding OcrCommand}"
                                     Icon="{x:Static ui:FluentSystemIcons.ScanType_20_Regular}"

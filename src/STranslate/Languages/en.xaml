@@ -68,10 +68,10 @@
     <sys:String x:Key="General_DoubleClickTrayFunction">Double-Click Tray Function</sys:String>
     <sys:String x:Key="General_DoubleClickTrayFunctionDescription">Selecting any action other than "None" will disable the tray single-click toggle main window display function.</sys:String>
     <sys:String x:Key="General_Language">Language</sys:String>
-    <sys:String x:Key="General_ScreenshotTranslateInImage">In-Image Translation</sys:String>
-    <sys:String x:Key="General_ScreenshotTranslateInImageDescription">Whether to enable in-image translation during screenshot translation.</sys:String>
-    <sys:String x:Key="General_ScreenshotTranslateInImageButtonVisible">Display "Screenshot Translation" | "Enable/Disable In-Image Translation" button on the main interface</sys:String>
-    <sys:String x:Key="General_ScreenshotTranslateButtonToolTip" xml:space="preserve">"Mouse Click" for screenshot translation&#10;"Ctrl+Mouse Click" to enable/disable in-image translation</sys:String>
+    <sys:String x:Key="General_ShowScreenshotTranslate">Show Screenshot Translation</sys:String>
+    <sys:String x:Key="General_ShowScreenshotTranslateDescription">Show "Screenshot Translation" button on the main interface. Take a screenshot, recognize text, fill it into the input box, then perform translation</sys:String>
+    <sys:String x:Key="General_ShowImageTranslate">Show Image Translation</sys:String>
+    <sys:String x:Key="General_ShowImageTranslateDescription">Show "Image Translation" button on the main interface. Take a screenshot and translate directly on the image</sys:String>
     <sys:String x:Key="General_ShowScreenshotAuxiliaryLines">Screenshot Auxiliary Lines</sys:String>
     <sys:String x:Key="General_ShowScreenshotAuxiliaryLinesDescription">Whether to show auxiliary lines during screenshot to help select area more accurately.</sys:String>
     <sys:String x:Key="General_HideNotifyIcon">Hide NotifyIcon</sys:String>
@@ -125,6 +125,8 @@
     <sys:String x:Key="Hotkey_ReplaceTranslateDescription">Shortcut key to translate the selected text and replace the original text.</sys:String>
     <sys:String x:Key="Hotkey_ScreenshotTranslate">Screenshot Translation</sys:String>
     <sys:String x:Key="Hotkey_ScreenshotTranslateDescription">Hotkey for capturing a selected screen area, recognizing the text, and translating it.</sys:String>
+    <sys:String x:Key="Hotkey_ImageTranslate">Image Translation</sys:String>
+    <sys:String x:Key="Hotkey_ImageTranslateDescription">Hotkey for taking a screenshot, selecting an area, recognizing text, and translating directly on the image.</sys:String>
     <sys:String x:Key="Hotkey_SilentOcr">Silent OCR</sys:String>
     <sys:String x:Key="Hotkey_SilentOcrDescription">Hotkey for capturing a selected screen area, recognizing the text, and set it to the clipboard.</sys:String>
     <sys:String x:Key="Hotkey_SilentTts">Silent TTS</sys:String>

@@ -95,20 +95,21 @@
             ColorSchemeCommand="{Binding ChangeColorSchemeCommand}"
             HistoryNextCommand="{Binding HistoryNextCommand}"
             HistoryPreviousCommand="{Binding HistoryPreviousCommand}"
+            ImageTranslateCommand="{Binding ImageTranslateCommand}"
             IsAutoTranslate="{Binding Settings.AutoTranslate}"
             IsAutoTranslateVisible="{Binding Settings.IsAutoTranslateVisible}"
             IsColorSchemeVisible="{Binding Settings.IsColorSchemeVisible}"
             IsHideInput="{Binding Settings.HideInput}"
             IsHideInputVisible="{Binding Settings.IsHideInputVisible}"
             IsHistoryNavigationVisible="{Binding Settings.IsHistoryNavigationVisible}"
+            IsImageTranslateVisible="{Binding Settings.IsImageTranslateVisible}"
             IsMouseHook="{Binding IsMouseHook}"
             IsMouseHookVisible="{Binding Settings.IsMouseHookVisible}"
             IsOcrVisible="{Binding Settings.IsOcrVisible}"
-            IsScreenshotTranslateInImageVisible="{Binding Settings.IsScreenshotTranslateInImageVisible}"
+            IsScreenshotTranslateVisible="{Binding Settings.IsScreenshotTranslateVisible}"
             IsTopmost="{Binding IsTopmost}"
             OcrCommand="{Binding OcrCommand}"
             ScreenshotTranslateCommand="{Binding ScreenshotTranslateCommand}"
-            ScreenshotTranslateInImage="{Binding Settings.ScreenshotTranslateInImage}"
             SettingCommand="{Binding OpenSettingsCommand}" />
 
         <ui:ScrollViewerEx Margin="10,37,0,5">

@@ -68,10 +68,10 @@
     <sys:String x:Key="General_DoubleClickTrayFunction">双击托盘程序功能</sys:String>
     <sys:String x:Key="General_DoubleClickTrayFunctionDescription">选择除「无操作」的其他操作会禁用托盘单击切换主窗口显示功能</sys:String>
     <sys:String x:Key="General_Language">语言</sys:String>
-    <sys:String x:Key="General_ScreenshotTranslateInImage">图片内翻译</sys:String>
-    <sys:String x:Key="General_ScreenshotTranslateInImageDescription">截图翻译时是否启用图片内翻译</sys:String>
-    <sys:String x:Key="General_ScreenshotTranslateInImageButtonVisible">在主界面上显示「截图翻译」|「启用/禁用图片内翻译」按钮</sys:String>
-    <sys:String x:Key="General_ScreenshotTranslateButtonToolTip" xml:space="preserve">「鼠标点击」截图翻译&#10;「Ctrl+鼠标点击」开启/关闭图片内翻译</sys:String>
+    <sys:String x:Key="General_ShowScreenshotTranslate">显示截图翻译</sys:String>
+    <sys:String x:Key="General_ShowScreenshotTranslateDescription">在主界面上显示「截图翻译」按钮，截图并识别结果填充到输入框后执行翻译</sys:String>
+    <sys:String x:Key="General_ShowImageTranslate">显示图片翻译</sys:String>
+    <sys:String x:Key="General_ShowImageTranslateDescription">在主界面上显示「图片翻译」按钮，截图后在图片上进行翻译</sys:String>
     <sys:String x:Key="General_ShowScreenshotAuxiliaryLines">截图辅助线</sys:String>
     <sys:String x:Key="General_ShowScreenshotAuxiliaryLinesDescription">截图时是否显示辅助线，帮助更精确地选择区域。</sys:String>
     <sys:String x:Key="General_HideNotifyIcon">隐藏托盘图标</sys:String>
@@ -125,6 +125,8 @@
     <sys:String x:Key="Hotkey_ReplaceTranslateDescription">鼠标选中文本触发翻译并替换原文本的快捷键。</sys:String>
     <sys:String x:Key="Hotkey_ScreenshotTranslate">截图翻译</sys:String>
     <sys:String x:Key="Hotkey_ScreenshotTranslateDescription">截图选择区域后识别文本并翻译的快捷键。</sys:String>
+    <sys:String x:Key="Hotkey_ImageTranslate">图片翻译</sys:String>
+    <sys:String x:Key="Hotkey_ImageTranslateDescription">截图选择区域后识别在图片上进行翻译的快捷键。</sys:String>
     <sys:String x:Key="Hotkey_SilentOcr">静默OCR</sys:String>
     <sys:String x:Key="Hotkey_SilentOcrDescription">用于截图选取区域，识别文字并将结果设置到剪贴板的快捷键。</sys:String>
     <sys:String x:Key="Hotkey_SilentTts">静默TTS</sys:String>
