@@ -392,6 +392,8 @@ internal static class AvailableLanguages
     public static I18nPair English = new("en", "English");
     public static I18nPair Chinese = new("zh-cn", "中文");
     public static I18nPair Chinese_TW = new("zh-tw", "中文（繁体）");
+    public static I18nPair Japanese = new("ja", "日本語");
+    public static I18nPair Korean = new("ko", "한국어");
 
     public static List<I18nPair> GetAvailableLanguages()
     {
@@ -400,6 +402,8 @@ internal static class AvailableLanguages
             English,
             Chinese,
             Chinese_TW,
+            Japanese,
+            Korean,
         ];
         return languages;
     }
@@ -411,6 +415,8 @@ internal static class AvailableLanguages
             "en" => "System",
             "zh-cn" => "系统",
             "zh-tw" => "系統",
+            "ja" => "システム",
+            "ko" => "시스템",
             _ => "System",
         };
     }

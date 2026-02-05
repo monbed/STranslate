@@ -1,0 +1,632 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <sys:String x:Key="ResetLocation">位置をリセット</sys:String>
+    <sys:String x:Key="Settings">設定</sys:String>
+    <sys:String x:Key="ImageTranslate">画像翻訳</sys:String>
+    <sys:String x:Key="Administrator">管理者</sys:String>
+
+    <sys:String x:Key="General">一般</sys:String>
+    <sys:String x:Key="Services">サービス</sys:String>
+    <sys:String x:Key="Translate">テキスト翻訳</sys:String>
+    <sys:String x:Key="Ocr">文字認識</sys:String>
+    <sys:String x:Key="Tts">音声合成</sys:String>
+    <sys:String x:Key="Vocabulary">単語帳</sys:String>
+    <sys:String x:Key="Standalone">独立ウィンドウ</sys:String>
+    <sys:String x:Key="History">履歴</sys:String>
+    <sys:String x:Key="Plugins">プラグイン</sys:String>
+    <sys:String x:Key="Hotkeys">ホットキー</sys:String>
+    <sys:String x:Key="Network">ネットワーク</sys:String>
+    <sys:String x:Key="About">情報</sys:String>
+
+    <sys:String x:Key="TimeoutPlaceholder">タイムアウト (秒)</sys:String>
+    <sys:String x:Key="SearchFunction">機能検索</sys:String>
+    <sys:String x:Key="SearchFunctionToolTip">Ctrl+F で機能を検索</sys:String>
+    <sys:String x:Key="Function">機能</sys:String>
+    <sys:String x:Key="Appearance">外観</sys:String>
+    <sys:String x:Key="AutoTranslateEnabled">自動翻訳を有効化</sys:String>
+    <sys:String x:Key="AutoTranslateDisabled">自動翻訳を無効化</sys:String>
+    <sys:String x:Key="General_AutoStartup">スタートアップ</sys:String>
+    <sys:String x:Key="General_AutoStartupDescription">PC起動時にソフトを自動起動します。</sys:String>
+    <sys:String x:Key="General_StartMode">起動モード</sys:String>
+    <sys:String x:Key="General_StartModeDescription">「UACスキップ(管理者)」は、UACポップアップを回避するタスクスケジューラを作成します。</sys:String>
+    <sys:String x:Key="General_HideOnStartup">起動時にメインウィンドウを隠す</sys:String>
+    <sys:String x:Key="General_HideOnStartupDescription">STranslate起動後、検索ウィンドウをタスクトレイに格納します。</sys:String>
+    <sys:String x:Key="General_HideWhenDeactivated">フォーカス喪失時に自動的に隠す</sys:String>
+    <sys:String x:Key="General_WindowPosition">メインウィンドウの位置</sys:String>
+    <sys:String x:Key="General_WindowAlign">ディスプレイ上の位置</sys:String>
+    <sys:String x:Key="General_DisableGlobalHotkeys">グローバルホットキーを無効化</sys:String>
+    <sys:String x:Key="General_IgnoreHotkeysOnFullscreen">全画面モードでホットキーを無視</sys:String>
+    <sys:String x:Key="General_IgnoreHotkeysOnFullscreenDescription">「グローバルホットキーを無効化」より優先度が低く、主にゲーム等の場面で使用します。</sys:String>
+    <sys:String x:Key="General_LanguageDetector">言語検出</sys:String>
+    <sys:String x:Key="General_LocalDetector">ローカル認識における英数字の割合</sys:String>
+    <sys:String x:Key="General_LocalDetectorDescription">「ローカル認識」において、英字が全文字数に占める割合の閾値を設定します。</sys:String>
+    <sys:String x:Key="General_DefaultSourceLanguage">デフォルトの翻訳元言語</sys:String>
+    <sys:String x:Key="General_DefaultSourceLanguageDescription">自動検出に失敗した場合、この言語を使用します。</sys:String>
+    <sys:String x:Key="General_FirstLanguage">第一言語</sys:String>
+    <sys:String x:Key="General_FirstLanguageDescription">翻訳先が自動で、かつ翻訳元が他の言語（第二言語を含む）の場合、翻訳先に第一言語を使用します。</sys:String>
+    <sys:String x:Key="General_SecondLanguage">第二言語</sys:String>
+    <sys:String x:Key="General_SecondLanguageDescription">翻訳先が自動で、かつ翻訳元が第一言語の場合、翻訳先に第二言語を使用します。</sys:String>
+    <sys:String x:Key="General_HttpTimeout">タイムアウト</sys:String>
+    <sys:String x:Key="General_HttpTimeoutDescription">ネットワークリクエストのタイムアウト時間。単位：秒。</sys:String>
+    <sys:String x:Key="General_TranslateOnPaste">貼り付け時に即時翻訳</sys:String>
+    <sys:String x:Key="General_TranslateOnPasteDescription">入力ボックスにテキストを貼り付けると、直ちに翻訳を実行します。</sys:String>
+    <sys:String x:Key="General_AutoTranslate">自動翻訳</sys:String>
+    <sys:String x:Key="General_AutoTranslateDescription">入力後、一定時間待機してから自動的に翻訳を実行します。</sys:String>
+    <sys:String x:Key="General_AutoTranslateButtonVisible">メイン画面に自動翻訳ボタンを表示</sys:String>
+    <sys:String x:Key="General_AutoTranslateDelay">自動翻訳の遅延</sys:String>
+    <sys:String x:Key="General_AutoTranslateDelayDescription">入力後の待機時間。単位：ミリ秒。</sys:String>
+    <sys:String x:Key="General_LineBreakHandleType">改行処理</sys:String>
+    <sys:String x:Key="General_LineBreakHandleTypeDescription" xml:space="preserve">テキスト選択、スクショ翻訳、クリップボード、静的OCRなどの改行処理を含みます&#10;「余分な改行を削除」は主にPDFなどでの使用を想定しており、余分な改行や分断を削除しますが、PDF以外では影響が出る可能性があります。</sys:String>
+    <sys:String x:Key="General_ImageQuality">画質</sys:String>
+    <sys:String x:Key="General_ImageQualityDescription">画像処理時の画質調整。オンラインOCRサービスによっては画像サイズが制限される場合があります。</sys:String>
+    <sys:String x:Key="General_DoubleClickTrayFunction">トレイアイコンのダブルクリック機能</sys:String>
+    <sys:String x:Key="General_DoubleClickTrayFunctionDescription">「操作なし」以外を選択すると、シングクリックによるウィンドウ表示切替機能は無効になります。</sys:String>
+    <sys:String x:Key="General_Language">言語</sys:String>
+    <sys:String x:Key="General_ScreenshotTranslate">スクリーンショット翻訳</sys:String>
+    <sys:String x:Key="General_ImageTranslate">画像翻訳</sys:String>
+    <sys:String x:Key="General_ShowScreenshotTranslate">スクショ翻訳を表示</sys:String>
+    <sys:String x:Key="General_ShowScreenshotTranslateDescription">メイン画面に「スクショ翻訳」ボタンを表示します。スクショ識別結果を入力欄に入力して翻訳します。</sys:String>
+    <sys:String x:Key="General_ShowImageTranslate">画像翻訳を表示</sys:String>
+    <sys:String x:Key="General_ShowImageTranslateDescription">メイン画面に「画像翻訳」ボタンを表示します。スクショ画像上でそのまま翻訳を行います。</sys:String>
+    <sys:String x:Key="General_ShowScreenshotAuxiliaryLines">スクショ補助線</sys:String>
+    <sys:String x:Key="General_ShowScreenshotAuxiliaryLinesDescription">スクリーンショット時に補助線を表示し、領域選択を正確に行えるようにします。</sys:String>
+    <sys:String x:Key="General_HideNotifyIcon">トレイアイコンを隠す</sys:String>
+    <sys:String x:Key="General_ShowScreenshotItemInNotifyIconMenu">トレイメニューにスクショ翻訳を表示</sys:String>
+    <sys:String x:Key="General_ShowOcrItemInNotifyIconMenu">トレイメニューに文字認識を表示</sys:String>
+    <sys:String x:Key="General_ShowQrCodeItemInNotifyIconMenu">トレイメニューにQRコードを表示</sys:String>
+    <sys:String x:Key="General_ColorTheme">カラーテーマ</sys:String>
+    <sys:String x:Key="General_ColorThemeDescription">表示するカラーテーマを選択します。</sys:String>
+    <sys:String x:Key="General_ColorThemeButtonVisible">メイン画面にテーマボタンを表示</sys:String>
+    <sys:String x:Key="General_HideInputBox">入力ボックスを隠す</sys:String>
+    <sys:String x:Key="General_HideInputBoxDescription">入力ボックスを非表示にするかどうか。</sys:String>
+    <sys:String x:Key="General_HideInputBoxButtonVisible">メイン画面に入力ボックス非表示ボタンを表示</sys:String>
+    <sys:String x:Key="General_HideLanguageControl">言語選択コントロールを隠す</sys:String>
+    <sys:String x:Key="General_HideLanguageControlDescription">入力ボックスを隠す際、言語選択コントロールも一緒に隠すかどうか。</sys:String>
+    <sys:String x:Key="General_ShowMouseHook">マウスフックを表示</sys:String>
+    <sys:String x:Key="General_ShowMouseHookDescription">メイン画面にマウス選択翻訳の有効/無効切替アイコンを表示するかどうか。</sys:String>
+    <sys:String x:Key="General_ShowHistoryNavigation">履歴ナビゲーションを表示</sys:String>
+    <sys:String x:Key="General_ShowHistoryNavigationDescription">メイン画面に前/次の翻訳履歴へ移動するアイコンを表示するかどうか。</sys:String>
+    <sys:String x:Key="General_ShowOcrButton">OCRボタンを表示</sys:String>
+    <sys:String x:Key="General_ShowOcrButtonDescription">メイン画面のタイトルバーにOCRボタンを表示します。</sys:String>
+    <sys:String x:Key="General_FontSize">フォントサイズ</sys:String>
+    <sys:String x:Key="General_FontSizeDescription">「右クリックメニュー」以外のすべてのフォントサイズを調整します。</sys:String>
+    <sys:String x:Key="General_OutputShowingControl">出力表示コントロール</sys:String>
+    <sys:String x:Key="General_ShowPascalCase">パスカルケース複製ボタンを表示</sys:String>
+    <sys:String x:Key="General_ShowCamelCase">キャメルケース複製ボタンを表示</sys:String>
+    <sys:String x:Key="General_ShowSnakeCase">スネークケース複製ボタンを表示</sys:String>
+    <sys:String x:Key="General_ShowInsert">テキスト挿入ボタンを表示</sys:String>
+    <sys:String x:Key="General_ShowBackTranslation">再翻訳ボタンを表示</sys:String>
+    <sys:String x:Key="General_ShowPrompt">プロンプト</sys:String>
+    <sys:String x:Key="General_ShowPromptDescription">メイン画面にAI翻訳サービスのプロンプト切替ボタンを表示するかどうか。</sys:String>
+    <sys:String x:Key="General_FontFamily">フォント</sys:String>
+    <sys:String x:Key="General_HistoryCount">履歴記録数</sys:String>
+    <sys:String x:Key="General_CopyAfterTranslation">翻訳後にコピー</sys:String>
+    <sys:String x:Key="General_CopyAfterTranslationDescription">「自動実行」のサービスのみ有効です。</sys:String>
+    <sys:String x:Key="General_CopyAfterTranslationNotAutomatic">「自動実行」以外の翻訳後にコピー</sys:String>
+    <sys:String x:Key="General_CopyAfterOcr">OCR後にコピー</sys:String>
+    <sys:String x:Key="General_CopyAfterOcrDescription">すべての文字認識シーンにおいて、認識後に結果を自動コピーします。</sys:String>
+
+    <sys:String x:Key="GlobalHotkeys">グローバルホットキー</sys:String>
+    <sys:String x:Key="SoftwareHotkeys">ソフトウェアホットキー</sys:String>
+    <sys:String x:Key="Hotkey_OpenSTranslate">STranslateを開く</sys:String>
+    <sys:String x:Key="Hotkey_OpenSTranslateDescription">STranslateメイン画面の表示/非表示を切り替えます。</sys:String>
+    <sys:String x:Key="Hotkey_InputTranslate">入力翻訳</sys:String>
+    <sys:String x:Key="Hotkey_InputTranslateDescription">STranslateを開き、内容をクリアして翻訳入力を待機します。</sys:String>
+    <sys:String x:Key="Hotkey_CrosswordTranslate">選択翻訳</sys:String>
+    <sys:String x:Key="Hotkey_CrosswordTranslateDescription">マウスで選択したテキストを翻訳するホットキー。</sys:String>
+    <sys:String x:Key="Hotkey_CrosswordTranslateIsUseCtrlSameC">Ctrl+C+C で選択翻訳を行う？</sys:String>
+    <sys:String x:Key="Hotkey_CrosswordTranslateTraditional">従来のホットキー</sys:String>
+    <sys:String x:Key="Hotkey_CrosswordTranslateByCtrlSameCDescription">テキストを選択し、Ctrl+C+C を素早く押して翻訳します。</sys:String>
+    <sys:String x:Key="Hotkey_MouseHookTranslate">マウス選択監視</sys:String>
+    <sys:String x:Key="Hotkey_MouseHookTranslateDescription">マウス選択による翻訳トリガーの監視を有効/無効化するホットキー。</sys:String>
+    <sys:String x:Key="Hotkey_ReplaceTranslate">置換翻訳</sys:String>
+    <sys:String x:Key="Hotkey_ReplaceTranslateDescription">選択したテキストを翻訳し、元のテキストを置換するホットキー。</sys:String>
+    <sys:String x:Key="Hotkey_ScreenshotTranslate">スクショ翻訳</sys:String>
+    <sys:String x:Key="Hotkey_ScreenshotTranslateDescription">スクリーンショットで領域を選択後、テキストを識別して翻訳します。</sys:String>
+    <sys:String x:Key="Hotkey_ImageTranslate">画像翻訳</sys:String>
+    <sys:String x:Key="Hotkey_ImageTranslateDescription">スクリーンショットで領域を選択後、画像上で翻訳を行います。</sys:String>
+    <sys:String x:Key="Hotkey_SilentOcr">サイレントOCR</sys:String>
+    <sys:String x:Key="Hotkey_SilentOcrDescription">スクリーンショットで領域を選択し、認識した文字をクリップボードに送ります。</sys:String>
+    <sys:String x:Key="Hotkey_SilentTts">サイレントTTS</sys:String>
+    <sys:String x:Key="Hotkey_SilentTtsDescription">マウスで選択した中国語テキストを読み上げます。</sys:String>
+    <sys:String x:Key="Hotkey_Ocr">OCR</sys:String>
+    <sys:String x:Key="Hotkey_OcrDescription">OCRウィンドウを呼び出して文字認識を行います。</sys:String>
+    <sys:String x:Key="Hotkey_CancelOrHide">キャンセル | 隠す</sys:String>
+    <sys:String x:Key="Hotkey_CancelOrHideDescription">進行中のリクエストをキャンセル | 画面を隠す。すべてのウィンドウに適用。</sys:String>
+    <sys:String x:Key="Hotkey_MainWindow">メイン画面ホットキー</sys:String>
+    <sys:String x:Key="Hotkey_Exit">アプリを終了</sys:String>
+    <sys:String x:Key="Hotkey_ToggleTopmost">最前面固定/解除</sys:String>
+    <sys:String x:Key="Hotkey_ToggleColorTheme">カラーテーマ切替</sys:String>
+    <sys:String x:Key="Hotkey_ToggleColorThemeDescription">カラーテーマを循環切り替え（システム設定/ライト/ダーク）。</sys:String>
+    <sys:String x:Key="Hotkey_ShowHideInputBox">入力ボックスの表示/非表示</sys:String>
+    <sys:String x:Key="Hotkey_OpenSettings">設定を開く</sys:String>
+    <sys:String x:Key="Hotkey_OpenSettingsDescription">メイン画面が開いている時、設定ウィンドウを開きます。</sys:String>
+    <sys:String x:Key="Hotkey_OpenHistory">履歴を開く</sys:String>
+    <sys:String x:Key="Hotkey_SaveToVocabulary">単語帳に保存</sys:String>
+    <sys:String x:Key="Hotkey_HistoryNavigePrevious">前の履歴へ</sys:String>
+    <sys:String x:Key="Hotkey_HistoryNavigeNext">次の履歴へ</sys:String>
+    <sys:String x:Key="Hotkey_AutoTranslate">自動翻訳</sys:String>
+    <sys:String x:Key="Hotkey_OcrImTransWindow">OCR | 画像翻訳画面ホットキー</sys:String>
+    <sys:String x:Key="Hotkey_ReExecuteOcr">文字認識 | 画像翻訳を再実行</sys:String>
+    <sys:String x:Key="Hotkey_SwitchImage">レンダリング画像/マークアップ画像の切替</sys:String>
+    <sys:String x:Key="Hotkey_QrCode">QRコード認識</sys:String>
+    <sys:String x:Key="Hotkey_QrCodeDescription">このホットキーはOCR画面でのみ有効です。</sys:String>
+    <sys:String x:Key="Hotkey_IncrementalTranslate">増分翻訳</sys:String>
+    <sys:String x:Key="Hotkey_IncrementalTranslateDescription" xml:space="preserve">キーを押しながらテキストを選択すると内容を追加し続け、キーを離すと即座に翻訳します。&#10;単一キーのみサポート（Win/Alt/Ctrl/Shiftを含まない）</sys:String>
+    <sys:String x:Key="ReplaceService">置換翻訳</sys:String>
+    <sys:String x:Key="ImTranService">画像翻訳</sys:String>
+    <sys:String x:Key="NoServiceEnabled">有効なサービスがありません</sys:String>
+    <sys:String x:Key="SpecialServiceInfo">左側のサービスをここにドラッグするか、右クリックで有効化してください</sys:String>
+    <sys:String x:Key="AsReplaceSvc">置換翻訳として使用</sys:String>
+    <sys:String x:Key="AsImTranSvc">画像翻訳として使用</sys:String>
+    <sys:String x:Key="TransExecMode">翻訳モード</sys:String>
+    <sys:String x:Key="TransExecAutomatic">自動実行</sys:String>
+    <sys:String x:Key="TransExecManual">手動実行</sys:String>
+    <sys:String x:Key="TransExecPinned">言語エリアに固定して手動実行</sys:String>
+
+    <sys:String x:Key="Market">マーケット</sys:String>
+    <sys:String x:Key="AddPlugin">インストール</sys:String>
+    <sys:String x:Key="PluginName">名前</sys:String>
+    <sys:String x:Key="PluginAuthor">作者</sys:String>
+    <sys:String x:Key="PluginType">タイプ</sys:String>
+    <sys:String x:Key="PluginVersion">バージョン</sys:String>
+    <sys:String x:Key="SearchPlugin">プラグインを検索</sys:String>
+    <sys:String x:Key="SearchPluginToolTip">Ctrl+F でプラグインを検索</sys:String>
+    <sys:String x:Key="DropInstallPlugin">ドロップしてプラグインをインストール</sys:String>
+
+    <sys:String x:Key="Network_EnableExternalCall">外部呼び出しを有効化</sys:String>
+    <sys:String x:Key="Network_EnableExternalCallDescription">外部呼び出し機能の有効/無効化</sys:String>
+    <sys:String x:Key="Network_ExternalCallPort">外部呼び出しポート</sys:String>
+    <sys:String x:Key="Network_ExternalCallPortDescription">外部呼び出しポート (localhost)</sys:String>
+    <sys:String x:Key="Network_ExternalCallPortPlaceholder">例：50020</sys:String>
+    <sys:String x:Key="Network_ExternalCallPortError">外部呼び出しエラー情報</sys:String>
+    <sys:String x:Key="Network_EnableProxy">プロキシを有効化</sys:String>
+    <sys:String x:Key="Network_EnableProxyDescription">プロキシ機能の有効/無効化</sys:String>
+    <sys:String x:Key="Network_ProxyType">プロキシタイプ</sys:String>
+    <sys:String x:Key="Network_ProxyTypeDescription">プロキシサーバーの種類を選択</sys:String>
+    <sys:String x:Key="Network_ProxyAddress">プロキシサーバーアドレス</sys:String>
+    <sys:String x:Key="Network_ProxyAddressPlaceholder">例：127.0.0.1</sys:String>
+    <sys:String x:Key="Network_ProxyPort">プロキシサーバーポート</sys:String>
+    <sys:String x:Key="Network_ProxyPortPlaceholder">例：8080</sys:String>
+    <sys:String x:Key="Network_ProxyUsername">ユーザー名 (任意)</sys:String>
+    <sys:String x:Key="Network_ProxyUsernameDescription">認証が必要な場合、ユーザー名を入力してください</sys:String>
+    <sys:String x:Key="Network_ProxyUsernamePlaceholder">プロキシユーザー名</sys:String>
+    <sys:String x:Key="Network_ProxyPassword">パスワード (任意)</sys:String>
+    <sys:String x:Key="Network_ProxyPasswordDescription">認証が必要な場合、パスワードを入力してください</sys:String>
+    <sys:String x:Key="Network_ProxyPasswordPlaceholder">プロキシパスワード</sys:String>
+    <sys:String x:Key="Network_AdvancedSettingsDescription">プロキシの高度な設定</sys:String>
+    <sys:String x:Key="Network_AdvancedSettings">詳細設定</sys:String>
+    <sys:String x:Key="Network_AdvancedSettingsText">高度な設定</sys:String>
+    <sys:String x:Key="Network_BypassLocalDescription">ローカルアドレスにはプロキシを使用しない</sys:String>
+    <sys:String x:Key="Network_BypassLocal">ローカルアドレスをバイパス</sys:String>
+    <sys:String x:Key="Network_BypassLocalOffContent">プロキシを使用</sys:String>
+    <sys:String x:Key="Network_BypassLocalOnContent">プロキシ不使用</sys:String>
+    <sys:String x:Key="Network_BypassListDescription">プロキシを使用しないアドレスリスト（セミコロン区切り）</sys:String>
+    <sys:String x:Key="Network_BypassList">バイパスリスト</sys:String>
+    <sys:String x:Key="Network_BypassListPlaceholder">例: localhost;127.*;10.*;192.168.*</sys:String>
+    <sys:String x:Key="Network_TestConnectionDescription">現在のプロキシ設定が正常に動作するかテストします</sys:String>
+    <sys:String x:Key="Network_TestConnection">接続テスト</sys:String>
+    <sys:String x:Key="Network_TestConnectionButton">接続テスト</sys:String>
+    <sys:String x:Key="Network_TestResult">テスト結果</sys:String>
+    <sys:String x:Key="Network_HttpTimeoutDescription">HTTPリクエストのタイムアウト時間設定（秒）</sys:String>
+    <sys:String x:Key="Network_HttpTimeout">HTTPタイムアウト</sys:String>
+    <sys:String x:Key="Network_HttpTimeoutPlaceholder">30</sys:String>
+    <sys:String x:Key="Network_ResetSettingsDescription">プロキシ設定をデフォルト値にリセット</sys:String>
+    <sys:String x:Key="Network_ResetSettings">操作</sys:String>
+    <sys:String x:Key="Network_ResetSettingsButton">設定をリセット</sys:String>
+    <sys:String x:Key="Network_HelpDescription">プロキシ設定の詳細説明を表示</sys:String>
+    <sys:String x:Key="Network_Help">使用説明</sys:String>
+    <sys:String x:Key="Network_HelpText">ヘルプ情報</sys:String>
+    <sys:String x:Key="Network_HelpProxyType">プロキシタイプの説明</sys:String>
+    <sys:String x:Key="Network_HelpProxyTypeContent" xml:space="preserve">• システムプロキシ：システムのプロキシ設定を使用&#10;• HTTPプロキシ：標準的なHTTPプロキシサーバー&#10;• Socks5プロキシ：TCPとUDPをサポートするSocks5プロキシ&#10;• プロキシなし：プロキシ機能を完全に無効化</sys:String>
+    <sys:String x:Key="Network_HelpBypassList">バイパスリストの形式</sys:String>
+    <sys:String x:Key="Network_HelpBypassListContent" xml:space="preserve">複数のアドレスはセミコロン(;)で区切ります。ワイルドカード(*)に対応：&#10;localhost;127.*;10.*;192.168.*;*.example.com</sys:String>
+    <sys:String x:Key="Network_HelpEffectiveness">反映について</sys:String>
+    <sys:String x:Key="Network_HelpEffectivenessContent" xml:space="preserve">プロキシ設定の変更は約2分後に反映されます&#10;即時反映させるには再起動が必要です</sys:String>
+
+    <sys:String x:Key="Standalone_OcrShowAnnotationHeader">検出結果を表示</sys:String>
+    <sys:String x:Key="Standalone_OcrShowAnnotationDescription">元画像/検出結果画像の表示切替</sys:String>
+    <sys:String x:Key="Standalone_OcrShowTextControlHeader">テキストボックスを表示</sys:String>
+    <sys:String x:Key="Standalone_OcrShowTextControlDescription">右側のテキストボックスの表示/非表示</sys:String>
+    <sys:String x:Key="Standalone_ImTranShowAnnotatedHeader">検出結果を表示</sys:String>
+    <sys:String x:Key="Standalone_ImTranShowAnnotatedDescription">翻訳結果/検出結果画像の表示切替</sys:String>
+    <sys:String x:Key="Standalone_ImTranShowTextControlHeader">テキストボックスを表示</sys:String>
+    <sys:String x:Key="Standalone_ImTranShowTextControlDescription">右側のテキストボックスの表示/非表示</sys:String>
+    <sys:String x:Key="Standalone_LayoutAnalysisHeader">レイアウト分析設定</sys:String>
+    <sys:String x:Key="Standalone_LayoutAnalysisDescription">認識結果の結合設定</sys:String>
+    <sys:String x:Key="Standalone_VerticalThresholdHeader">垂直方向の隣接検出閾値比率</sys:String>
+    <sys:String x:Key="Standalone_VerticalThresholdDescription" xml:space="preserve">上下に隣接するテキストブロックの結合感度を制御&#10;0.1-0.3: 厳格モード。非常に近い行のみ結合&#10;0.5-0.8: 標準モード。段落内の行を結合&#10;1.0-3.0: 緩いモード。離れたテキストブロックも結合&#10;&gt;5.0: 垂直分布するほぼ全てのテキストを結合</sys:String>
+    <sys:String x:Key="Standalone_HorizontalThresholdHeader">水平方向の隣接検出閾値比率</sys:String>
+    <sys:String x:Key="Standalone_HorizontalThresholdDescription" xml:space="preserve">左右に隣接するテキストブロックの結合感度を制御&#10;0.1-0.3: 厳格モード。非常に近い単語のみ結合&#10;0.5-0.8: 標準モード。行内のフレーズを結合&#10;1.0-2.0: 緩いモード。分欄テキストを結合&#10;&gt;5.0: 水平分布するほぼ全てのテキストを結合</sys:String>
+    <sys:String x:Key="Standalone_LineSpacingThresholdHeader">改行検出閾値比率</sys:String>
+    <sys:String x:Key="Standalone_LineSpacingThresholdDescription" xml:space="preserve">テキスト結合時の改行追加を制御&#10;0.1-0.2: 厳格な改行。距離がわずかでも改行&#10;0.3-0.5: 標準的な改行。多くの文書に適する&#10;0.8-1.0: 緩い改行。距離が大きい場合のみ改行&#10;&gt;2.0: ほぼ改行なし。全テキストを連結</sys:String>
+    <sys:String x:Key="Standalone_WordSpacingThresholdHeader">単語間隔検出閾値比率</sys:String>
+    <sys:String x:Key="Standalone_WordSpacingThresholdDescription" xml:space="preserve">テキスト結合時のスペース追加を制御&#10;0.1-0.2: 標準的なスペース間隔&#10;0.3-0.5: 緩いスペース間隔&#10;&gt;1.0: ほぼスペースを追加しない</sys:String>
+
+    <sys:String x:Key="Total">計</sys:String>
+    <sys:String x:Key="Item">件</sys:String>
+    <sys:String x:Key="HistorySearch">入力または Ctrl+F で履歴を検索</sys:String>
+
+    <sys:String x:Key="UserDataLocation">ユーザーデータの場所</sys:String>
+    <sys:String x:Key="UserDataLocationDescription">ユーザー設定とインストール済みプラグインはユーザーデータフォルダに保存されます。この場所はポータブルモードかどうかによって異なる場合があります。</sys:String>
+    <sys:String x:Key="OpenDirectory">ディレクトリを開く</sys:String>
+    <sys:String x:Key="DeveloperTools">開発ツール</sys:String>
+    <sys:String x:Key="ClearCache">キャッシュ削除</sys:String>
+    <sys:String x:Key="ClearLogs">ログ削除</sys:String>
+    <sys:String x:Key="SettingsDirectory">設定ディレクトリ</sys:String>
+    <sys:String x:Key="LogsDirectory">ログディレクトリ</sys:String>
+    <sys:String x:Key="CacheDirectory">キャッシュディレクトリ</sys:String>
+    <sys:String x:Key="ConfirmDelete">削除確認?</sys:String>
+    <sys:String x:Key="ConfirmDeleteService">本当にサービス '{0}' を削除しますか？</sys:String>
+    <sys:String x:Key="Close">閉じる</sys:String>
+    <sys:String x:Key="LogLevel">ログレベル</sys:String>
+    <sys:String x:Key="ConfirmRestartAndBackup">再起動して設定をバックアップしますか？</sys:String>
+    <sys:String x:Key="ConfirmRestartAndRestore">再起動して設定を復元しますか？</sys:String>
+    <sys:String x:Key="SelectBackupFile">バックアップファイルを選択</sys:String>
+    <sys:String x:Key="SelectRestoreFile">復元ファイルを選択</sys:String>
+    <sys:String x:Key="BackupConfigSuccess">設定のバックアップ成功 [{0}]</sys:String>
+    <sys:String x:Key="RestoreConfigSuccess">設定の復元成功 [{0}]</sys:String>
+    <sys:String x:Key="CheckConfigOrLog">設定を確認するかログを参照してください</sys:String>
+    <sys:String x:Key="BackupSuccess">バックアップ成功 [{0}]</sys:String>
+    <sys:String x:Key="BackupFailed">バックアップ失敗。ログを確認してください</sys:String>
+    <sys:String x:Key="DownloadSuccess">ダウンロード成功</sys:String>
+    <sys:String x:Key="DownloadFailed">ダウンロード失敗：{0} {1}</sys:String>
+    <sys:String x:Key="DownloadException">ダウンロード例外：{0}</sys:String>
+    <sys:String x:Key="DeleteFailed">削除失敗：{0} {1}</sys:String>
+    <sys:String x:Key="RenameFailed">リネーム失敗：{0} {1}</sys:String>
+    <sys:String x:Key="RenameException">リネーム例外：{0}</sys:String>
+    <sys:String x:Key="BackupMethod">バックアップ方式</sys:String>
+    <sys:String x:Key="BackupMethodDescription">ローカルおよびWebDavのバックアップ/復元をサポート。処理中にソフトが自動的に再起動します。</sys:String>
+    <sys:String x:Key="WebDavAddress">WebDav アドレス</sys:String>
+    <sys:String x:Key="WebDavUsername">WebDav ユーザー名</sys:String>
+    <sys:String x:Key="WebDavPassword">WebDav パスワード</sys:String>
+    <sys:String x:Key="Backup">バックアップ</sys:String>
+    <sys:String x:Key="CreateBackup">バックアップ作成</sys:String>
+    <sys:String x:Key="Restore">復元</sys:String>
+    <sys:String x:Key="RestoreBackup">バックアップから復元</sys:String>
+    <sys:String x:Key="Version">バージョン</sys:String>
+    <sys:String x:Key="CheckUpdate">更新を確認</sys:String>
+    <sys:String x:Key="NoCheckUpdataInDev">開発モードでは更新確認は無効です</sys:String>
+    <sys:String x:Key="Donate">寄付</sys:String>
+    <sys:String x:Key="OfficialWebsite">公式サイト</sys:String>
+    <sys:String x:Key="Website">ウェブサイト</sys:String>
+    <sys:String x:Key="Group">グループ</sys:String>
+    <sys:String x:Key="Thanks">謝辞</sys:String>
+
+    <sys:String x:Key="Add">追加</sys:String>
+    <sys:String x:Key="Delete">削除</sys:String>
+    <sys:String x:Key="Overwrite">上書き</sys:String>
+    <sys:String x:Key="Save">保存</sys:String>
+    <sys:String x:Key="Confirm">確認</sys:String>
+    <sys:String x:Key="Prompt">ヒント</sys:String>
+    <sys:String x:Key="Cancel">キャンセル</sys:String>
+    <sys:String x:Key="Copy">コピー</sys:String>
+    <sys:String x:Key="Show">表示</sys:String>
+    <sys:String x:Key="Hide">隠す</sys:String>
+    <sys:String x:Key="Enable">有効</sys:String>
+    <sys:String x:Key="Disable">無効</sys:String>
+    <sys:String x:Key="Open">開く</sys:String>
+    <sys:String x:Key="Exit">終了</sys:String>
+    <sys:String x:Key="Reset">リセット</sys:String>
+    <sys:String x:Key="Retry">再試行</sys:String>
+    <sys:String x:Key="Duplicate">複製</sys:String>
+    <sys:String x:Key="Official">公式</sys:String>
+    <sys:String x:Key="IdentifiedLanguageLabel">検出言語：</sys:String>
+    <sys:String x:Key="On">オン</sys:String>
+    <sys:String x:Key="Off">オフ</sys:String>
+    <sys:String x:Key="QrCode">QRコード</sys:String>
+
+    <sys:String x:Key="Previous">前へ</sys:String>
+    <sys:String x:Key="Next">次へ</sys:String>
+
+    <sys:String x:Key="Document">ドキュメント</sys:String>
+
+    <sys:String x:Key="RemoveLineBreak">改行を削除</sys:String>
+    <sys:String x:Key="RemoveSpace">スペースを削除</sys:String>
+    <sys:String x:Key="UseSettingLang">識別失敗</sys:String>
+    <sys:String x:Key="IdentifiedCache">キャッシュ</sys:String>
+    <sys:String x:Key="CopyServiceNotFound">第 {0} 項目のサービスが見つかりません</sys:String>
+    <sys:String x:Key="CopiedToClipboard">「{0}」の結果をコピーしました</sys:String>
+    <sys:String x:Key="SaveToVocabulary">単語帳に追加</sys:String>
+
+    <sys:String x:Key="SwapLanguage">翻訳元と翻訳先を入れ替え</sys:String>
+    <sys:String x:Key="WaitingForPreviousExecution">実行中です。お待ちください</sys:String>
+    <sys:String x:Key="InputContentIsEmpty">内容を入力してから実行してください</sys:String>
+
+    <sys:String x:Key="CopyAsPascalCase">パスカルケースでコピー</sys:String>
+    <sys:String x:Key="CopyAsCamelCase">キャメルケースでコピー</sys:String>
+    <sys:String x:Key="CopyAsSnakeCase">スネークケースでコピー</sys:String>
+    <sys:String x:Key="InsertText">テキストを挿入</sys:String>
+    <sys:String x:Key="BackTranslation">再翻訳 (逆翻訳)</sys:String>
+    <sys:String x:Key="SaveToVocabularyWithNote">単語帳に追加 (メモ付)</sys:String>
+
+    <sys:String x:Key="ExecuteTranslation">翻訳を実行</sys:String>
+    <sys:String x:Key="AutoBackTranslation">自動再翻訳</sys:String>
+    <sys:String x:Key="ConfigureService">サービス設定</sys:String>
+    <sys:String x:Key="CloseService">サービスを閉じる</sys:String>
+    <sys:String x:Key="Paraphrase">言い換え</sys:String>
+    <sys:String x:Key="Expand">拡張</sys:String>
+
+    <sys:String x:Key="TranslateCancel">翻訳キャンセル</sys:String>
+    <sys:String x:Key="TranslateFail">翻訳失敗</sys:String>
+
+    <sys:String x:Key="NewPrompt">新しいプロンプト</sys:String>
+    <sys:String x:Key="NewPromptSuffix">_新規</sys:String>
+    <sys:String x:Key="EditPrompt">プロンプトを編集</sys:String>
+    <sys:String x:Key="PromptList">プロンプト一覧</sys:String>
+    <sys:String x:Key="PromptDetails">プロンプト詳細</sys:String>
+    <sys:String x:Key="PromptItemManagement">項目管理:</sys:String>
+    <sys:String x:Key="AddPromptItem">項目を追加</sys:String>
+    <sys:String x:Key="RemovePromptItem">項目を削除</sys:String>
+    <sys:String x:Key="Role">役割:</sys:String>
+    <sys:String x:Key="CustomPromptInstructionTitle">💡 カスタムプロンプト説明</sys:String>
+    <sys:String x:Key="CustomPromptInstructionDesc1">カスタムプロンプトでLLMの挙動を定義します。</sys:String>
+    <sys:String x:Key="CustomPromptInstructionDesc2">変数置換：</sys:String>
+    <sys:String x:Key="CustomPromptInstructionDesc3">→翻訳元言語</sys:String>
+    <sys:String x:Key="CustomPromptInstructionDesc4">「OCR利用不可」、</sys:String>
+    <sys:String x:Key="CustomPromptInstructionDesc5">→翻訳先言語、</sys:String>
+    <sys:String x:Key="CustomPromptInstructionDesc6">→翻訳対象テキスト</sys:String>
+
+    <sys:String x:Key="None">なし</sys:String>
+    <sys:String x:Key="HotkeyFunctionPrompt">この機能に使用したいキーを押してください。</sys:String>
+    <sys:String x:Key="HotkeySingleKeyMode">単一キーモード</sys:String>
+    <sys:String x:Key="RegisterHotkeyFailed">ホットキー「{0}」の登録に失敗しました。再試行するかログを確認してください。</sys:String>
+    <sys:String x:Key="UnregisterHotkeyFailed">ホットキー「{0}」の解除に失敗しました。再試行するかログを確認してください。</sys:String>
+    <sys:String x:Key="BindHotkey">ホットキーをバインド</sys:String>
+    <sys:String x:Key="HotkeyUnavailable">現在のホットキーは使用できません。</sys:String>
+    <sys:String x:Key="HotkeyOverwriteFailed">ホットキー上書き時の解除に失敗しました。復元されました。</sys:String>
+    <sys:String x:Key="HotkeyUnavailableUneditable">このホットキーは「{0}」用に予約されており、使用できません。他のキーを選択してください。</sys:String>
+    <sys:String x:Key="HotkeyUnavailableEditable">このホットキーは既に「{0}」で使用されています。「上書き」を押すと「{0}」から削除されます。</sys:String>
+
+    <sys:String x:Key="StartModeNormal">通常起動</sys:String>
+    <sys:String x:Key="StartModeAdmin">管理者起動</sys:String>
+    <sys:String x:Key="StartModeSkipUACAdmin">UACスキップ(管理者)</sys:String>
+
+    <sys:String x:Key="ColorSchemeDefault">システム設定</sys:String>
+    <sys:String x:Key="ColorSchemeLight">ライト</sys:String>
+    <sys:String x:Key="ColorSchemeDark">ダーク</sys:String>
+
+    <sys:String x:Key="LangEnumAuto">自動検出</sys:String>
+    <sys:String x:Key="LangEnumChineseSimplified">簡体字中国語</sys:String>
+    <sys:String x:Key="LangEnumChineseTraditional">繁体字中国語</sys:String>
+    <sys:String x:Key="LangEnumCantonese">広東語</sys:String>
+    <sys:String x:Key="LangEnumEnglish">英語</sys:String>
+    <sys:String x:Key="LangEnumJapanese">日本語</sys:String>
+    <sys:String x:Key="LangEnumKorean">韓国語</sys:String>
+    <sys:String x:Key="LangEnumFrench">フランス語</sys:String>
+    <sys:String x:Key="LangEnumSpanish">スペイン語</sys:String>
+    <sys:String x:Key="LangEnumRussian">ロシア語</sys:String>
+    <sys:String x:Key="LangEnumGerman">ドイツ語</sys:String>
+    <sys:String x:Key="LangEnumItalian">イタリア語</sys:String>
+    <sys:String x:Key="LangEnumTurkish">トルコ語</sys:String>
+    <sys:String x:Key="LangEnumPortuguesePortugal">ポルトガル語</sys:String>
+    <sys:String x:Key="LangEnumPortugueseBrazil">ポルトガル語 (ブラジル)</sys:String>
+    <sys:String x:Key="LangEnumVietnamese">ベトナム語</sys:String>
+    <sys:String x:Key="LangEnumIndonesian">インドネシア語</sys:String>
+    <sys:String x:Key="LangEnumThai">タイ語</sys:String>
+    <sys:String x:Key="LangEnumMalay">マレー語</sys:String>
+    <sys:String x:Key="LangEnumArabic">アラビア語</sys:String>
+    <sys:String x:Key="LangEnumHindi">ヒンディー語</sys:String>
+    <sys:String x:Key="LangEnumMongolianCyrillic">モンゴル語(キリル)</sys:String>
+    <sys:String x:Key="LangEnumMongolianTraditional">モンゴル語</sys:String>
+    <sys:String x:Key="LangEnumKhmer">クメール語</sys:String>
+    <sys:String x:Key="LangEnumNorwegianBokmal">ノルウェー語(ブークモール)</sys:String>
+    <sys:String x:Key="LangEnumNorwegianNynorsk">ノルウェー語(ニーノシュク)</sys:String>
+    <sys:String x:Key="LangEnumPersian">ペルシャ語</sys:String>
+    <sys:String x:Key="LangEnumSwedish">スウェーデン語</sys:String>
+    <sys:String x:Key="LangEnumPolish">ポーランド語</sys:String>
+    <sys:String x:Key="LangEnumDutch">オランダ語</sys:String>
+    <sys:String x:Key="LangEnumUkrainian">ウクライナ語</sys:String>
+
+    <sys:String x:Key="LanguageDetectorTypeLocal">ローカル認識</sys:String>
+    <sys:String x:Key="LanguageDetectorTypeBaidu">Baidu認識</sys:String>
+    <sys:String x:Key="LanguageDetectorTypeTencent">Tencent認識</sys:String>
+    <sys:String x:Key="LanguageDetectorTypeNiutrans">Niutrans認識</sys:String>
+    <sys:String x:Key="LanguageDetectorTypeBing">Bing認識</sys:String>
+    <sys:String x:Key="LanguageDetectorTypeYandex">Yandex認識</sys:String>
+    <sys:String x:Key="LanguageDetectorTypeGoogle">Google認識</sys:String>
+    <sys:String x:Key="LanguageDetectorTypeMicrosoft">Microsoft認識</sys:String>
+
+    <sys:String x:Key="LineBreakHandleTypeNone">改行を処理しない</sys:String>
+    <sys:String x:Key="LineBreakHandleTypeRemoveExtraLineBreak">余分な改行を削除</sys:String>
+    <sys:String x:Key="LineBreakHandleTypeRemoveAllLineBreak">全ての改行を削除</sys:String>
+    <sys:String x:Key="LineBreakHandleTypeRemoveAllLineBreakWithoutSpace">全ての改行を削除 (スペースなし)</sys:String>
+
+    <sys:String x:Key="PluginTypeAll">全プラグイン</sys:String>
+    <sys:String x:Key="PluginTypeTranslate">テキスト翻訳</sys:String>
+    <sys:String x:Key="PluginTypeOcr">文字認識</sys:String>
+    <sys:String x:Key="PluginTypeTts">音声合成</sys:String>
+    <sys:String x:Key="PluginTypeVocabulary">単語帳</sys:String>
+
+    <sys:String x:Key="ProxyTypeSystem">システムプロキシ</sys:String>
+    <sys:String x:Key="ProxyTypeHttp">HTTPプロキシ</sys:String>
+    <sys:String x:Key="ProxyTypeSocks5">Socks5プロキシ</sys:String>
+    <sys:String x:Key="ProxyTypeNone">プロキシなし</sys:String>
+
+    <sys:String x:Key="LayoutAnalysisModeMergeAll">全て結合</sys:String>
+    <sys:String x:Key="LayoutAnalysisModeStrictParagraph">厳格な段落</sys:String>
+    <sys:String x:Key="LayoutAnalysisModeStandardDocument">標準ドキュメント</sys:String>
+    <sys:String x:Key="LayoutAnalysisModeColumnDocument">多段組みドキュメント</sys:String>
+    <sys:String x:Key="LayoutAnalysisModeNoMerge">結合しない</sys:String>
+    <sys:String x:Key="LayoutAnalysisModeUserDefined">カスタム</sys:String>
+
+    <sys:String x:Key="WindowScreenTypeRememberLastLaunchLocation">前回の位置を記憶</sys:String>
+    <sys:String x:Key="WindowScreenTypeCursor">マウスカーソルのある画面</sys:String>
+    <sys:String x:Key="WindowScreenTypeFocus">フォーカスのある画面</sys:String>
+    <sys:String x:Key="WindowScreenTypePrimary">メインディスプレイ</sys:String>
+    <sys:String x:Key="WindowScreenTypeCustom">カスタムディスプレイ</sys:String>
+
+    <sys:String x:Key="WindowAlignTypeCenter">中央</sys:String>
+    <sys:String x:Key="WindowAlignTypeCenterTop">上部中央</sys:String>
+    <sys:String x:Key="WindowAlignTypeLeftTop">左上</sys:String>
+    <sys:String x:Key="WindowAlignTypeRightTop">右上</sys:String>
+    <sys:String x:Key="WindowAlignTypeCustom">カスタム位置</sys:String>
+
+    <sys:String x:Key="LogEventLevelVerbose">詳細</sys:String>
+    <sys:String x:Key="LogEventLevelDebug">デバッグ</sys:String>
+    <sys:String x:Key="LogEventLevelInformation">情報</sys:String>
+    <sys:String x:Key="LogEventLevelWarning">警告</sys:String>
+    <sys:String x:Key="LogEventLevelError">エラー</sys:String>
+    <sys:String x:Key="LogEventLevelFatal">致命的</sys:String>
+
+    <sys:String x:Key="OcrResultShowingTypeOriginal">元のテキスト</sys:String>
+    <sys:String x:Key="OcrResultShowingTypeMarkdown">Markdown</sys:String>
+    <sys:String x:Key="OcrResultShowingTypeLatex">Latex</sys:String>
+
+    <sys:String x:Key="HistoryLimitNotSave">保存しない</sys:String>
+    <sys:String x:Key="HistoryLimitLimit100">100</sys:String>
+    <sys:String x:Key="HistoryLimitLimit500">500</sys:String>
+    <sys:String x:Key="HistoryLimitLimit1000">1000</sys:String>
+    <sys:String x:Key="HistoryLimitLimit2000">2000</sys:String>
+    <sys:String x:Key="HistoryLimitLimit5000">5000</sys:String>
+    <sys:String x:Key="HistoryLimitUnlimited">無制限</sys:String>
+
+    <sys:String x:Key="CopyAfterTranslationNoAction">操作なし</sys:String>
+    <sys:String x:Key="CopyAfterTranslationFirst">1番目</sys:String>
+    <sys:String x:Key="CopyAfterTranslationSecond">2番目</sys:String>
+    <sys:String x:Key="CopyAfterTranslationThird">3番目</sys:String>
+    <sys:String x:Key="CopyAfterTranslationFourth">4番目</sys:String>
+    <sys:String x:Key="CopyAfterTranslationFifth">5番目</sys:String>
+    <sys:String x:Key="CopyAfterTranslationSixth">6番目</sys:String>
+    <sys:String x:Key="CopyAfterTranslationSeventh">7番目</sys:String>
+    <sys:String x:Key="CopyAfterTranslationEighth">8番目</sys:String>
+    <sys:String x:Key="CopyAfterTranslationLast">最後</sys:String>
+
+    <sys:String x:Key="BackupTypeLocal">ローカルバックアップ</sys:String>
+    <sys:String x:Key="BackupTypeWebDav">WebDavバックアップ</sys:String>
+
+    <sys:String x:Key="ImageQualityLow">低画質</sys:String>
+    <sys:String x:Key="ImageQualityMedium">中画質</sys:String>
+    <sys:String x:Key="ImageQualityHigh">高画質</sys:String>
+
+    <sys:String x:Key="DoubleClickTrayFunctionNone">操作なし</sys:String>
+    <sys:String x:Key="DoubleClickTrayFunctionInputTranslate">入力翻訳</sys:String>
+    <sys:String x:Key="DoubleClickTrayFunctionScreenshotTranslate">スクショ翻訳</sys:String>
+    <sys:String x:Key="DoubleClickTrayFunctionOCR">文字認識</sys:String>
+    <sys:String x:Key="DoubleClickTrayFunctionOpenSettingsWindow">設定ウィンドウを開く</sys:String>
+    <sys:String x:Key="DoubleClickTrayFunctionToggleMouseHook">マウス取込切替</sys:String>
+    <sys:String x:Key="DoubleClickTrayFunctionToggleGlobalHotkeys">グローバルホットキー切替</sys:String>
+    <sys:String x:Key="DoubleClickTrayFunctionExit">終了</sys:String>
+
+    <sys:String x:Key="UnsupportedSourceLang">未対応の翻訳元言語</sys:String>
+    <sys:String x:Key="UnsupportedTargetLang">未対応の翻訳先言語</sys:String>
+    <sys:String x:Key="ValidationSuccess">検証成功</sys:String>
+    <sys:String x:Key="ValidationFailure">検証失敗</sys:String>
+    <sys:String x:Key="SelectPluginFile">プラグインファイルを選択</sys:String>
+    <sys:String x:Key="PluginInstallFailed">プラグインのインストールに失敗</sys:String>
+    <sys:String x:Key="PluginInstallSuccess">プラグインのインストールに成功</sys:String>
+    <sys:String x:Key="PluginDeleteConfirm" xml:space="preserve">開発者 {0}&#10;バージョン {1}&#10;プラグイン「{2}」を削除しますか？</sys:String>
+    <sys:String x:Key="PluginDeleteFailed">プラグインの削除に失敗</sys:String>
+    <sys:String x:Key="PluginDeleteForRestart">プラグインは削除対象としてマークされました。再起動後に反映されます。</sys:String>
+    <sys:String x:Key="Ok">OK</sys:String>
+    <sys:String x:Key="PluginUpgrade">プラグイン更新</sys:String>
+    <sys:String x:Key="PluginUpgradeConfirm">プラグイン {0} の既知のバージョン {1}、新バージョン {2}。更新しますか？</sys:String>
+    <sys:String x:Key="PluginUpgradeSuccess">プラグイン更新の準備が完了しました。再起動後に反映されます。</sys:String>
+    <sys:String x:Key="PluginUpgradeFailed">プラグイン更新に失敗しました</sys:String>
+    <sys:String x:Key="BatchOperation">一括操作</sys:String>
+    <sys:String x:Key="DeleteSelected">選択項目を削除</sys:String>
+    <sys:String x:Key="NoPluginSelected">プラグインが選択されていません</sys:String>
+    <sys:String x:Key="BatchDeletePluginConfirm">{0} 個のプラグインを選択しました。削除しますか？</sys:String>
+
+    <sys:String x:Key="BaiduDetectError">Baidu認識エラー</sys:String>
+    <sys:String x:Key="TencentDetectError">Tencent認識エラー</sys:String>
+    <sys:String x:Key="NiutransDetectError">Niutrans認識エラー</sys:String>
+    <sys:String x:Key="BingDetectError">Bing認識エラー</sys:String>
+    <sys:String x:Key="YandexDetectError">Yandex認識エラー</sys:String>
+    <sys:String x:Key="GoogleDetectError">Google認識エラー</sys:String>
+    <sys:String x:Key="MicrosoftDetectError">Microsoft認識エラー</sys:String>
+
+    <sys:String x:Key="FilterService">サービスをフィルタ</sys:String>
+    <sys:String x:Key="SearchService">サービスを検索</sys:String>
+    <sys:String x:Key="SearchServiceTooltip">Ctrl+F でサービスを検索</sys:String>
+    <sys:String x:Key="BuiltIn">内蔵</sys:String>
+    <sys:String x:Key="PreInstall">プリインストール</sys:String>
+    <sys:String x:Key="Extend">拡張</sys:String>
+
+    <sys:String x:Key="PlayPronunciation">発音を再生</sys:String>
+    <sys:String x:Key="Plural">複数形</sys:String>
+    <sys:String x:Key="PastTense">過去形</sys:String>
+    <sys:String x:Key="PastParticiple">過去分詞</sys:String>
+    <sys:String x:Key="PresentParticiple">現在分詞</sys:String>
+    <sys:String x:Key="ThirdPersonSingular">三人称単数</sys:String>
+    <sys:String x:Key="Comparative">比較級</sys:String>
+    <sys:String x:Key="Superlative">最上級</sys:String>
+    <sys:String x:Key="Tag">タグ</sys:String>
+
+    <sys:String x:Key="SelectAll">すべて選択</sys:String>
+    <sys:String x:Key="ImportFromClipboard">クリップボードからインポート</sys:String>
+    <sys:String x:Key="ImportFromFile">ファイルからインポート</sys:String>
+    <sys:String x:Key="SaveAs">名前を付けて保存</sys:String>
+    <sys:String x:Key="ShowHideAnnotation">注釈の表示/非表示</sys:String>
+    <sys:String x:Key="FitToWindow">ウィンドウに合わせる</sys:String>
+    <sys:String x:Key="ActualSize">実際のサイズ</sys:String>
+    <sys:String x:Key="ShowText">テキストを表示</sys:String>
+    <sys:String x:Key="HideText">テキストを隠す</sys:String>
+    <sys:String x:Key="Recognize">認識</sys:String>
+    <sys:String x:Key="ReOcr">スクリーンショットしてOCRを再実行</sys:String>
+    <sys:String x:Key="ReImTransOcr">スクリーンショットして画像翻訳を再実行</sys:String>
+    <sys:String x:Key="ReOcrKeepWindow">ウィンドウのスクショを保持</sys:String>
+    <sys:String x:Key="RecognizeQrCode">QRコードを認識</sys:String>
+    <sys:String x:Key="NoQrCodeFound">​​QRコードが見つかりません</sys:String>
+    <sys:String x:Key="NoLocationInfoTitle">位置情報なし</sys:String>
+    <sys:String x:Key="NoLocationInfoMessage">注釈および画像上のテキスト選択はできません。</sys:String>
+    <sys:String x:Key="NoLocationInfoMessageForImTrans">注釈および画像上の翻訳結果表示はできません。</sys:String>
+    <sys:String x:Key="OcrSettingsToolTip" xml:space="preserve">左クリック -> 独立設定画面&#10;Ctrl+左クリック -> 文字認識設定</sys:String>
+
+    <sys:String x:Key="RecognizeLanguage">認識言語</sys:String>
+    <sys:String x:Key="TranslateLanguage">翻訳言語</sys:String>
+    <sys:String x:Key="ImTranSettingsToolTip" xml:space="preserve">左クリック -> 独立設定画面&#10;Ctrl+左クリック -> 文字認識設定&#10;Alt+左クリック -> テキスト翻訳設定</sys:String>
+
+    <sys:String x:Key="CopySuccess">コピー成功</sys:String>
+    <sys:String x:Key="CopyFailed">コピー失敗</sys:String>
+    <sys:String x:Key="NoCopyContent">コピーする内容がありません</sys:String>
+    <sys:String x:Key="SaveSuccess">保存成功</sys:String>
+    <sys:String x:Key="SaveFailed">保存失敗</sys:String>
+    <sys:String x:Key="NoImageToSave">保存する画像がありません</sys:String>
+    <sys:String x:Key="NoImageInClipboard">クリップボードに画像がありません</sys:String>
+    <sys:String x:Key="OperationSuccess">操作成功</sys:String>
+    <sys:String x:Key="OperationFailed">操作失敗</sys:String>
+    <sys:String x:Key="OcrFailed">文字認識に失敗しました</sys:String>
+    <sys:String x:Key="TtsFailed">音声合成に失敗しました</sys:String>
+    <sys:String x:Key="ImtransFailed">画像翻訳に失敗しました</sys:String>
+    <sys:String x:Key="NoTranslateService">利用可能な翻訳サービスが見つかりません</sys:String>
+    <sys:String x:Key="NavigateFailed">これ以上ありません</sys:String>
+    <sys:String x:Key="NoValidPluginFile">SPKGファイルがありません</sys:String>
+
+    <sys:String x:Key="RecognizingImageText">画像の文字を認識中...</sys:String>
+    <sys:String x:Key="TranslatingText">テキストを翻訳中...</sys:String>
+
+    <sys:String x:Key="PluginTranslateAutoBackTranslation">再翻訳</sys:String>
+    <sys:String x:Key="PluginTranslateAutoBackTranslationDescription">翻訳後に自動で再翻訳（逆翻訳）を行います</sys:String>
+    <sys:String x:Key="PluginTranslateValidate">検証</sys:String>
+    <sys:String x:Key="PluginTranslateValidateDescription">API接続と設定が正しいかテストします</sys:String>
+
+    <sys:String x:Key="UpdateCheck">更新確認</sys:String>
+    <sys:String x:Key="CheckingForUpdates">更新を確認中...</sys:String>
+    <sys:String x:Key="NoUpdateInfoFound">更新情報は見つかりませんでした。</sys:String>
+    <sys:String x:Key="AlreadyLatestVersion">最新バージョンを使用中です。</sys:String>
+    <sys:String x:Key="UpdateAvailable">利用可能な更新があります</sys:String>
+    <sys:String x:Key="NewVersionFound">新バージョン {0} が見つかりました。ダウンロードしますか？</sys:String>
+    <sys:String x:Key="PortableDataMoveError">STranslateはユーザー設定データを新バージョンへ移行できませんでした。&#10;設定データフォルダを {0} から {1} へ手動で移動してください。</sys:String>
+    <sys:String x:Key="UpdateReady">更新の準備完了</sys:String>
+    <sys:String x:Key="UpdateFailed">更新失敗</sys:String>
+    <sys:String x:Key="UpdateFailedMessage">アプリケーションの更新に失敗しました。ネットワーク接続を確認してください。</sys:String>
+    <sys:String x:Key="NewVersionTips">新バージョン {0} が利用可能です。STranslateを再起動して更新を適用しますか？</sys:String>
+
+    <sys:String x:Key="Url">エンドポイント</sys:String>
+    <sys:String x:Key="Url_Description">末尾に「#」を付けると、入力アドレスを強制的に使用します</sys:String>
+    <sys:String x:Key="Url_ToolTip">最終的にリクエストされる完全なURL</sys:String>
+    <sys:String x:Key="ApiKey">APIキー</sys:String>
+    <sys:String x:Key="ApiKey_Suggestion">APIキーを入力してください</sys:String>
+    <sys:String x:Key="Model">モデルを選択</sys:String>
+    <sys:String x:Key="Prompt_Header">プロンプト設定</sys:String>
+    <sys:String x:Key="Prompt_Description">翻訳に使用するプロンプトテンプレートを選択または編集</sys:String>
+    <sys:String x:Key="Prompt_Placeholder">プロンプトテンプレートを選択</sys:String>
+    <sys:String x:Key="EditPrompt_ToolTip">プロンプトを編集</sys:String>
+    <sys:String x:Key="EditPrompt_Content">編集</sys:String>
+    <sys:String x:Key="Temperature">温度 (Temperature)</sys:String>
+    <sys:String x:Key="Temperature_Description">モデル出力のランダム性を制御します</sys:String>
+</ResourceDictionary>

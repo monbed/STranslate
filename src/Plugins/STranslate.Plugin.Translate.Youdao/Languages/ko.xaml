@@ -1,0 +1,11 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <sys:String x:Key="STranslate_Plugin_Translate_Youdao_Info">소개</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Translate_Youdao_Info_Content">이 플러그인은 공식 Youdao 번역 API를 사용하여 번역을 수행합니다.</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Translate_Youdao_AppKey">AppKey</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Translate_Youdao_AppSecret">AppSecret</sys:String>
+
+</ResourceDictionary>
