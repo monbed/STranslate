@@ -25,7 +25,7 @@ public partial class HotkeySettings : ObservableObject
     public GlobalHotkey InputTranslateHotkey { get; set; } = new(Constant.EmptyHotkey);
     public GlobalHotkey CrosswordTranslateHotkey { get; set; } = new("Alt + D");
     public GlobalHotkey ScreenshotTranslateHotkey { get; set; } = new("Alt + S");
-    public GlobalHotkey ImageTranslateHotkey { get; set; } = new("Alt + X");
+    public GlobalHotkey ImageTranslateHotkey { get; set; } = new("Alt + Shift + X");
     public GlobalHotkey ReplaceTranslateHotkey { get; set; } = new(Constant.EmptyHotkey);
     public GlobalHotkey MouseHookTranslateHotkey { get; set; } = new(Constant.EmptyHotkey);
     public GlobalHotkey SilentOcrHotkey { get; set; } = new(Constant.EmptyHotkey);
@@ -180,7 +180,7 @@ public partial class HotkeySettings : ObservableObject
             [nameof(InputTranslateHotkey)] = "Alt + A",
             [nameof(CrosswordTranslateHotkey)] = "Alt + D",
             [nameof(ScreenshotTranslateHotkey)] = "Alt + S",
-            [nameof(ImageTranslateHotkey)] = "Alt + X",
+            [nameof(ImageTranslateHotkey)] = "Alt + Shift + X",
             [nameof(ReplaceTranslateHotkey)] = "Alt + F",
             [nameof(MouseHookTranslateHotkey)] = "Alt + Shift + D",
             [nameof(SilentOcrHotkey)] = "Alt + Shift + F",
