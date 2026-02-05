@@ -1124,7 +1124,7 @@ public partial class MainWindowViewModel : ObservableObject, IDisposable
 
     public void CrosswordTranslateByCtrlSameCHandler()
     {
-        var text = ClipboardHelper.GetText();
+        var text = ClipboardHelper.GetText()?.Trim();
         if (string.IsNullOrWhiteSpace(text)) return;
         ExecuteTranslate(Utilities.LinebreakHandler(text, Settings.LineBreakHandleType));
     }
