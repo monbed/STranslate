@@ -113,41 +113,18 @@
                     <ui:SettingsExpander.Items>
                         <ui:SettingsCard
                             Description="{DynamicResource Hotkey_CrosswordTranslateDescription}"
-                            Header="{DynamicResource Hotkey_CrosswordTranslateTraditional}"
-                            IsEnabled="{Binding HotkeySettings.CrosswordTranslateByCtrlSameC, Converter={cnvt:BoolInverseConverter}}">
+                            Header="{DynamicResource Hotkey_CrosswordTranslateTraditional}">
                             <control:HotkeyControl
                                 DefaultHotkey="{Binding HotkeySettings.CrosswordTranslateHotkey.Default}"
                                 Hotkey="{Binding HotkeySettings.CrosswordTranslateHotkey.Key}"
                                 IsRegistered="{Binding HotkeySettings.CrosswordTranslateHotkey.IsConflict}"
-                                WindowTitle="{DynamicResource Hotkey_CrosswordTranslate}">
-                                <control:HotkeyControl.Style>
-                                    <Style BasedOn="{StaticResource {x:Type control:HotkeyControl}}" TargetType="{x:Type control:HotkeyControl}">
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding HotkeySettings.CrosswordTranslateByCtrlSameC}" Value="True">
-                                                <Setter Property="Background" Value="{DynamicResource {x:Static ui:ThemeKeys.AccentFillColorDisabledBrushKey}}" />
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </control:HotkeyControl.Style>
-                            </control:HotkeyControl>
+                                WindowTitle="{DynamicResource Hotkey_CrosswordTranslate}" />
                         </ui:SettingsCard>
 
                         <ui:SettingsCard
                             Description="{DynamicResource Hotkey_CrosswordTranslateByCtrlSameCDescription}"
-                            Header="Ctrl+C+C"
-                            IsEnabled="{Binding HotkeySettings.CrosswordTranslateByCtrlSameC}">
-                            <control:HotkeyDisplay Keys="Ctr+C+C">
-                                <control:HotkeyDisplay.Style>
-                                    <Style BasedOn="{StaticResource {x:Type control:HotkeyDisplay}}" TargetType="{x:Type control:HotkeyDisplay}">
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding HotkeySettings.CrosswordTranslateByCtrlSameC}" Value="True">
-                                                <Setter Property="Background" Value="{DynamicResource {x:Static ui:ThemeKeys.SystemControlBackgroundAccentBrushKey}}" />
-                                                <Setter Property="Opacity" Value=".7" />
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </control:HotkeyDisplay.Style>
-                            </control:HotkeyDisplay>
+                            Header="Ctrl+C+C">
+                            <control:HotkeyDisplay Keys="Ctr+C+C" />
                         </ui:SettingsCard>
                     </ui:SettingsExpander.Items>
                 </ui:SettingsExpander>

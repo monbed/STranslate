@@ -347,14 +347,7 @@ public partial class HotkeySettings : ObservableObject
                 InputTranslateHotkey.IsConflict = !HotkeyMapper.SetHotkey(InputTranslateHotkey.Key, WithFullscreenCheck(() => MainWindowViewModel.InputClearCommand.Execute(null)));
                 break;
             case nameof(CrosswordTranslateHotkey):
-                CrosswordTranslateHotkey.IsConflict = !HotkeyMapper.SetHotkey(CrosswordTranslateHotkey.Key, WithFullscreenCheck(() =>
-                {
-                    // 如果启用了 Ctrl+C+C，则不允许使用此快捷键
-                    if (CrosswordTranslateByCtrlSameC)
-                        return;
-
-                    MainWindowViewModel.CrosswordTranslateCommand.Execute(null);
-                }));
+                CrosswordTranslateHotkey.IsConflict = !HotkeyMapper.SetHotkey(CrosswordTranslateHotkey.Key, WithFullscreenCheck(() => MainWindowViewModel.CrosswordTranslateCommand.Execute(null)));
                 break;
             case nameof(MouseHookTranslateHotkey):
                 MouseHookTranslateHotkey.IsConflict = !HotkeyMapper.SetHotkey(MouseHookTranslateHotkey.Key, WithFullscreenCheck(() => MainWindowViewModel.ToggleMouseHookTranslateCommand.Execute(null)));
