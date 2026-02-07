@@ -1340,7 +1340,13 @@ public partial class MainWindowViewModel : ObservableObject, IDisposable
     [RelayCommand]
     private async Task OpenSettingsAsync(object? parameter)
     {
+        // 检查设置窗口是否已经打开
+        var isAlreadyOpen = Application.Current.Windows.OfType<SettingsWindow>().Any();
+
         await OpenSettingsInternalAsync(parameter);
+
+        // 只有窗口是新打开的才导航到 GeneralPage
+        if (isAlreadyOpen) return;
 
         Application.Current.Windows
                     .OfType<SettingsWindow>()
