@@ -628,6 +628,8 @@
     <sys:String x:Key="OperationFailed">操作失败</sys:String>
     <sys:String x:Key="OcrFailed">文字识别失败</sys:String>
     <sys:String x:Key="TtsFailed">语音合成失败</sys:String>
+    <sys:String x:Key="TtsCancelled">朗读已取消</sys:String>
+    <sys:String x:Key="TtsServiceNotFound">未配置语音合成服务，请前往「设置-服务-语音合成」配置</sys:String>
     <sys:String x:Key="ImtransFailed">图片翻译失败</sys:String>
     <sys:String x:Key="NoTranslateService">未找到可用的翻译服务</sys:String>
     <sys:String x:Key="NavigateFailed">已经到头了</sys:String>

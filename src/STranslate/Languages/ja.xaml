@@ -605,6 +605,8 @@
     <sys:String x:Key="OperationFailed">操作失敗</sys:String>
     <sys:String x:Key="OcrFailed">文字認識に失敗しました</sys:String>
     <sys:String x:Key="TtsFailed">音声合成に失敗しました</sys:String>
+    <sys:String x:Key="TtsCancelled">読み上げをキャンセルしました</sys:String>
+    <sys:String x:Key="TtsServiceNotFound">音声合成サービスが設定されていません。「設定-サービス-音声合成」で設定してください</sys:String>
     <sys:String x:Key="ImtransFailed">画像翻訳に失敗しました</sys:String>
     <sys:String x:Key="NoTranslateService">利用可能な翻訳サービスが見つかりません</sys:String>
     <sys:String x:Key="NavigateFailed">これ以上ありません</sys:String>

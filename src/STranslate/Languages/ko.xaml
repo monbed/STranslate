@@ -605,6 +605,8 @@
     <sys:String x:Key="OperationFailed">작업 실패</sys:String>
     <sys:String x:Key="OcrFailed">문자 인식 실패</sys:String>
     <sys:String x:Key="TtsFailed">음성 합성 실패</sys:String>
+    <sys:String x:Key="TtsCancelled">읽기가 취소되었습니다</sys:String>
+    <sys:String x:Key="TtsServiceNotFound">음성 합성 서비스가 구성되지 않았습니다. "설정-서비스-TTS"에서 구성하세요</sys:String>
     <sys:String x:Key="ImtransFailed">이미지 번역 실패</sys:String>
     <sys:String x:Key="NoTranslateService">사용 가능한 번역 서비스를 찾을 수 없습니다</sys:String>
     <sys:String x:Key="NavigateFailed">더 이상 없습니다</sys:String>

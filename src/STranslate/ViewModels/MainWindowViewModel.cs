@@ -872,14 +872,43 @@ public partial class MainWindowViewModel : ObservableObject, IDisposable
     {
         var ttsSvc = TtsService.GetActiveSvc<ITtsPlugin>();
         if (ttsSvc == null)
+        {
+            _snackbar.ShowWarning(_i18n.GetTranslation("TtsServiceNotFound"));
             return;
+        }
 
-        await ttsSvc.PlayAudioAsync(text, cancellationToken);
+        try
+        {
+            await ttsSvc.PlayAudioAsync(text, cancellationToken);
+        }
+        catch (TaskCanceledException)
+        {
+            _snackbar.ShowInfo(_i18n.GetTranslation("TtsCancelled"));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "TTS播放失败");
+            _snackbar.ShowError(_i18n.GetTranslation("TtsFailed"));
+        }
     }
 
     [RelayCommand(IncludeCancelCommand = true)]
     private async Task PlayAudioUrlAsync(string url, CancellationToken cancellationToken)
-        => await _audioPlayer.PlayAsync(url, cancellationToken);
+    {
+        try
+        {
+            await _audioPlayer.PlayAsync(url, cancellationToken);
+        }
+        catch (TaskCanceledException)
+        {
+            _snackbar.ShowInfo(_i18n.GetTranslation("TtsCancelled"));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "音频播放失败");
+            _snackbar.ShowError(_i18n.GetTranslation("TtsFailed"));
+        }
+    }
 
     [RelayCommand(IncludeCancelCommand = true)]
     private async Task SilentTtsAsync(CancellationToken cancellationToken)

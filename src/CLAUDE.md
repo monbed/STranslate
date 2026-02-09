@@ -20,6 +20,30 @@ dotnet build STranslate.sln --configuration Debug
 
 更多构建选项参见 [项目概述](docs/overview.md)。
 
+## 多语言支持
+
+本项目支持以下五种语言，语言文件位于 [`STranslate/Languages/`](STranslate/Languages/) 目录：
+
+| 语言 | 文件 | 说明 |
+|------|------|------|
+| 简体中文 | `zh-cn.xaml` | 默认语言 |
+| 繁体中文 | `zh-tw.xaml` | 台湾/香港地区 |
+| English | `en.xaml` | 英语 |
+| 日本語 | `ja.xaml` | 日语 |
+| 한국어 | `ko.xaml` | 韩语 |
+
+### 添加或修改国际化字符串
+
+1. 在所有语言文件中添加相同的键值（参考现有字符串格式）
+2. 使用 `_i18n.GetTranslation("KeyName")` 在代码中获取翻译
+3. 使用 `Internationalization.GetString("KeyName")` 在 XAML 中绑定
+
+### 开发注意事项
+
+- 新增用户可见的提示信息时，必须添加对应的国际化字符串
+- 建议按模块分类组织语言文件（参考现有文件的注释分组）
+- 所有语言文件必须保持键的一致性（相同的键存在于所有语言文件中）
+
 ## 文档导航
 
 本文档已按功能模块拆分为以下子文档：
