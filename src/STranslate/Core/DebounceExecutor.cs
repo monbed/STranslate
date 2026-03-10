@@ -2,8 +2,8 @@ namespace STranslate.Core;
 
 public sealed class DebounceExecutor : IDisposable
 {
-    private CancellationTokenSource? _cts;
     private readonly Lock _lock = new();
+    private long _generation;
     private bool _disposed = false;
 
     /// <summary>
@@ -13,9 +13,7 @@ public sealed class DebounceExecutor : IDisposable
     {
         lock (_lock)
         {
-            _cts?.Cancel();
-            _cts?.Dispose();
-            _cts = null;
+            _generation++;
         }
     }
 
@@ -26,31 +24,8 @@ public sealed class DebounceExecutor : IDisposable
     {
         ObjectDisposedException.ThrowIf(_disposed, this);
 
-        lock (_lock)
-        {
-            _cts?.Cancel();
-            _cts?.Dispose();
-            _cts = new CancellationTokenSource();
-        }
-
-        var token = _cts.Token;
-
-        Task.Run(async () =>
-        {
-            try
-            {
-                await Task.Delay(delay, token);
-
-                if (!token.IsCancellationRequested)
-                {
-                    action.Invoke();
-                }
-            }
-            catch (TaskCanceledException)
-            {
-                // 忽略取消
-            }
-        }, token);
+        var generation = NextGeneration();
+        _ = DelayAndRunAsync(generation, delay, action);
     }
 
     /// <summary>
@@ -60,39 +35,56 @@ public sealed class DebounceExecutor : IDisposable
     {
         ObjectDisposedException.ThrowIf(_disposed, this);
 
+        var generation = NextGeneration();
+        _ = DelayAndRunAsync(generation, delay, asyncAction);
+    }
+
+    private long NextGeneration()
+    {
         lock (_lock)
         {
-            _cts?.Cancel();
-            _cts?.Dispose();
-            _cts = new CancellationTokenSource();
+            _generation++;
+            return _generation;
         }
+    }
 
-        var token = _cts.Token;
-
-        Task.Run(async () =>
+    private bool IsLatestGeneration(long generation)
+    {
+        lock (_lock)
         {
-            try
-            {
-                await Task.Delay(delay, token);
+            return !_disposed && generation == _generation;
+        }
+    }
 
-                if (!token.IsCancellationRequested)
-                {
-                    await asyncAction();
-                }
-            }
-            catch (TaskCanceledException)
-            {
-                // 忽略取消
-            }
-        }, token);
+    private async Task DelayAndRunAsync(long generation, TimeSpan delay, Action action)
+    {
+        await Task.Delay(delay).ConfigureAwait(false);
+
+        if (!IsLatestGeneration(generation))
+            return;
+
+        action.Invoke();
+    }
+
+    private async Task DelayAndRunAsync(long generation, TimeSpan delay, Func<Task> asyncAction)
+    {
+        await Task.Delay(delay).ConfigureAwait(false);
+
+        if (!IsLatestGeneration(generation))
+            return;
+
+        await asyncAction().ConfigureAwait(false);
     }
 
     public void Dispose()
     {
-        if (_disposed)
-            return;
+        lock (_lock)
+        {
+            if (_disposed)
+                return;
 
-        Cancel(); // 复用 Cancel 方法
-        _disposed = true;
+            _disposed = true;
+            _generation++;
+        }
     }
 }
