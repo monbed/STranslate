@@ -5,6 +5,7 @@
     xmlns:cnvt="clr-namespace:STranslate.Converters"
     xmlns:control="clr-namespace:STranslate.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:ikw="http://schemas.inkore.net/lib/ui/wpf"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:s="https://github.com/zggsong/2022/xaml"
@@ -38,6 +39,11 @@
     Visibility="Visible"
     WindowStartupLocation="Manual"
     mc:Ignorable="d">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="SizeChanged">
+            <i:InvokeCommandAction Command="{Binding AdjustPositionForContentSizeChangedCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Window.InputBindings>
         <KeyBinding
             Key="Esc"

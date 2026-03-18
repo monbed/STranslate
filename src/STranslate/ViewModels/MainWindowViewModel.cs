@@ -15,6 +15,7 @@ using System.Drawing;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Threading;
 using Windows.Win32;
@@ -33,6 +34,7 @@ public partial class MainWindowViewModel : ObservableObject, IDisposable
     private readonly INotification _notification;
     private double _cacheLeft;
     private double _cacheTop;
+    private bool _isAdjustingWindowPositionForContent;
 
     public TranslateService TranslateService { get; }
     public OcrService OcrService { get; }
@@ -1725,6 +1727,77 @@ public partial class MainWindowViewModel : ObservableObject, IDisposable
 
         Settings.MainWindowLeft = Math.Clamp(left, minLeft, maxLeft);
         Settings.MainWindowTop = Math.Clamp(top, minTop, maxTop);
+    }
+
+    /// <summary>
+    /// 在窗口内容尺寸变化后，确保窗口底部不会超出当前屏幕工作区。
+    /// </summary>
+    [RelayCommand]
+    private void AdjustPositionForContentSizeChanged()
+    {
+        if (_isAdjustingWindowPositionForContent || !IsMainWindowVisible || MainWindow.WindowState == WindowState.Minimized)
+            return;
+
+        var windowHeight = MainWindow.ActualHeight > 0 ? MainWindow.ActualHeight : MainWindow.MinHeight;
+        if (windowHeight <= 0)
+            return;
+
+        try
+        {
+            _isAdjustingWindowPositionForContent = true;
+            AdjustVerticalPositionWithinWorkArea();
+        }
+        finally
+        {
+            _isAdjustingWindowPositionForContent = false;
+        }
+    }
+
+    /// <summary>
+    /// 当窗口触底时，仅向上修正 Top，避免内容被屏幕底部遮挡。
+    /// </summary>
+    private void AdjustVerticalPositionWithinWorkArea()
+    {
+        const double edgePadding = 8;
+
+        MonitorInfo screen;
+        try
+        {
+            // 以主窗口句柄所在屏幕为准，避免多屏时误用鼠标屏幕。
+            var windowHelper = new WindowInteropHelper(MainWindow);
+            windowHelper.EnsureHandle();
+            screen = MonitorInfo.GetNearestDisplayMonitor(windowHelper.Handle);
+        }
+        catch
+        {
+            screen = SelectedScreen();
+        }
+
+        var workAreaTopLeft = Win32Helper.TransformPixelsToDIP(MainWindow, screen.WorkingArea.X, screen.WorkingArea.Y);
+        var workAreaBottomRight = Win32Helper.TransformPixelsToDIP(
+            MainWindow,
+            screen.WorkingArea.X + screen.WorkingArea.Width,
+            screen.WorkingArea.Y + screen.WorkingArea.Height);
+
+        var windowHeight = MainWindow.ActualHeight > 0 ? MainWindow.ActualHeight : MainWindow.MinHeight;
+        var currentTop = Settings.MainWindowTop;
+        var bottomLimit = workAreaBottomRight.Y - edgePadding;
+        var currentBottom = currentTop + windowHeight;
+
+        // 仅在触底时上移，未触底时保持原位避免抖动。
+        if (currentBottom <= bottomLimit)
+            return;
+
+        var minTop = workAreaTopLeft.Y + edgePadding;
+        var maxTop = bottomLimit - windowHeight;
+        if (maxTop < minTop)
+            maxTop = minTop;
+
+        var targetTop = Math.Clamp(currentTop, minTop, maxTop);
+        if (targetTop >= currentTop)
+            return;
+
+        Settings.MainWindowTop = targetTop;
     }
 
     private void AdjustPositionForResolutionChange()
