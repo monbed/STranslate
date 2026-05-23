@@ -73,6 +73,15 @@ public class Main : DictionaryPluginBase
             return;
         }
 
+        // 校验 iciba 返回的单词是否与用户输入一致
+        // 当 iciba 无法识别输入时，会重定向到默认页（如"在线翻译"），需过滤此类结果
+        if (!word.Equals(content, StringComparison.OrdinalIgnoreCase) &&
+            !word.Equals(content.ToLowerInvariant(), StringComparison.Ordinal))
+        {
+            result.ResultType = DictionaryResultType.NoResult;
+            return;
+        }
+
         result.Text = word;
         result.ResultType = DictionaryResultType.Success;
 
