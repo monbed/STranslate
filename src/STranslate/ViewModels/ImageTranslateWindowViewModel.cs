@@ -210,7 +210,7 @@ public partial class ImageTranslateWindowViewModel : ObservableObject, IDisposab
                 if (!isSuccess)
                 {
                     _logger.LogWarning($"Language detection failed for text: {content.Text}");
-                    _notification.Show(_i18n.GetTranslation("Prompt"), "语言检测失败");
+                    _snackbar.ShowWarning(_i18n.GetTranslation("LanguageDetectionFailed"));
                     return;
                 }
                 if (string.IsNullOrWhiteSpace(content.Text))
@@ -233,7 +233,7 @@ public partial class ImageTranslateWindowViewModel : ObservableObject, IDisposab
         }
         catch (Exception ex)
         {
-            _notification.Show(_i18n.GetTranslation("Prompt"), $"{_i18n.GetTranslation("ImtransFailed")}\n{ex.Message}");
+            _snackbar.ShowError($"{_i18n.GetTranslation("ImtransFailed")}\n{ex.Message}");
             _logger.LogError(ex, "Image Translate execution failed");
         }
         finally
@@ -304,7 +304,13 @@ public partial class ImageTranslateWindowViewModel : ObservableObject, IDisposab
     {
         var ttsSvc = _ttsService.GetActiveSvc<ITtsPlugin>();
         if (ttsSvc == null)
+        {
+            Helper.PromptConfigureService(
+                _i18n.GetTranslation("Prompt"),
+                _i18n.GetTranslation("TtsServiceNotFound"),
+                nameof(TtsPage));
             return;
+        }
 
         await ttsSvc.PlayAudioAsync(text, cancellationToken);
     }
