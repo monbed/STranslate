@@ -1,9 +1,0 @@
-<ResourceDictionary
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:sys="clr-namespace:System;assembly=mscorlib">
-
-    <sys:String x:Key="STranslate_Plugin_Translate_Transmart">서비스 상태</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Translate_Transmart_Content">Tencent Transmart 공식 서비스가 종료되었습니다. 이 내장 플러그인은 호환성 유지를 위해서만 남아 있으며 더 이상 사용을 권장하지 않습니다.</sys:String>
-
-</ResourceDictionary>

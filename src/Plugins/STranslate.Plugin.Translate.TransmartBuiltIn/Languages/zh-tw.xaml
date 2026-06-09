@@ -1,9 +1,0 @@
-<ResourceDictionary
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:sys="clr-namespace:System;assembly=mscorlib">
-
-    <sys:String x:Key="STranslate_Plugin_Translate_Transmart">服務狀態</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Translate_Transmart_Content">騰訊 Transmart 官方服務已停止。此內建插件僅為相容性保留，不再建議使用。</sys:String>
-
-</ResourceDictionary>

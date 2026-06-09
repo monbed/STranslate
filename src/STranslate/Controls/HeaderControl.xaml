@@ -166,10 +166,10 @@
                                     ToolTip="{DynamicResource Settings}"
                                     Visibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=IsSettingVisible, Converter={cnvt:BoolToVisibilityConverter}}" />
                                 <control:IconButton
+                                    Margin="3,0,0,0"
                                     Command="{TemplateBinding CloseCommand}"
                                     CommandParameter="{TemplateBinding CloseCommandParameter}"
                                     Icon="{x:Static ui:FluentSystemIcons.Dismiss_20_Regular}"
-                                    Margin="3,0,0,0"
                                     ToolTip="{DynamicResource Close}"
                                     Visibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=IsCloseVisible, Converter={cnvt:BoolToVisibilityConverter}}" />
                             </StackPanel>
